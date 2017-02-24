@@ -1,0 +1,6 @@
+[submodule "very-util-json"]
+	path = very-util-json
+	url = git@git.oschina.net:mefaso/very-util-json.git
+[submodule "very-util-lang"]
+	path = very-util-lang
+	url = git@git.oschina.net:mefaso/very-util-lang.git
