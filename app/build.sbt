@@ -10,8 +10,11 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria" % "1.0.0",
   "com.typesafe.akka" %% "akka-http" % "10.0.3",
 
+  //slick posggreql
+  "org.postgresql" % "postgresql" % "42.0.0",
   "com.typesafe.slick" %% "slick" % "3.2.0-RC1",
   "com.github.tminglei" %% "slick-pg" % "0.15.0-M4",
+
 
 // json4s adapter
   "com.github.tminglei" %% "slick-pg_json4s" % "0.15.0-M4",
