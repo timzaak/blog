@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
 
   //slick posggreql
   "org.postgresql" % "postgresql" % "42.0.0",
-  "com.typesafe.slick" %% "slick" % "3.2.0-RC1",
+  "com.typesafe.slick" %% "slick" % "3.2.0",
   "com.github.tminglei" %% "slick-pg" % "0.15.0-M4",
 
 

@@ -16,9 +16,6 @@ trait PostgresProfileWithJson4S extends PostgresProfile
 
   override val jsonMethods = org.json4s.native.JsonMethods.asInstanceOf[JsonMethods[DOCType]]
 
-//  override protected def computeCapabilities:Set[Capability] =
-//    super.computeCapabilities + JdbcCapabilities.insertOrUpdate
-
   override val api = MyAPI
 
   val plainAPI = new API with Json4sJsonPlainImplicits
@@ -32,9 +29,7 @@ trait PostgresProfileWithJson4S extends PostgresProfile
         (s) => utils.SimpleArrayUtils.fromString[JValue](jsonMethods.parse(_))(s).orNull,
         (v) => utils.SimpleArrayUtils.mkString[JValue](j=>jsonMethods.compact(jsonMethods.render(j)))(v)
       ).to(_.toList)
-
   }
-
 }
 
 
