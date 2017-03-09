@@ -1,20 +1,21 @@
+import java.util.Date
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import akka.stream.ActorMaterializer
-import com.timzaak.repo.CharacterRepo
-import com.timzaak.schema.SchemaDefinition
+import com.timzaak.di.DI
+import com.timzaak.entity.UserAuth
 import org.json4s._
-import sangria.execution.deferred.DeferredResolver
 import sangria.execution.{ErrorWithResolver, Executor, QueryAnalysisError, QueryReducer}
 import sangria.parser.QueryParser
 import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{Failure, Success}
 
-object Server extends App with JsonHelperWithDoubleMode {
+object Server extends App with JsonHelperWithDoubleMode with DI {
   implicit val system = ActorSystem("server")
   implicit val materializer = ActorMaterializer()
 
@@ -31,28 +32,30 @@ object Server extends App with JsonHelperWithDoubleMode {
       import sangria.marshalling.json4s.native._
 
       entity(as[JValue]) { requestJson ⇒
-        val JString(query) = requestJson \ "query"
+        val JString(query: String) = requestJson \ "query"
 
-        val strOption(operation) = requestJson \ "operationName"
+        val strOption(operation: Option[String]) = requestJson \ "operationName"
 
         val variables = requestJson \ "variables" match {
-          case JNull => JObject()
-          case other =>
-            other
+          case JNull | JNothing => JObject()
+          case other => other
         }
-
+        val time = new Date().getTime
         QueryParser.parse(query) match {
           case Success(queryAst) ⇒
-            complete(Executor.execute(SchemaDefinition.StarWarsSchema, queryAst, new CharacterRepo,
+            complete(Executor.execute(graphQLSchema, queryAst, UserAuth(None),
               variables = variables,
-              operationName = operation,
-              deferredResolver = DeferredResolver.fetchers(SchemaDefinition.characters),
-              maxQueryDepth = Some(5),
-              queryReducers = rejectComplexQueries :: Nil)
-              .map(OK → _)
+              operationName = operation
+            )
+              .map { result =>
+                println("cost" + (new Date().getTime - time))
+                OK → result
+              }
               .recover {
-                case error: QueryAnalysisError ⇒ BadRequest → error.resolveError
-                case error: ErrorWithResolver ⇒ InternalServerError → error.resolveError
+                case error: QueryAnalysisError ⇒
+                  BadRequest → error.resolveError
+                case error: ErrorWithResolver ⇒
+                  InternalServerError → error.resolveError
               })
           case Failure(error) ⇒
             complete(BadRequest, "error" -> error.getMessage)
