@@ -30,4 +30,6 @@ lazy val lang = RootProject(file("../very-util-lang"))
 
 lazy val json = RootProject(file("../very-util-json"))
 
-lazy val root = (project in file(".")).dependsOn(json,lang)
+lazy val redis_client = RootProject(file("../scala-redis-client"))
+
+lazy val root = (project in file(".")).dependsOn(json,lang,redis_client)

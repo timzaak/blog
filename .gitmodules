@@ -4,3 +4,6 @@
 [submodule "very-util-lang"]
 	path = very-util-lang
 	url = git@git.oschina.net:mefaso/very-util-lang.git
+[submodule "scala-redis-client"]
+	path = scala-redis-client
+	url = https://git.oschina.net/mefaso/scala-redis-client.git

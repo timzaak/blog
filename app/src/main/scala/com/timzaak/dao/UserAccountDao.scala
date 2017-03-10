@@ -1,7 +1,6 @@
 package com.timzaak.dao
 
 import com.timzaak.entity.UserAccount
-import slick.jdbc.GetResult
 import slick.lifted.TableQuery
 import very.util.db.postgrel.WithPostgrel
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
@@ -16,12 +15,17 @@ trait UserAccountDao extends WithPostgrel {
   )
 
   def getByAccAndPwd(account: S, pwd: S): Future[Option[UserAccount]] = {
-    db.run(getByAccAndPwdCompiled(account, pwd).result.headOption)
+    getByAccAndPwdCompiled(account, pwd).result.headOption
   }
 
-//  implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
-//
-//  def getByAccAndPwd2(account: S, pwd: S): Future[Option[UserAccount]] = {
-//    db.run(sql"select * from user_account where account=$account and password=$pwd".as[UserAccount].headOption)
-//  }
+
+  def newAcc(acc: UserAccount): Future[S] = (userAccounts returning userAccounts.map(_.id)) += acc
+
+
+  //  import slick.jdbc.GetResult
+  //  implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
+  //
+  //  def getByAccAndPwd2(account: S, pwd: S): Future[Option[UserAccount]] = {
+  //    db.run(sql"select * from user_account where account=$account and password=$pwd".as[UserAccount].headOption)
+  //  }
 }
