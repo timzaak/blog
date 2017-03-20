@@ -7,3 +7,6 @@
 [submodule "scala-redis-client"]
 	path = scala-redis-client
 	url = https://git.oschina.net/mefaso/scala-redis-client.git
+[submodule "very-util-db-redis"]
+	path = very-util-db-redis
+	url = https://git.oschina.net/mefaso/very-util-db-redis.git

@@ -1,9 +1,7 @@
 package com.timzaak.schema
 
 import com.timzaak.entity.UserAuth
-import sangria.execution.deferred.{Fetcher, HasId}
 import sangria.schema._
-import scala.concurrent.Future
 
 trait SchemaDefinition {
 

@@ -1,5 +1,6 @@
 package com.timzaak.dao
 
+import com.joyrec.util.db.redis.WithRedis
 import com.timzaak.entity.UserAccount
 import slick.lifted.TableQuery
 import very.util.db.postgrel.WithPostgrel
@@ -7,7 +8,7 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 import scala.concurrent.Future
 
-trait UserAccountDao extends WithPostgrel {
+trait UserAccountDao extends WithPostgrel with WithRedis{
   protected lazy val userAccounts = TableQuery[UserAccountTable]
 
   private val getByAccAndPwdCompiled = Compiled((account: Rep[String], pwd: Rep[String]) =>

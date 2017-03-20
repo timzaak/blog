@@ -1,11 +1,9 @@
 import java.util.Date
 
-import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
-import akka.stream.ActorMaterializer
 import com.timzaak.di.DI
 import com.timzaak.entity.UserAuth
 import org.json4s._
@@ -16,10 +14,6 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 import scala.util.{Failure, Success}
 
 object Server extends App with JsonHelperWithDoubleMode with DI {
-  implicit val system = ActorSystem("server")
-  implicit val materializer = ActorMaterializer()
-
-  import system.dispatcher
 
   val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](100, (c, ctx) ⇒
     new IllegalArgumentException(s"Too complex query"))
@@ -43,8 +37,12 @@ object Server extends App with JsonHelperWithDoubleMode with DI {
         val time = new Date().getTime
         QueryParser.parse(query) match {
           case Success(queryAst) ⇒
-            complete(Executor.execute(graphQLSchema, queryAst, UserAuth(None),
+            complete(Executor.execute(
+              graphQLSchema,
+              queryAst,
+              UserAuth(None),
               variables = variables,
+              queryReducers = rejectComplexQueries::Nil,
               operationName = operation
             )
               .map { result =>
@@ -66,5 +64,13 @@ object Server extends App with JsonHelperWithDoubleMode with DI {
         getFromResource("graphiql.html")
       }
 
-  Http().bindAndHandle(route, "0.0.0.0", sys.props.get("http.port").fold(8080)(_.toInt))
+  val port = sys.props.get("http.port").fold(8080)(_.toInt)
+  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", port)
+  bindingFuture.onComplete {
+    case Success(binding) ⇒
+      println(s"Server is listening on localhost:$port")
+    case Failure(e) ⇒
+      println(s"Binding failed with ${e.getMessage}")
+      system.terminate()
+  }
 }
