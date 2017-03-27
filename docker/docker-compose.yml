@@ -20,14 +20,12 @@ redis:
     - ./db/redis/data:/data
   command: redis-server /user/local/etc/redis/redis.conf
 
-java:
-  image: java:openjdk-8-jdk-alpine
-  container_name: app
-  ports:
-  - "9000:9000"
-  links:
-    - redis
-    - postgres
-  command: ifconfig
-
-
+# java:
+#   image: java:openjdk-8-jdk-alpine
+#   container_name: app
+#   ports:
+#   - "9000:9000"
+#   links:
+#     - redis
+#     - postgres
+#   command: ifconfig
