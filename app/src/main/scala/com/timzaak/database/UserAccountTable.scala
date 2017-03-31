@@ -1,4 +1,4 @@
-package com.timzaak.dao
+package com.timzaak.database
 
 import com.timzaak.entity.UserAccount
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._

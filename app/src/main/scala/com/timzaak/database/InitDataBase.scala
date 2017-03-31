@@ -1,11 +1,10 @@
 package com.timzaak.database
 
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
-import com.timzaak.dao.UserAccountTable
 import com.timzaak.di.DaoDI
 import com.timzaak.entity.UserAccount
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
 import scala.concurrent.Await
 import scala.util.{Failure, Success}
 

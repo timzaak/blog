@@ -1,6 +1,7 @@
 package com.timzaak.dao
 
 import com.joyrec.util.db.redis.WithRedis
+import com.timzaak.database.UserAccountTable
 import com.timzaak.entity.UserAccount
 import slick.lifted.TableQuery
 import very.util.db.postgrel.WithPostgrel
