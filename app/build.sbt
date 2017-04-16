@@ -10,14 +10,7 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria" % "1.0.0",
   "com.typesafe.akka" %% "akka-http" % "10.0.3",
   "com.pauldijou" %% "jwt-core" % "0.12.0",
-  //slick posggreql
-  "org.postgresql" % "postgresql" % "42.0.0",
-  "com.typesafe.slick" %% "slick" % "3.2.0",
-  "com.github.tminglei" %% "slick-pg" % "0.15.0-M4",
 
-
-// json4s adapter
-  "com.github.tminglei" %% "slick-pg_json4s" % "0.15.0-M4",
   "de.heikoseeberger" %% "akka-http-json4s" % "1.12.0",
   "org.sangria-graphql" %% "sangria-json4s-native" % "1.0.0",
   "com.pauldijou" %% "jwt-json4s-native" % "0.12.0",
@@ -26,6 +19,17 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick-testkit" % "3.2.0" % Test
 
 )
+lazy val slickSetting = Seq(
+  scalaVersion:= "2.12.1",
+  libraryDependencies ++= List(
+    //slick posggreql
+    "org.postgresql" % "postgresql" % "42.0.0",
+    "com.typesafe.slick" %% "slick" % "3.2.0",
+    "com.github.tminglei" %% "slick-pg" % "0.15.0-M4",
+    // json4s adapter
+    "com.github.tminglei" %% "slick-pg_json4s" % "0.15.0-M4"
+  )
+)
 
 lazy val lang = RootProject(file("../very-util-lang"))
 
@@ -33,4 +37,28 @@ lazy val json = RootProject(file("../very-util-json"))
 
 lazy val redis = RootProject(file("../very-util-db-redis"))
 
-lazy val root = (project in file(".")).dependsOn(json,lang,redis)
+lazy val codegen = project
+  .settings(slickSetting)
+  .settings(libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.2.0")
+  .dependsOn(json)
+
+lazy val root = (project in file(".")).dependsOn(json, lang, redis, codegen)
+  .settings(slick := slickCodeGenTask.value)
+  .settings(slickSetting)
+  //.settings(sourceGenerators in Compile += slickCodeGenTask.taskValue) // register automatic code generation on every compile, remove for only manual use)
+
+// code generation task
+lazy val slick = TaskKey[Seq[File]]("gen-tables")
+lazy val slickCodeGenTask = Def.task {
+  val dir = sourceManaged.value
+  val cp = (dependencyClasspath in Compile).value
+  val r = (runner in Compile).value
+  val s = streams.value
+  val outputDir = (dir / "slick").getPath
+
+  toError(r.run("com.timzaak.generated.CustomizedCodeGenerator", cp.files, Array(outputDir), s.log))
+  val fname = outputDir + "/com/timzaak/generated/Tables.scala"
+  Seq(file(fname))
+}
+
+unmanagedSourceDirectories in Compile += sourceManaged.value / "slick"
