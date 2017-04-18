@@ -1,33 +1,27 @@
 package com.timzaak.dao
 
 import com.joyrec.util.db.redis.WithRedis
-import com.timzaak.database.UserAccountTable
 import com.timzaak.entity.UserAccount
-import slick.lifted.TableQuery
 import very.util.db.postgrel.WithPostgrel
-import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import very.util.db.postgrel.PostgresProfileWithJson4S.plainAPI._
 
 import scala.concurrent.Future
 
 trait UserAccountDao extends WithPostgrel with WithRedis{
-  protected lazy val userAccounts = TableQuery[UserAccountTable]
 
-  private val getByAccAndPwdCompiled = Compiled((account: Rep[String], pwd: Rep[String]) =>
-    userAccounts.filter(v => v.account === account && v.password === pwd)
-  )
+
+  protected val tableName = "user_accounts"
+
+
+  import slick.jdbc.GetResult
+  implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
 
   def getByAccAndPwd(account: S, pwd: S): Future[Option[UserAccount]] = {
-    getByAccAndPwdCompiled(account, pwd).result.headOption
+    sql"select * from #$tableName where acc=$account and pwd=$pwd".as[UserAccount].headOption
   }
 
 
-  def newAcc(acc: UserAccount): Future[S] = (userAccounts returning userAccounts.map(_.id)) += acc
+  def newAcc(acc: UserAccount): Future[I] =
+    sqlu"insert into #${tableName}(acc,pwd) values (${acc.accountName},${acc.password})"
 
-
-  //  import slick.jdbc.GetResult
-  //  implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
-  //
-  //  def getByAccAndPwd2(account: S, pwd: S): Future[Option[UserAccount]] = {
-  //    db.run(sql"select * from user_account where account=$account and password=$pwd".as[UserAccount].headOption)
-  //  }
 }

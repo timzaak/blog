@@ -2,7 +2,6 @@ package com.timzaak.di
 
 import com.joyrec.util.db.redis.{AutoSelectSingleRedis, SingleRedisTpl}
 import com.timzaak.dao._
-import com.timzaak.generated.{Tables, UsersRow}
 import com.top10.redis.{Redis, SingleRedis}
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
@@ -19,8 +18,7 @@ trait DaoDI extends AkkaDI with WithConf{
   class Redis(db: I) extends SingleRedis(redisPool) with AutoSelectSingleRedis {
     val select: Int = db
   }
-import Tables._
-  UsersRow
+
   object userAccountDao extends UserAccountDao{
     override protected def redis: SingleRedisTpl = new Redis(2)
   }

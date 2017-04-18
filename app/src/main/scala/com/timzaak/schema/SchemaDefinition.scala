@@ -1,28 +1,28 @@
 package com.timzaak.schema
 
-import com.timzaak.entity.UserAuth
+import com.timzaak.entity.UserSchema
 import sangria.schema._
 
-trait SchemaDefinition {
+trait SchemaDefinition extends UserSchema{
 
 
   val Query = ObjectType(
-    "Query", fields[UserAuth, Unit](
+    "Query", fields[GraphQLContext, Unit](
       Field("test", StringType,
         Some("nihao"),
         resolve = _ => ""
+
       )
     )
   )
 
-  val accArg = Argument("acc", StringType)
-  val pwdArg = Argument("pwd", StringType)
+  val mutationType = ObjectType(
+    name = "Mutation",
+    fields = userSchemaMutation
+  )
 
-  val Mutation = ObjectType("Mutation", fields[UserAuth, Unit](
-    Field("getToken", OptionType(StringType),
-      arguments = accArg :: pwdArg :: Nil,
-      resolve = ctx => "12332")
-  ))
 
-  val graphQLSchema = Schema(Query, Some(Mutation))
+  val graphQLSchema = Schema(Query, Some(mutationType))
 }
+
+//object SchemaDefinition extends SchemaDefinition

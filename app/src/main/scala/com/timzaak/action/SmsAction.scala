@@ -11,9 +11,9 @@ trait SmsAction extends Action with Mockable {
   def getCaptcha(mobile: S) = smsDao.getCaptcha(mobile)
 
   def sendCaptcha(mobile: S, captcha: S): Future[U] = mock2Default {
-    Promise.successful().future
+    Promise.successful[U](()).future
   } {
-    Promise.successful().future
+    Promise.successful[U](()).future
   }.map { _ =>
     smsDao.saveCaptcha(mobile, captcha)
   }
