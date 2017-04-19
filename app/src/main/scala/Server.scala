@@ -4,12 +4,11 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
+import com.joyrec.util.log.impl.slf4j.ClassSlf4j
 import com.timzaak.di.{ActionDI, DI}
-import com.timzaak.entity.UserAuth
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
 import pdi.jwt.{Jwt, JwtAlgorithm}
-import sangria.ast.SchemaDefinition
 import sangria.execution.{ErrorWithResolver, Executor, QueryAnalysisError, QueryReducer}
 import sangria.parser.QueryParser
 import sangria.renderer.SchemaRenderer
@@ -17,7 +16,7 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{Failure, Success}
 
-object Server extends App with JsonHelperWithDoubleMode with DI {
+object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j{
 
   val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](100, (c, ctx) ⇒
     new IllegalArgumentException(s"Too complex query"))
@@ -53,7 +52,7 @@ object Server extends App with JsonHelperWithDoubleMode with DI {
               operationName = operation
             )
               .map { result =>
-                println("cost" + (new Date().getTime - time))
+                debug("cost" + (new Date().getTime - time))
                 OK → result
               }
               .recover {

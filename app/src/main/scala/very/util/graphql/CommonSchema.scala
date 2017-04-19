@@ -1,4 +1,4 @@
-package com.timzaak.schema
+package very.util.graphql
 
 import sangria.schema._
 

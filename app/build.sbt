@@ -37,12 +37,14 @@ lazy val json = RootProject(file("../very-util-json"))
 
 lazy val redis = RootProject(file("../very-util-db-redis"))
 
+lazy val log = RootProject(file("../very-util-log"))
+
 lazy val codegen = project
   .settings(slickSetting)
   .settings(libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.2.0")
   .dependsOn(json)
 
-lazy val root = (project in file(".")).dependsOn(json, lang, redis, codegen)
+lazy val root = (project in file(".")).dependsOn(json, lang, redis, codegen, log)
   .settings(slick := slickCodeGenTask.value)
   .settings(slickSetting)
   //.settings(sourceGenerators in Compile += slickCodeGenTask.taskValue) // register automatic code generation on every compile, remove for only manual use)

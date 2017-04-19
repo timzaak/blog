@@ -21,7 +21,7 @@ trait UserAccountDao extends WithPostgrel with WithRedis{
   }
 
 
-  def newAcc(acc: UserAccount): Future[I] =
-    sqlu"insert into #${tableName}(acc,pwd) values (${acc.accountName},${acc.password})"
+  def newAcc(acc: UserAccount): Future[L] =
+    sql"insert into #${tableName}(acc,pwd) values (${acc.accountName},${acc.password}) returning id".as[L].head
 
 }
