@@ -3,8 +3,8 @@ package com.timzaak.dao
 import com.joyrec.util.db.redis.WithRedis
 import com.timzaak.entity.UserAccount
 import very.util.db.postgrel.WithPostgrel
-import very.util.db.postgrel.PostgresProfileWithJson4S.plainAPI._
-
+import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import slick.jdbc.GetResult
 import scala.concurrent.Future
 
 trait UserAccountDao extends WithPostgrel with WithRedis{
@@ -13,7 +13,7 @@ trait UserAccountDao extends WithPostgrel with WithRedis{
   protected val tableName = "user_accounts"
 
 
-  import slick.jdbc.GetResult
+
   implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
 
   def getByAccAndPwd(account: S, pwd: S): Future[Option[UserAccount]] = {

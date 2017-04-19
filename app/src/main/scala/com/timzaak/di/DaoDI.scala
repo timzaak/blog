@@ -29,4 +29,5 @@ trait DaoDI extends AkkaDI with WithConf{
     override protected def redis: SingleRedisTpl = new Redis(1)
   }
 
+  object commentDao extends CommentDao
 }

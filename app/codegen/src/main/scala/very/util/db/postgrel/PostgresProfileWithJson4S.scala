@@ -2,13 +2,12 @@ package very.util.db.postgrel
 
 import com.github.tminglei.slickpg._
 import org.json4s.{JValue, JsonMethods}
-
 import slick.jdbc.PostgresProfile
 
 trait PostgresProfileWithJson4S extends PostgresProfile
   with PgJson4sSupport
-  with array.PgArrayJdbcTypes
-{
+  with PgDate2Support
+  with array.PgArrayJdbcTypes {
 
   def pgjson = "jsonb"
 
@@ -18,18 +17,19 @@ trait PostgresProfileWithJson4S extends PostgresProfile
 
   override val api = MyAPI
 
-  val plainAPI = new API with Json4sJsonPlainImplicits
 
-  object MyAPI extends super.API with JsonImplicits {
+  object MyAPI extends super.API
+    with JsonImplicits with Date2DateTimePlainImplicits{
 
     implicit val strListTypeMapper = new SimpleArrayJdbcType[String]("text").to(_.toList)
 
     implicit val json4sJsonArrayTypeMapper =
       new AdvancedArrayJdbcType[JValue](pgjson,
         (s) => utils.SimpleArrayUtils.fromString[JValue](jsonMethods.parse(_))(s).orNull,
-        (v) => utils.SimpleArrayUtils.mkString[JValue](j=>jsonMethods.compact(jsonMethods.render(j)))(v)
+        (v) => utils.SimpleArrayUtils.mkString[JValue](j => jsonMethods.compact(jsonMethods.render(j)))(v)
       ).to(_.toList)
   }
+
 }
 
 

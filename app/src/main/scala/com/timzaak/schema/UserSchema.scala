@@ -1,15 +1,16 @@
-package com.timzaak.entity
+package com.timzaak.schema
+
 import com.timzaak.action.UserAccAction
-import com.timzaak.schema.GraphQLContext
-import sangria.schema._
+import com.timzaak.entity.UserAccount
 import sangria.macros.derive._
+import sangria.schema._
 trait UserSchema {
   private val userAccountInputType = deriveInputObjectType[UserAccount](
     InputObjectTypeDescription("the user"),
     DocumentInputField("id","user id")
   )
 
-  private val mutationType = deriveObjectType[GraphQLContext,UserAccAction](
+  private val mutationType:ObjectType[GraphQLContext,UserAccAction] = deriveObjectType[GraphQLContext,UserAccAction](
     IncludeMethods(
       "login",
       "sampleRegister"
