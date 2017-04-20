@@ -7,7 +7,7 @@ CREATE TABLE comments(
     to_id integer NOT NULL
 );
 
-CREATE INDEX comments_user_id_index on comments USING hash(to_id);
+CREATE INDEX comments_to_id_index on comments USING hash(to_id);
 
 --用户登录，注册
 CREATE TABLE user_accounts(

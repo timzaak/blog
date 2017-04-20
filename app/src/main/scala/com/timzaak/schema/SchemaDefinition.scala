@@ -11,7 +11,7 @@ trait SchemaDefinition extends UserSchema with CommentSchema {
 
   val mutationType = ObjectType(
     name = "Mutation",
-    fields = userSchemaMutation
+    fields = userSchemaMutation ::: commentSchemaMutation
   )
 
   val graphQLSchema = Schema(Query, Some(mutationType))

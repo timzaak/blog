@@ -12,13 +12,13 @@ import scala.concurrent.Future
 trait CommentDao extends WithPostgrel with BaseSqlDSL {
   protected val tableName = "comments"
 
-  implicit val getCommentImplicit = GetResult(r => Comment(r.<<,r.<<, r.<<, r.<<, r.<<))
+  implicit val getCommentImplicit = GetResult(r => Comment(r.<<, r.<<, r.<<, r.<<, r.<<))
 
-  def createComment(userId: L, content: S): Future[L] = {
-    sql"insert into #$tableName(content,user_id) values($content,$userId) returning id".as[L].head
+  def createComment(fromId:L,toId:L,content:S): Future[L] = {
+    sql"insert into #$tableName(content,from_id,to_id,time) values ($content,$fromId, $toId,${LocalDateTime.now()}) returning id".as[L].head
   }
 
-  def pages(userId: S, page: I, pageSize: I) = paginate[Comment](
-    page, pageSize, whereClause= s"to_id=$userId" ,orderBy = "time desc")
+  def pages(userId: L, page: I, pageSize: I) = paginate[Comment](
+    page, pageSize, whereClause = s"to_id=$userId", orderBy = "time desc")
 
 }
