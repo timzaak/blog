@@ -5,7 +5,7 @@ import com.timzaak.dao._
 import com.top10.redis.{Redis, SingleRedis}
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
-trait DaoDI extends AkkaDI with WithConf{
+trait DaoDI extends WithConf{
   di =>
 
   implicit val db = Database.forURL(

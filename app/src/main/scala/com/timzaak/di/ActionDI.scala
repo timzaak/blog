@@ -3,7 +3,7 @@ package com.timzaak.di
 import com.timzaak.action._
 import com.timzaak.dao.{CommentDao, SmsDao, UserAccountDao}
 
-trait ActionDI extends DaoDI {
+trait ActionDI extends DaoDI with AkkaDI{
   di =>
   val enableMock: B = true
 

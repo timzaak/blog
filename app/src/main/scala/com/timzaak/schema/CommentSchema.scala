@@ -2,7 +2,6 @@ package com.timzaak.schema
 
 import com.timzaak.action.CommentAction
 import com.timzaak.entity.Comment
-import org.json4s.JValue
 import sangria.schema._
 import sangria.macros.derive._
 import very.util.graphql.CommonSchema
@@ -10,7 +9,6 @@ import very.util.graphql.CommonSchema
 trait CommentSchema extends CommonSchema {
   //need it for macro
   import very.util.graphql.DateTimeSchema._
-
   private implicit val commentObjectType = deriveObjectType[GraphQLContext, Comment](
     ObjectTypeName("Comment"),
     ObjectTypeDescription("the sample comment version")
