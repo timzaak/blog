@@ -19,7 +19,7 @@ trait UserAccAction extends Action {
     SHA(acc + pwd, SHA.SHA_256)
   }
 
-  protected def jwtEncode(userId: L) = Jwt.encode(s"""{"id":$userId}""", secretKey, JwtAlgorithm.HS256)
+  protected def jwtEncode(userId: L) = Jwt.encode(s"""$userId""", secretKey, JwtAlgorithm.HS256)
 
   def login(acc: S, pwd: S) = {
     userAccDao.getByAccAndPwd(acc, secretPwd(acc, pwd)).map(_.flatMap(_.id)).map {

@@ -45,8 +45,18 @@ lazy val codegen = project
   .dependsOn(json)
 
 lazy val root = (project in file(".")).dependsOn(json, lang, redis, codegen, log)
-  .settings(slick := slickCodeGenTask.value)
   .settings(slickSetting)
+
+
+flywayUrl := {
+  import com.typesafe.config._
+  val conf = ConfigFactory.parseFile((resourceDirectory in Compile).value / "application.conf").resolve()
+  conf.getString("postgrel.url")
+}
+
+
+/*  .settings(slick := slickCodeGenTask.value)  //no need without code generate
+
   //.settings(sourceGenerators in Compile += slickCodeGenTask.taskValue) // register automatic code generation on every compile, remove for only manual use)
 
 // code generation task
@@ -62,5 +72,6 @@ lazy val slickCodeGenTask = Def.task {
   val fname = outputDir + "/com/timzaak/generated/Tables.scala"
   Seq(file(fname))
 }
-
 unmanagedSourceDirectories in Compile += sourceManaged.value / "slick"
+*/
+

@@ -16,7 +16,7 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{Failure, Success}
 
-object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j{
+object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j {
 
   val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](100, (c, ctx) ⇒
     new IllegalArgumentException(s"Too complex query"))
@@ -34,7 +34,9 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j{
 
         val strOption(operation: Option[String]) = requestJson \ "operationName"
 
-        val userId = auth.flatMap(t => Jwt.decode(t, jwtSecretKey, Seq(JwtAlgorithm.HS256)).toOption)
+        val userId = auth.flatMap { t =>
+          Jwt.decode(t, jwtSecretKey, Seq(JwtAlgorithm.HS256)).map(_.toLong).toOption
+        }.getOrElse(0L)
 
         val variables = requestJson \ "variables" match {
           case JNull | JNothing => JObject()
@@ -46,9 +48,9 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j{
             complete(Executor.execute(
               graphQLSchema,
               queryAst,
-              GraphQLContext(userId,this:ActionDI),
+              GraphQLContext(userId, this: ActionDI),
               variables = variables,
-              queryReducers =  Nil,
+              queryReducers = Nil,
               operationName = operation
             )
               .map { result =>
@@ -67,12 +69,12 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j{
       }
     } ~
       get {
-        path("graphiql.html"){
+        path("graphiql.html") {
           getFromResource("graphiql.html")
-        }~
-        path("graph_schema"){
-          complete(SchemaRenderer.renderSchema(graphQLSchema))
-        }
+        } ~
+          path("graph_schema") {
+            complete(SchemaRenderer.renderSchema(graphQLSchema))
+          }
       }
 
 

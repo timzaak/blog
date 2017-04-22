@@ -18,7 +18,7 @@ trait BaseSqlDSL extends WithPostgrel {
     val where = whereClause.map(x => s" where $x").getOrElse("")
 
     db.run(sql"""select * from #$tableName #$where #${orderBy.map(x => s" order by $x").getOrElse("")} limit $pageSize offset ${pageSize * (page - 1)}""".as[Entity]) zip
-    db.run(sql"select count(id) from #$tableName #$where".as[Long].head)
+    db.run(sql"select count(*) from #$tableName #$where".as[Long].head)
   }
 
 }

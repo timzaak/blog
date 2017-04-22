@@ -24,7 +24,7 @@ trait ActionDI extends DaoDI with AkkaDI{
   }
 
   object commentAction extends CommentAction {
-    override def commentDao: CommentDao = di.commentDao
+    override protected def commentDao: CommentDao = di.commentDao
   }
 
 }
