@@ -45,11 +45,20 @@ trait CommentSchema extends CommonSchema {
     ExcludeInputFields("time", "id")
   )
 
+
+  private val toId = Argument("toId", LongType)
+  private val content = Argument("content", StringType)
+
   private val commentMutationType = deriveObjectType[GraphQLContext, CommentAction](
     ObjectTypeName("commentMutationAction"),
-    IncludeMethods(
-      "postComment"
-    )
+    IncludeMethods(),
+    AddFields(Field(
+      name = "postComment",
+      description = "post comment",
+      arguments = toId :: content :: Nil,
+      fieldType = LongType,
+      resolve = c => c.ctx.di.commentAction.postComment(c.ctx.userId, c arg toId, c arg content)
+    ))
   )
 
   val commentSchemaMutation = fields[GraphQLContext, Unit](

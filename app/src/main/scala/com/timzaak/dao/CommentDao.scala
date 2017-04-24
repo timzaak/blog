@@ -20,6 +20,6 @@ trait CommentDao extends WithPostgrel with BaseSqlDSL {
 
   def pages(userId: L, page: I, pageSize: I) = {
     paginate[Comment](
-      page, pageSize, whereClause = s"to_id=$userId", orderBy = "created_at desc")
+      page, pageSize, whereClause = s"to_id=$userId or from_id=${userId}", orderBy = "created_at desc")
   }
 }
