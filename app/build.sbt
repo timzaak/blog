@@ -6,6 +6,8 @@ description := "An example GraphQL server written with akka-http and sangria."
 scalaVersion := "2.12.1"
 scalacOptions ++= Seq("-deprecation", "-feature")
 
+enablePlugins(JavaAppPackaging)
+
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria" % "1.0.0",
   "com.typesafe.akka" %% "akka-http" % "10.0.3",
@@ -48,12 +50,16 @@ lazy val root = (project in file(".")).dependsOn(json, lang, redis, codegen, log
   .settings(slickSetting)
 
 
+
 flywayUrl := {
   import com.typesafe.config._
   val conf = ConfigFactory.parseFile((resourceDirectory in Compile).value / "application.conf").resolve()
   conf.getString("postgrel.url")
 }
 
+//package
+enablePlugins(JavaAppPackaging)
+mainClass in Compile := Some("com.timzaak.Server")
 
 /*  .settings(slick := slickCodeGenTask.value)  //no need without code generate
 
