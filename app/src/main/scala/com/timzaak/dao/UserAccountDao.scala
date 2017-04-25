@@ -7,7 +7,7 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 import slick.jdbc.GetResult
 import scala.concurrent.Future
 
-trait UserAccountDao extends WithPostgrel with WithRedis{
+trait UserAccountDao extends WithPostgrel{
 
 
   protected val tableName = "user_accounts"

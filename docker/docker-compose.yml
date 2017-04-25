@@ -9,16 +9,16 @@ postgres:
     POSTGRES_PASSWORD: timzaak
     POSTGRES_USER: timzaak
 
-redis:
-  image: redis:3.2.8-alpine
-  container_name: redis_db
-  ports:
-  - "6666:6666"
-  volumes:
-    - ./db/redis/logs/redis:/var/log/redis
-    - ./db/redis/conf/redis.conf:/user/local/etc/redis/redis.conf
-    - ./db/redis/data:/data
-  command: redis-server /user/local/etc/redis/redis.conf
+# redis:
+#   image: redis:3.2.8-alpine
+#   container_name: redis_db
+#   ports:
+#   - "6666:6666"
+#   volumes:
+#     - ./db/redis/logs/redis:/var/log/redis
+#     - ./db/redis/conf/redis.conf:/user/local/etc/redis/redis.conf
+#     - ./db/redis/data:/data
+#   command: redis-server /user/local/etc/redis/redis.conf
 
 # java:
 #   image: java:openjdk-8-jdk-alpine
