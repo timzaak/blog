@@ -1,7 +1,3 @@
 dump.rdb
 *.log
-db/postgres/*
-!db/postgres/postgresql.auto.conf
-!db/postgres/postgresql.conf
-!db/postgres/pg_hba.conf
-!db/postgres/pg_ident.conf
+db/postgres/data
