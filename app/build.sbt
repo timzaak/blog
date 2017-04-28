@@ -59,7 +59,7 @@ flywayUrl := {
 
 //package
 enablePlugins(JavaAppPackaging)
-mainClass in Compile := Some("com.timzaak.Server")
+mainClass in Compile := Some("Server")
 
 /*  .settings(slick := slickCodeGenTask.value)  //no need without code generate
 

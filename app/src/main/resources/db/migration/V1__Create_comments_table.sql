@@ -7,7 +7,7 @@ CREATE TABLE if not exists comments(
     created_at timestamp NOT NULL DEFAULT current_timestamp
 );
 
-CREATE INDEX comments_to_id_index ON comments USING hash(to_id);
+CREATE INDEX comments_to_id_index ON comments(to_id);
 
 INSERT INTO comments(from_id,to_id,content,created_at) values(1,1,'1','2017-04-24 20:24:28.936235');
 INSERT INTO comments(from_id,to_id,content,created_at) values(1,1,'2','2017-04-24 20:24:29.936235');
