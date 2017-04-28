@@ -15,7 +15,7 @@ trait CommentDao extends WithPostgrel with BaseSqlDSL {
   }
 
   def createComment(fromId: L, toId: L, content: S): Future[L] = {
-    sql"insert into #$tableName(content,from_id,to_id) values ($content,$fromId, $toId}) returning id".as[L].head
+    sql"insert into #$tableName(content,from_id,to_id) values ($content,$fromId, $toId) returning id".as[L].head
   }
 
   def pages(userId: L, page: I, pageSize: I) = {
