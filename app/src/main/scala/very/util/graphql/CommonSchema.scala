@@ -1,9 +1,12 @@
 package very.util.graphql
 
 import org.json4s.JValue
+import sangria.execution.deferred.DeferredResolver
 import sangria.marshalling.FromInput
 import sangria.schema._
 import ws.very.util.json.JsonHelperWithDoubleMode
+
+import scala.concurrent.Future
 
 
 trait CommonSchema extends JsonHelperWithDoubleMode {

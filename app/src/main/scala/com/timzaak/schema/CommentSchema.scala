@@ -17,7 +17,6 @@ trait CommentSchema extends CommonSchema {
 
   private implicit val CommentPageObjectType = pageType[GraphQLContext, Comment]("comments", commentObjectType)
 
-  //private implicit val commentObjectsType = ListType(commentObjectType)
   private val commentQueryType: ObjectType[GraphQLContext, CommentAction] =
     deriveObjectType[GraphQLContext, CommentAction](
       ObjectTypeName("commentQueryAction"),
@@ -27,7 +26,8 @@ trait CommentSchema extends CommonSchema {
         description = "get my comments",
         arguments = pageArg :: pageSizeArg :: Nil,
         fieldType = CommentPageObjectType,
-        resolve = c => c.ctx.di.commentAction.myComments(c.ctx.userId, c arg pageSizeArg, c arg pageArg)
+        resolve = c =>
+          c.ctx.withAuth(c.ctx.di.commentAction.myComments(_, c arg pageSizeArg, c arg pageArg))
       ))
     )
 
@@ -57,7 +57,7 @@ trait CommentSchema extends CommonSchema {
       description = "post comment",
       arguments = toId :: content :: Nil,
       fieldType = LongType,
-      resolve = c => c.ctx.di.commentAction.postComment(c.ctx.userId, c arg toId, c arg content)
+      resolve = c => c.ctx.withAuth(c.ctx.di.commentAction.postComment(_, c arg toId, c arg content))
     ))
   )
 

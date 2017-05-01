@@ -36,7 +36,7 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
 
         val userId = auth.flatMap { t =>
           Jwt.decode(t, jwtSecretKey, Seq(JwtAlgorithm.HS256)).map(_.toLong).toOption
-        }.getOrElse(0L)
+        }
 
         val variables = requestJson \ "variables" match {
           case JNull | JNothing => JObject()
