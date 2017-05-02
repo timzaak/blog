@@ -21,9 +21,7 @@ trait DaoDI extends WithConf{
   }
 
   object smsDao extends SmsDao {
-    override protected def expireTime: I = 120
-
-//    override protected def redis: SingleRedisTpl = new Redis(1)
+    override protected val tableName: String = "sms"
   }
 
   object commentDao extends CommentDao

@@ -13,3 +13,6 @@
 [submodule "very-util-log"]
 	path = very-util-log
 	url = git@git.oschina.net:mefaso/very-util-log.git
+[submodule "very-util-scalaj-http"]
+	path = very-util-scalaj-http
+	url = https://git.oschina.net/timzaak/very-util-scalaj-http.git

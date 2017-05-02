@@ -1,6 +1,5 @@
 package com.timzaak.dao
 
-import com.joyrec.util.db.redis.WithRedis
 import com.timzaak.entity.UserAccount
 import very.util.db.postgrel.WithPostgrel
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._

@@ -1,18 +1,19 @@
 package com.timzaak.dao
 
-import com.joyrec.util.db.redis.WithRedis
+import java.time.LocalDateTime
 
-trait SmsDao{
-  protected def expireTime: I
+import very.util.db.postgrel.{BaseSqlDSL, WithPostgrel}
+import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
-  def saveCaptcha(mobile: S, code: S) = {
-//    redis.set(mobile, code)
-//    redis.expire(mobile, expireTime)
-    1L
+import scala.concurrent.Future
+
+trait SmsDao extends WithPostgrel with BaseSqlDSL {
+  def saveCaptcha(mobile: S, code: S, reId: S): Future[L] = {
+    sql"insert into #${tableName}(mobile,code,re_id) values(${mobile},${code},${reId}) returning id".as[L].head
   }
 
-  def getCaptcha(mobile: S) = {
-//    redis.get(mobile)
-    Option("1")
+
+  def getCaptcha(mobile: S): Future[(S, LocalDateTime)] = {
+    sql"select re_id,created_at from #${tableName} where mobile=${mobile} order by created_at desc limit 1".as[(String, LocalDateTime)].head
   }
 }

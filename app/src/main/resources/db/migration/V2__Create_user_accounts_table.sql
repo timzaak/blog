@@ -1,5 +1,5 @@
 --用户登录，注册
-CREATE TABLE user_accounts(
+CREATE TABLE if not exists user_accounts(
     id bigserial PRIMARY key,
     acc varchar(32) NOT NULL,
     pwd varchar(64) NOT NULL,
