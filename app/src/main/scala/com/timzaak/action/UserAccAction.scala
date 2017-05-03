@@ -41,11 +41,11 @@ trait UserAccAction extends Action {
     }
   }
 
-  def checkMobileExists(mobile: MobileNum) = {
+  def checkMobileExists(mobile: MobileNum):Future[Option[L]] = {
     userAccDao.getAccId(mobile)
   }
 
-  def getRegisterCaptcha(mobile: MobileNum) = {
+  def getRegisterCaptcha(mobile: MobileNum):Future[S] = {
     if (mobile.matches(Texts.Regex.Num)) {
       smsAction.getCaptcha(mobile).flatMap {
         case Some((_, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < 60 =>
@@ -53,6 +53,8 @@ trait UserAccAction extends Action {
         case _ =>
           smsAction.sendCaptcha(mobile)
       }
+    }else{
+      new IllegalArgumentException("手机号格式错误")
     }
   }
 
