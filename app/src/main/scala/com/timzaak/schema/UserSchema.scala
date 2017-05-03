@@ -14,13 +14,19 @@ trait UserSchema {
   private val mutationType: ObjectType[GraphQLContext, UserAccAction] = deriveObjectType[GraphQLContext, UserAccAction](
     ObjectTypeName("UserAccMutationAction"),
     IncludeMethods(
-      "sampleRegister"
+      "register"
     )
   )
   private val queryType: ObjectType[GraphQLContext, UserAccAction] = deriveObjectType[GraphQLContext, UserAccAction](
     ObjectTypeName("UserAccQueryAction"),
     IncludeMethods(
-      "login"
+      "login",
+      /*
+      * "getRegisterCaptcha",
+      * "checkMobileExists" 是否需要放到User里面，还是要单独拎出来，变成Auth模块
+      * */
+      "getRegisterCaptcha",
+      "checkMobileExists"
     )
   )
 

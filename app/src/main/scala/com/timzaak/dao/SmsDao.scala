@@ -13,7 +13,7 @@ trait SmsDao extends WithPostgrel with BaseSqlDSL {
   }
 
 
-  def getCaptcha(mobile: S): Future[(S, LocalDateTime)] = {
-    sql"select re_id,created_at from #${tableName} where mobile=${mobile} order by created_at desc limit 1".as[(String, LocalDateTime)].head
+  def getCaptcha(mobile: S): Future[O[(Captcha, LocalDateTime)]] = {
+    sql"select re_id,created_at from #${tableName} where mobile=${mobile} order by created_at desc limit 1".as[(Captcha, LocalDateTime)].headOption
   }
 }

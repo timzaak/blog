@@ -13,7 +13,7 @@ trait WithAliSms {
 
   protected def captchaTemplateCode: S
 
-  def sendSms(signName: S, templateCode: S, params: (S, S)*)(phoneNumbers: S*) = {
+  protected def sendSms(signName: S, templateCode: S, params: (S, S)*)(phoneNumbers: S*) = {
     val msg = new RawTopicMessage
     msg.setMessageBody("sms-message")
     val messageAttributes = new MessageAttributes
@@ -30,7 +30,7 @@ trait WithAliSms {
     }
   }
 
-  def sendCaptchaSms(params: (S, S)*)(phoneNumbers: S*) = {
+  protected def sendCaptchaSms(params: (S, S)*)(phoneNumbers: S*) = {
     sendSms(captchaSignName, captchaTemplateCode, params: _*)(phoneNumbers: _*)
   }
 

@@ -31,6 +31,8 @@ trait ActionDI extends DaoDI with AkkaDI {
     override protected def secretKey: S = jwtSecretKey
 
     override protected def smsAction: SmsAction = di.smsAction
+
+    override protected val expireTime: I = 60*20
   }
 
   object commentAction extends CommentAction {
