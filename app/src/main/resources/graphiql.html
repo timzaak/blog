@@ -126,7 +126,7 @@
           headers: Object.assign({
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-          },graphQLParams.headers),
+          },JSON.parse(parameters.headers||"{}")),
           body: JSON.stringify(graphQLParams),
           credentials: 'include',
         }).then(function (response) {
@@ -147,7 +147,6 @@
           query: parameters.query,
           variables: parameters.variables,
           operationName: parameters.operationName,
-          headers: parameters.headers,
           onEditQuery: onEditQuery,
           onEditVariables: onEditVariables,
           onEditOperationName: onEditOperationName

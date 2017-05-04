@@ -8,8 +8,8 @@ trait ActionDI extends DaoDI with AkkaDI {
   di =>
   val enableMock: B = true
 
-  private val aliSmsConf = conf.getConfig("ali.sm")
-  val msnClient = new CloudAccount(aliSmsConf.getString("accessId"), aliSmsConf.getString("accessKey"), aliSmsConf.getString("endpoint")).getMNSClient
+  private val aliSmsConf = conf.getConfig("ali.sms")
+  lazy val msnClient = new CloudAccount(aliSmsConf.getString("accessId"), aliSmsConf.getString("accessKey"), aliSmsConf.getString("endpoint")).getMNSClient
 
   object smsAction extends SmsAction {
     override def enableMock: B = di.enableMock

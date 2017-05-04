@@ -49,7 +49,7 @@ trait UserAccAction extends Action {
     if (mobile.matches(Texts.Regex.Num)) {
       smsAction.getCaptcha(mobile).flatMap {
         case Some((_, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < 60 =>
-          new IllegalArgumentException("1分钟内不能多次请求")
+            new IllegalArgumentException("1分钟内不能多次请求")
         case _ =>
           smsAction.sendCaptcha(mobile)
       }

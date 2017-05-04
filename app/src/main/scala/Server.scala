@@ -9,7 +9,7 @@ import com.timzaak.di.{ActionDI, DI}
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
 import pdi.jwt.{Jwt, JwtAlgorithm}
-import sangria.execution.{ErrorWithResolver, Executor, QueryAnalysisError, QueryReducer}
+import sangria.execution._
 import sangria.parser.QueryParser
 import sangria.renderer.SchemaRenderer
 import ws.very.util.json.JsonHelperWithDoubleMode
@@ -51,18 +51,22 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
               GraphQLContext(userId, this: ActionDI),
               variables = variables,
               queryReducers = Nil,
-              operationName = operation
-            )
-              .map { result =>
-                debug("cost" + (new Date().getTime - time))
-                OK → result
+              operationName = operation,
+              exceptionHandler = {
+                case (m, e) =>
+                  HandledException(e.getMessage)
               }
-              .recover {
-                case error: QueryAnalysisError ⇒
-                  BadRequest → error.resolveError
-                case error: ErrorWithResolver ⇒
-                  InternalServerError → error.resolveError
-              })
+            ).map { result =>
+              OK → result
+            }.recover {
+              case error: QueryAnalysisError ⇒
+                BadRequest → error.resolveError
+              case error: ErrorWithResolver ⇒
+                InternalServerError → error.resolveError
+            }.map { result =>
+              debug("cost:" + (new Date().getTime - time))
+              result
+            })
           case Failure(error) ⇒
             complete(BadRequest, "error" -> error.getMessage)
         }
@@ -82,9 +86,14 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", port)
   bindingFuture.onComplete {
     case Success(binding) ⇒
-      println(s"Server is listening on localhost:$port")
+      debug(s"Server is listening on localhost:$port")
     case Failure(e) ⇒
-      println(s"Binding failed with ${e.getMessage}")
+      error(s"Binding failed with ${e.getMessage}")
       system.terminate()
   }
+  scala.sys.addShutdownHook {
+    system.terminate()
+    error(s"closed at ${new Date()}")
+  }
+
 }
