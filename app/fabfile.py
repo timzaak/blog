@@ -21,11 +21,12 @@ def scp():
     run('unzip backend-0.1.0-SNAPSHOT.zip&&rm backend-0.1.0-SNAPSHOT.zip')
     newPath = datetime.now().strftime("%Y-%m-%d_%H_%M")
     run('mv backend-0.1.0-SNAPSHOT ' + newPath)
-    #cd(newPath)
-    #run('./bin/backend  -Dlogback.configurationFile=logback.pro.xml &')
+    return newPath
 
 @task
 def deploy():
-    scp()
-
-    #....
+    newPath=scp()
+    #未测试
+    run("ps x|grep Dlogback |awk '{print $1}'|xargs kill")
+    cd(newPath)
+    run('./bin/backend  -Dlogback.configurationFile=logback.pro.xml &')

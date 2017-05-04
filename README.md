@@ -12,7 +12,7 @@
 
 > 开发环境: docker
 
-> 部署工具: python3 fabric
+> 部署工具: python3 Fabric3
 
 ### 开始
 ```sh
@@ -44,12 +44,6 @@ fab -H $SERVER_HOST
 
 ### TODO:
 
-> 日志管理
-
 > 服务监控
 
 > akka cluster 微服务（发现，队列，定时）
-
-> 输入数据校验
-
-> Relay??
