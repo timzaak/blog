@@ -8,7 +8,6 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 import scala.concurrent.{Future, Promise}
 
 trait CommentDao extends WithPostgrel with BaseSqlDSL {
-  protected val tableName = "comments"
 
   implicit val getCommentImplicit = GetResult{r =>
     Comment(r.nextString().toLong, r.nextString().toLong, r.nextString().toLong, r.nextString(), r.nextLocalDateTime())

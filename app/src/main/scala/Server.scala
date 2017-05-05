@@ -53,7 +53,7 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
               queryReducers = Nil,
               operationName = operation,
               exceptionHandler = {
-                case (m, e) =>
+                case (_, e) =>
                   HandledException(e.getMessage)
               }
             ).map { result =>

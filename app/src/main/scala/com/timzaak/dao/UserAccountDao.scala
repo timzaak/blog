@@ -16,7 +16,6 @@ trait UserAccountDao extends WithPostgrel {
     sql"select * from #$tableName where acc=$account and pwd=$pwd".as[UserAccount].headOption
   }
 
-
   def newAcc(acc: UserAccount): Future[L] =
     sql"insert into #${tableName}(acc,pwd) values (${acc.accountName},${acc.password}) returning id".as[L].head
 

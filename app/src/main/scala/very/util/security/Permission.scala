@@ -19,3 +19,10 @@ object Permission {
 
   def union(permissions: Permission*) = (Nothing /: permissions) (_ | _)
 }
+
+trait PermissionCheckable {
+  def resource: String
+
+  def AccessDef: BasicAccessDef
+
+}

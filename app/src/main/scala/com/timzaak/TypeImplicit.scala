@@ -7,6 +7,7 @@ import scala.util.{Failure, Success, Try}
 
 trait TypeImplicit extends Implicits2 {
   type UserId = L
+  type GroupId = L
   type MobileNum = S
   type Captcha = S
 
