@@ -8,17 +8,19 @@ import com.joyrec.util.log.impl.slf4j.ClassSlf4j
 import com.timzaak.di.{ActionDI, DI}
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
-import pdi.jwt.{Jwt, JwtAlgorithm}
 import sangria.execution._
 import sangria.parser.QueryParser
 import sangria.renderer.SchemaRenderer
+import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{Failure, Success}
 
-object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j {
+object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j with JwtAuthDecode {
 
-  val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](100, (c, ctx) ⇒
+  override def secretKey = jwtSecretKey
+
+  val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](1000, (c, ctx) ⇒
     new IllegalArgumentException(s"Too complex query"))
 
   val route: Route =
@@ -35,7 +37,7 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
         val strOption(operation: Option[String]) = requestJson \ "operationName"
 
         val userId = auth.flatMap { t =>
-          Jwt.decode(t, jwtSecretKey, Seq(JwtAlgorithm.HS256)).map(_.toLong).toOption
+          jwtDecode(t).map(_.toLong)
         }
 
         val variables = requestJson \ "variables" match {

@@ -4,19 +4,17 @@ import java.time._
 
 import com.timzaak.dao.UserAccountDao
 import com.timzaak.entity.UserAccount
-import pdi.jwt.{Jwt, JwtAlgorithm}
+import very.util.security.JwtAuthEncode
 import ws.very.util.lang.Texts
 import ws.very.util.security.SHA
 
 import scala.concurrent.Future
 
-trait UserAccAction extends Action {
+trait UserAccAction extends Action with JwtAuthEncode {
 
   protected def userAccDao: UserAccountDao
 
   protected def smsAction: SmsAction
-
-  protected def secretKey: S
 
   protected def expireTime: I
 
@@ -24,12 +22,11 @@ trait UserAccAction extends Action {
     SHA(acc + pwd, SHA.SHA_256)
   }
 
-  protected def jwtEncode(userId: L) = Jwt.encode(s"""$userId""", secretKey, JwtAlgorithm.HS256)
 
   def login(acc: MobileNum, pwd: S) = {
     userAccDao.getByAccAndPwd(acc, secretPwd(acc, pwd)).map(_.flatMap(_.id)).map {
       case Some(userId) =>
-        jwtEncode(userId)
+        jwtEncode(userId.toString)
       case None =>
         throw new IllegalArgumentException("账号或密码不能存在")
     }
@@ -37,7 +34,7 @@ trait UserAccAction extends Action {
 
   def sampleRegister(acc: S, pwd: S): Future[S] = {
     userAccDao.newAcc(UserAccount(None, acc, secretPwd(acc, pwd))).map { id =>
-      jwtEncode(id)
+      jwtEncode(id.toString)
     }
   }
 
@@ -63,7 +60,7 @@ trait UserAccAction extends Action {
       case Some((code, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < expireTime && code == capture =>
         userAccDao.newAcc(UserAccount(None, mobile, secretPwd(mobile, pwd))).recoverWith {
           case _ => Future.failed(new IllegalArgumentException("账号已存在"))
-        }.map(jwtEncode)
+        }.map(userId => jwtEncode(userId.toString))
       case _ =>
         new IllegalArgumentException("验证码错误")
     }
