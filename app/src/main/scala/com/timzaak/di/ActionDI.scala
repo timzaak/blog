@@ -3,22 +3,28 @@ package com.timzaak.di
 import com.aliyun.mns.client.{CloudAccount, CloudTopic}
 import com.timzaak.action._
 import com.timzaak.dao.{CommentDao, SmsDao, UserAccountDao}
+import very.util.alisms.{AliMockSmsClient, AliSmsClient}
 
 trait ActionDI extends DaoDI with AkkaDI {
   di =>
-  val enableMock: B = true
-
-  private val aliSmsConf = conf.getConfig("ali.sms")
-  lazy val msnClient = new CloudAccount(aliSmsConf.getString("accessId"), aliSmsConf.getString("accessKey"), aliSmsConf.getString("endpoint")).getMNSClient
+  val enableMock: B = conf.getBoolean("mode.mock")
 
   object smsAction extends SmsAction {
     override def enableMock: B = di.enableMock
 
-    override protected def topic: CloudTopic = msnClient.getTopicRef(aliSmsConf.getString("topic"))
+    override protected val smsClient: AliSmsClient = if (di.enableMock) {
+      new AliMockSmsClient {}
+    } else {
+      val aliSmsConf = conf.getConfig("ali.sms")
+      val msnClient = new CloudAccount(aliSmsConf.getString("accessId"), aliSmsConf.getString("accessKey"), aliSmsConf.getString("endpoint")).getMNSClient
+      new AliSmsClient {
+        override protected def topic: CloudTopic = msnClient.getTopicRef(aliSmsConf.getString("topic"))
 
-    override protected def captchaSignName = aliSmsConf.getString("captchaSign")
+        override protected def captchaSignName = aliSmsConf.getString("captchaSign")
 
-    override protected def captchaTemplateCode = aliSmsConf.getString("captchaTemplate")
+        override protected def captchaTemplateCode = aliSmsConf.getString("captchaTemplate")
+      }
+    }
 
     override protected def smsDao: SmsDao = di.smsDao
   }
@@ -32,7 +38,7 @@ trait ActionDI extends DaoDI with AkkaDI {
 
     override protected def smsAction: SmsAction = di.smsAction
 
-    override protected val expireTime: I = 60*20
+    override protected val expireTime: I = 60 * 20
   }
 
   object commentAction extends CommentAction {

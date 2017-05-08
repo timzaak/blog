@@ -95,7 +95,7 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
   }
   scala.sys.addShutdownHook {
     system.terminate()
-    error(s"closed at ${new Date()}")
+    info(s"closed at ${new Date()}")
   }
 
 }

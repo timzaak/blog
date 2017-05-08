@@ -1,14 +1,15 @@
 package com.timzaak.action
 
 import com.timzaak.dao.SmsDao
-import very.util.alisms.WithAliSms
+import very.util.alisms.AliSmsClient
 import ws.very.util.lang.Mockable
 
 import scala.concurrent.Future
 import scala.util.{Random, Success}
 
-trait SmsAction extends Action with WithAliSms with Mockable {
+trait SmsAction extends Action with Mockable {
   protected def smsDao: SmsDao
+  protected def smsClient: AliSmsClient
 
   protected def captchaCode(): S = {
     val captcha = Random.nextInt(99999).toString
@@ -24,7 +25,7 @@ trait SmsAction extends Action with WithAliSms with Mockable {
   def sendCaptcha(mobile: S): Future[S] = {
     val code = captchaCode()
     mock2Default {
-      sendCaptchaSms("code" -> code)(mobile)
+      smsClient.sendCaptchaSms("code" -> code)(mobile)
     } {
       Success("TestId")
     }.map { resultId =>
