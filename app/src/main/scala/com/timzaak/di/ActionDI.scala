@@ -2,7 +2,7 @@ package com.timzaak.di
 
 import com.aliyun.mns.client.{CloudAccount, CloudTopic}
 import com.timzaak.action._
-import com.timzaak.dao.{CommentDao, SmsDao, UserAccountDao}
+import com.timzaak.dao.{AccessDao, CommentDao, SmsDao, UserAccountDao}
 import very.util.alisms.{AliMockSmsClient, AliSmsClient}
 
 trait ActionDI extends DaoDI with AkkaDI {
@@ -43,6 +43,10 @@ trait ActionDI extends DaoDI with AkkaDI {
 
   object commentAction extends CommentAction {
     override protected def commentDao: CommentDao = di.commentDao
+  }
+
+  object accessAction extends AccessAction{
+    override def accessDao: AccessDao = di.accessDao
   }
 
 }

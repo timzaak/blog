@@ -1,4 +1,4 @@
---用户分组
+--权限分组
 create table if not exists groups(
     id serial PRIMARY KEY,
     parent_id int default 0,
