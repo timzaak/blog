@@ -6,7 +6,7 @@ import sangria.schema._
 import sangria.macros.derive._
 import very.util.graphql.CommonSchema
 
-trait CommentSchema extends CommonSchema {
+trait CommentSchema extends Schema {
   //need it for macro
   import very.util.graphql.DateTimeSchema._
 

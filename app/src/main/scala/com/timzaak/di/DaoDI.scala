@@ -1,6 +1,7 @@
 package com.timzaak.di
 
 import com.timzaak.dao._
+import org.pico.hashids.Hashids
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 trait DaoDI extends WithConf {
@@ -16,6 +17,7 @@ trait DaoDI extends WithConf {
   //  class Redis(db: I) extends SingleRedis(redisPool) with AutoSelectSingleRedis {
   //    val select: Int = db
   //  }
+  implicit val hashids = Hashids.reference(conf.getString("server.salt"))
 
   object userAccountDao extends UserAccountDao {
   }

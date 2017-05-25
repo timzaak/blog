@@ -7,12 +7,12 @@ import very.util.security.Permission
 
 import scala.concurrent.Future
 
-trait AccessDao extends BaseSqlDSL {
+trait AccessDao extends Dao {
 
   private object genId {
     val userId = (_: UserId) + "u"
 
-    val groupId = (_: GroupId) + "g"
+    val groupId = (_: GroupId).dbId + "g"
   }
 
   private implicit val getPermissionResult = GetResult(r => Permission(r.<<))

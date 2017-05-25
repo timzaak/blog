@@ -7,10 +7,10 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 import scala.concurrent.{Future, Promise}
 
-trait CommentDao extends WithPostgrel with BaseSqlDSL {
+trait CommentDao extends Dao {
 
   implicit val getCommentImplicit = GetResult{r =>
-    Comment(r.nextString().toLong, r.nextString().toLong, r.nextString().toLong, r.nextString(), r.nextLocalDateTime())
+    Comment(r.<<, r.nextString().toLong, r.nextString().toLong, r.nextString(), r.nextLocalDateTime())
   }
 
   def createComment(fromId: L, toId: L, content: S): Future[L] = {

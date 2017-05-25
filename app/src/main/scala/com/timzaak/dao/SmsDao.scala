@@ -7,7 +7,7 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 import scala.concurrent.Future
 
-trait SmsDao extends WithPostgrel with BaseSqlDSL {
+trait SmsDao extends Dao {
   def saveCaptcha(mobile: S, code: S, reId: S): Future[L] = {
     sql"insert into #${tableName}(mobile,code,re_id) values(${mobile},${code},${reId}) returning id".as[L].head
   }

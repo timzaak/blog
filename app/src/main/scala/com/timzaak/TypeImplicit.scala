@@ -1,5 +1,6 @@
 package com.timzaak
 
+import very.util.security.{IntId, LongId}
 import ws.very.util.lang.Implicits2
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -7,7 +8,8 @@ import scala.util.{Failure, Success, Try}
 
 trait TypeImplicit extends Implicits2 {
   type UserId = L
-  type GroupId = I
+  type GroupId = IntId
+  type CommentId = LongId
   type MobileNum = S
   type Captcha = S
 

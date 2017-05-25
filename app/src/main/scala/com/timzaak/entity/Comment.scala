@@ -1,3 +1,5 @@
 package com.timzaak.entity
 
-case class Comment(id: L,fromId:L, toId: L, content: S, time: java.time.LocalDateTime)
+import very.util.security.LongId
+
+case class Comment(id: LongId, fromId: L, toId: L, content: S, time: java.time.LocalDateTime)
