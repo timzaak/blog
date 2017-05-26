@@ -9,6 +9,8 @@ import scala.concurrent.{Future, Promise}
 
 trait CommentDao extends Dao {
 
+  override protected val fieldList: List[String] = extractSnakeFields[Comment]
+
   implicit val getCommentImplicit = GetResult{r =>
     Comment(r.<<, r.nextString().toLong, r.nextString().toLong, r.nextString(), r.nextLocalDateTime())
   }

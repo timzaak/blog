@@ -15,6 +15,9 @@ trait AccessDao extends Dao {
     val groupId = (_: GroupId).dbId + "g"
   }
 
+
+  override protected val fieldList: List[String] = "id,resource,permission".split(",").toList
+
   private implicit val getPermissionResult = GetResult(r => Permission(r.<<))
 
   private implicit object SetPermission extends SetParameter[Permission] {

@@ -6,7 +6,9 @@ import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 import slick.jdbc.GetResult
 import scala.concurrent.Future
 
-trait UserAccountDao extends WithPostgrel {
+trait UserAccountDao extends Dao {
+
+  override protected val fieldList: List[String] = extractSnakeFields[UserAccount]
 
   protected val tableName = "user_accounts"
 

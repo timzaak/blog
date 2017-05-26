@@ -1,13 +1,14 @@
 package com.timzaak.dao
 
 import com.timzaak.entity.RoleGroup
-import very.util.db.postgrel.BaseSqlDSL
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 import scala.concurrent.Future
 
 trait GroupRoleDao extends Dao {
   override def tableName = "groups"
+
+  override protected val fieldList: List[String] = extractSnakeFields[RoleGroup]
 
   def setRoleGroup(roleGroup: RoleGroup): Future[GroupId] = {
     import roleGroup._
