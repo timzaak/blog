@@ -8,24 +8,27 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.concurrent.Future
 
-
 trait CommonSchema extends JsonHelperWithDoubleMode {
-  val pageArg = Argument("page", IntType)
+  val pageArg     = Argument("page", IntType)
   val pageSizeArg = Argument("pageSize", IntType)
 
-  def pageType[Context, T](name: String, ofType: ObjectType[Context, T]) = ObjectType(name, fields[Context, (Vector[T], Long)](
-    Field(name = "list", fieldType = ListType(ofType), resolve = _.value._1),
-    Field(name = "totalCount", fieldType = LongType, resolve = _.value._2)
-  ))
+  def pageType[Context, T](name: String, ofType: ObjectType[Context, T]) =
+    ObjectType(
+      name,
+      fields[Context, (Vector[T], Long)](
+        Field(name = "list", fieldType = ListType(ofType), resolve = _.value._1),
+        Field(name = "totalCount", fieldType = LongType, resolve = _.value._2)
+      )
+    )
 
   import sangria.marshalling.json4s.native._
-
 
   implicit def json4sNativeFromInput[T: Manifest]: FromInput[T] =
     new FromInput[T] {
       val marshaller = Json4sNativeResultMarshaller
 
-      def fromResult(node: marshaller.Node) = node.asInstanceOf[JValue].extract[T]
+      def fromResult(node: marshaller.Node) =
+        node.asInstanceOf[JValue].extract[T]
     }
 }
 

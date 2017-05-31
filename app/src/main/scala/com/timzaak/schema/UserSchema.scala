@@ -11,24 +11,26 @@ trait UserSchema {
     DocumentInputField("id", "user id")
   )
 
-  private val mutationType: ObjectType[GraphQLContext, UserAccAction] = deriveObjectType[GraphQLContext, UserAccAction](
-    ObjectTypeName("UserAccMutationAction"),
-    IncludeMethods(
-      "register"
+  private val mutationType: ObjectType[GraphQLContext, UserAccAction] =
+    deriveObjectType[GraphQLContext, UserAccAction](
+      ObjectTypeName("UserAccMutationAction"),
+      IncludeMethods(
+        "register"
+      )
     )
-  )
-  private val queryType: ObjectType[GraphQLContext, UserAccAction] = deriveObjectType[GraphQLContext, UserAccAction](
-    ObjectTypeName("UserAccQueryAction"),
-    IncludeMethods(
-      "login",
-      /*
-      * "getRegisterCaptcha",
-      * "checkMobileExists" 是否需要放到User里面，还是要单独拎出来，变成Auth模块
-      * */
-      "getRegisterCaptcha",
-      "checkMobileExists"
+  private val queryType: ObjectType[GraphQLContext, UserAccAction] =
+    deriveObjectType[GraphQLContext, UserAccAction](
+      ObjectTypeName("UserAccQueryAction"),
+      IncludeMethods(
+        "login",
+        /*
+         * "getRegisterCaptcha",
+         * "checkMobileExists" ??????User??????????????Auth??
+         * */
+        "getRegisterCaptcha",
+        "checkMobileExists"
+      )
     )
-  )
 
   val userSchemaQuery = fields[GraphQLContext, U](
     Field(

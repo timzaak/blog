@@ -1,12 +1,11 @@
 package com.timzaak.di
 
-import com.aliyun.mns.client.{CloudAccount, CloudTopic}
+import com.aliyun.mns.client.{ CloudAccount, CloudTopic }
 import com.timzaak.action._
-import com.timzaak.dao.{AccessDao, CommentDao, SmsDao, UserAccountDao}
-import very.util.alisms.{AliMockSmsClient, AliSmsClient}
+import com.timzaak.dao.{ AccessDao, CommentDao, SmsDao, UserAccountDao }
+import very.util.alisms.{ AliMockSmsClient, AliSmsClient }
 
-trait ActionDI extends DaoDI with AkkaDI {
-  di =>
+trait ActionDI extends DaoDI with AkkaDI { di =>
   val enableMock: B = conf.getBoolean("mode.mock")
 
   object smsAction extends SmsAction {
@@ -16,13 +15,18 @@ trait ActionDI extends DaoDI with AkkaDI {
       new AliMockSmsClient {}
     } else {
       val aliSmsConf = conf.getConfig("ali.sms")
-      val msnClient = new CloudAccount(aliSmsConf.getString("accessId"), aliSmsConf.getString("accessKey"), aliSmsConf.getString("endpoint")).getMNSClient
+      val msnClient = new CloudAccount(aliSmsConf.getString("accessId"),
+                                       aliSmsConf.getString("accessKey"),
+                                       aliSmsConf.getString("endpoint")).getMNSClient
       new AliSmsClient {
-        override protected def topic: CloudTopic = msnClient.getTopicRef(aliSmsConf.getString("topic"))
+        override protected def topic: CloudTopic =
+          msnClient.getTopicRef(aliSmsConf.getString("topic"))
 
-        override protected def captchaSignName = aliSmsConf.getString("captchaSign")
+        override protected def captchaSignName =
+          aliSmsConf.getString("captchaSign")
 
-        override protected def captchaTemplateCode = aliSmsConf.getString("captchaTemplate")
+        override protected def captchaTemplateCode =
+          aliSmsConf.getString("captchaTemplate")
       }
     }
 
@@ -45,7 +49,7 @@ trait ActionDI extends DaoDI with AkkaDI {
     override protected def commentDao: CommentDao = di.commentDao
   }
 
-  object accessAction extends AccessAction{
+  object accessAction extends AccessAction {
     override def accessDao: AccessDao = di.accessDao
   }
 

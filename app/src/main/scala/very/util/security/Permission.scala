@@ -15,9 +15,9 @@ case class Permission(self: Long) extends AnyVal {
 object Permission {
 
   val Anything = Permission(0xFFFFFFFFFFFFFFFFL)
-  val Nothing = Permission(0x0000000000000000L)
+  val Nothing  = Permission(0x0000000000000000L)
 
-  def union(permissions: Permission*) = (Nothing /: permissions) (_ | _)
+  def union(permissions: Permission*) = (Nothing /: permissions)(_ | _)
 }
 
 trait PermissionCheckable {

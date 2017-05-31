@@ -1,5 +1,3 @@
 package com.timzaak
 
-package object action extends TypeImplicit{
-
-}
+package object action extends TypeImplicit {}

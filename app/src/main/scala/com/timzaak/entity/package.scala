@@ -1,5 +1,3 @@
 package com.timzaak
 
-package object entity extends TypeImplicit{
-
-}
+package object entity extends TypeImplicit {}

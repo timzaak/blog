@@ -1,10 +1,7 @@
 package com.timzaak.di
 
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.Config
 
-object WithConf{
-  val conf = ConfigFactory.load()
-}
 trait WithConf {
-  def conf = WithConf.conf
+  def conf: Config
 }

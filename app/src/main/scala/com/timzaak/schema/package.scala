@@ -1,5 +1,3 @@
 package com.timzaak
 
-package object schema extends TypeImplicit{
-
-}
+package object schema extends TypeImplicit {}

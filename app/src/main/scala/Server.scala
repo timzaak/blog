@@ -5,8 +5,9 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ActionDI, DI}
+import com.timzaak.di.{ ActionDI, DI }
 import com.timzaak.schema.GraphQLContext
+import com.typesafe.config.ConfigFactory
 import org.json4s._
 import sangria.execution._
 import sangria.parser.QueryParser
@@ -14,24 +15,30 @@ import sangria.renderer.SchemaRenderer
 import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 
-object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j with JwtAuthDecode {
-
+object Server
+    extends App
+    with JsonHelperWithDoubleMode
+    with DI
+    with ClassSlf4j
+    with JwtAuthDecode {
+  var conf               = ConfigFactory.load()
   override def secretKey = jwtSecretKey
 
-  val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](1000, (c, ctx) ⇒
-    new IllegalArgumentException(s"Too complex query"))
+  val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](
+    1000,
+    (c, ctx) => new IllegalArgumentException(s"Too complex query")
+  )
 
   val route: Route =
     (post & path("graphql") & optionalHeaderValueByName("auth")) { auth =>
-
       implicit val serialization = native.Serialization
       import JsonExtractors._
       import de.heikoseeberger.akkahttpjson4s.Json4sSupport._
       import sangria.marshalling.json4s.native._
 
-      entity(as[JValue]) { requestJson ⇒
+      entity(as[JValue]) { requestJson =>
         val JString(query: String) = requestJson \ "query"
 
         val strOption(operation: Option[String]) = requestJson \ "operationName"
@@ -42,34 +49,40 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
 
         val variables = requestJson \ "variables" match {
           case JNull | JNothing => JObject()
-          case other => other
+          case other            => other
         }
         val time = new Date().getTime
         QueryParser.parse(query) match {
-          case Success(queryAst) ⇒
-            complete(Executor.execute(
-              graphQLSchema,
-              queryAst,
-              GraphQLContext(userId, this: ActionDI),
-              variables = variables,
-              queryReducers = Nil,
-              operationName = operation,
-              exceptionHandler = {
-                case (_, e) =>
-                  HandledException(e.getMessage)
-              }
-            ).map { result =>
-              OK → result
-            }.recover {
-              case error: QueryAnalysisError ⇒
-                BadRequest → error.resolveError
-              case error: ErrorWithResolver ⇒
-                InternalServerError → error.resolveError
-            }.map { result =>
-              debug("cost:" + (new Date().getTime - time))
-              result
-            })
-          case Failure(error) ⇒
+          case Success(queryAst) =>
+            complete(
+              Executor
+                .execute(
+                  graphQLSchema,
+                  queryAst,
+                  GraphQLContext(userId, this: ActionDI),
+                  variables = variables,
+                  queryReducers = Nil,
+                  operationName = operation,
+                  exceptionHandler = {
+                    case (_, e) =>
+                      HandledException(e.getMessage)
+                  }
+                )
+                .map { result =>
+                  OK -> result
+                }
+                .recover {
+                  case error: QueryAnalysisError =>
+                    BadRequest -> error.resolveError
+                  case error: ErrorWithResolver =>
+                    InternalServerError -> error.resolveError
+                }
+                .map { result =>
+                  debug("cost:" + (new Date().getTime - time))
+                  result
+                }
+            )
+          case Failure(error) =>
             complete(BadRequest, "error" -> error.getMessage)
         }
       }
@@ -83,13 +96,12 @@ object Server extends App with JsonHelperWithDoubleMode with DI with ClassSlf4j 
           }
       }
 
-
-  val port = sys.props.get("http.port").fold(8080)(_.toInt)
+  val port          = sys.props.get("http.port").fold(8080)(_.toInt)
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", port)
   bindingFuture.onComplete {
-    case Success(binding) ⇒
+    case Success(binding) =>
       debug(s"Server is listening on localhost:$port")
-    case Failure(e) ⇒
+    case Failure(e) =>
       error(s"Binding failed with ${e.getMessage}")
       system.terminate()
   }

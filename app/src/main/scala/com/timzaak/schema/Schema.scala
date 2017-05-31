@@ -6,10 +6,10 @@ import org.pico.hashids.Hashids
 import sangria.schema.ScalarType
 import sangria.validation.ValueCoercionViolation
 import very.util.graphql.CommonSchema
-import very.util.security.{IntId, LongId}
+import very.util.security.{ IntId, LongId }
 
-trait Schema extends CommonSchema{
-  implicit def hashids:Hashids
+trait Schema extends CommonSchema {
+  implicit def hashids: Hashids
 
   case object IdValidation extends ValueCoercionViolation("id validation error")
   implicit val intIdType = ScalarType[IntId](
@@ -18,11 +18,11 @@ trait Schema extends CommonSchema{
     coerceOutput = (d, caps) => d.hashId,
     coerceUserInput = {
       case s: String => Right(IntId(s))
-      case _ => Left(IdValidation)
+      case _         => Left(IdValidation)
     },
     coerceInput = {
       case sangria.ast.StringValue(s, _, _) => Right(IntId(s))
-      case _ => Left(IdValidation)
+      case _                                => Left(IdValidation)
     }
   )
 
@@ -32,11 +32,11 @@ trait Schema extends CommonSchema{
     coerceOutput = (d, caps) => d.hashId,
     coerceUserInput = {
       case s: String => Right(LongId(s))
-      case _ => Left(IdValidation)
+      case _         => Left(IdValidation)
     },
     coerceInput = {
       case sangria.ast.StringValue(s, _, _) => Right(LongId(s))
-      case _ => Left(IdValidation)
+      case _                                => Left(IdValidation)
     }
   )
 }

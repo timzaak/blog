@@ -5,7 +5,7 @@ import very.util.alisms.AliSmsClient
 import ws.very.util.lang.Mockable
 
 import scala.concurrent.Future
-import scala.util.{Random, Success}
+import scala.util.{ Random, Success }
 
 trait SmsAction extends Action with Mockable {
   protected def smsDao: SmsDao

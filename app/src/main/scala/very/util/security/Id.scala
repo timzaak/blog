@@ -16,9 +16,11 @@ case class IntId(hashId: String, dbId: Int) extends Id {
 }
 
 object IntId {
-  def apply(hashId: String)(implicit hashids: Hashids):IntId = IntId(hashId, hashId.unhashid.head.toInt)
+  def apply(hashId: String)(implicit hashids: Hashids): IntId =
+    IntId(hashId, hashId.unhashid.head.toInt)
 
-  def apply(dbId: Int)(implicit hashids: Hashids):IntId = IntId(dbId.hashid, dbId)
+  def apply(dbId: Int)(implicit hashids: Hashids): IntId =
+    IntId(dbId.hashid, dbId)
 }
 
 case class LongId(hashId: String, dbId: Long) extends Id {
@@ -26,7 +28,9 @@ case class LongId(hashId: String, dbId: Long) extends Id {
 }
 
 object LongId {
-  def apply(hashId: String)(implicit hashids: Hashids):LongId = LongId(hashId, hashId.unhashid.head)
+  def apply(hashId: String)(implicit hashids: Hashids): LongId =
+    LongId(hashId, hashId.unhashid.head)
 
-  def apply(dbId: Long)(implicit hashids: Hashids):LongId = LongId(dbId.hashid, dbId)
+  def apply(dbId: Long)(implicit hashids: Hashids): LongId =
+    LongId(dbId.hashid, dbId)
 }

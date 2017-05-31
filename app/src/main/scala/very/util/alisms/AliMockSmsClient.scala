@@ -5,10 +5,10 @@ import com.aliyun.mns.model.TopicMessage
 
 import scala.util.Success
 
-trait AliMockSmsClient extends AliSmsClient{
+trait AliMockSmsClient extends AliSmsClient {
   protected def topic: CloudTopic = null
 
-  protected def captchaSignName: S =null
+  protected def captchaSignName: S = null
 
   protected def captchaTemplateCode: S = null
 

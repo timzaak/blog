@@ -1,4 +1,3 @@
 package com.timzaak
 
-package object dao extends TypeImplicit {
-}
+package object dao extends TypeImplicit {}

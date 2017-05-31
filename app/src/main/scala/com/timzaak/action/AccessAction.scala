@@ -2,14 +2,17 @@ package com.timzaak.action
 
 import com.timzaak.dao.AccessDao
 import com.timzaak.entity.User
-import very.util.security.{Access, AccessDenied, Permission, PermissionCheckable}
+import very.util.security.{ Access, AccessDenied, Permission, PermissionCheckable }
 import scala.concurrent.Future
 
 trait AccessAction extends Action {
   def accessDao: AccessDao
 
-  def withUserAccess(userId: UserId, permissionDesc: PermissionCheckable, access: Access): Future[B] = {
-    accessDao.getUserPermission(permissionDesc.resource, userId)
+  def withUserAccess(userId: UserId,
+                     permissionDesc: PermissionCheckable,
+                     access: Access): Future[B] = {
+    accessDao
+      .getUserPermission(permissionDesc.resource, userId)
       .map(_.getOrElse(Permission.Nothing))
       .map { permission =>
         if (permission ? access) {
@@ -20,8 +23,11 @@ trait AccessAction extends Action {
       }
   }
 
-  def withGroupAccess(groupId: GroupId, permissionDesc: PermissionCheckable, access: Access): Future[B] = {
-    accessDao.getGroupPermission(permissionDesc.resource, groupId)
+  def withGroupAccess(groupId: GroupId,
+                      permissionDesc: PermissionCheckable,
+                      access: Access): Future[B] = {
+    accessDao
+      .getGroupPermission(permissionDesc.resource, groupId)
       .map(_.getOrElse(Permission.Nothing))
       .map { permission =>
         if (permission ? access) {
@@ -32,8 +38,11 @@ trait AccessAction extends Action {
       }
   }
 
-  def withGroupsAccess(groupIds: Seq[GroupId], permissionDesc: PermissionCheckable, access: Access): Future[B] = {
-    accessDao.getGroupsPermission(permissionDesc.resource, groupIds)
+  def withGroupsAccess(groupIds: Seq[GroupId],
+                       permissionDesc: PermissionCheckable,
+                       access: Access): Future[B] = {
+    accessDao
+      .getGroupsPermission(permissionDesc.resource, groupIds)
       .map { permissions =>
         if (Permission.union(permissions: _*) ? access) {
           true

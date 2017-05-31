@@ -2,6 +2,4 @@ package com.timzaak.di
 
 import com.timzaak.schema.SchemaDefinition
 
-trait SchemaDI extends SchemaDefinition with ActionDI{
-
-}
+trait SchemaDI extends SchemaDefinition with ActionDI {}

@@ -6,7 +6,7 @@ trait SchemaDefinition extends UserSchema with CommentSchema {
 
   val Query = ObjectType(
     name = "Query",
-    fields = commentSchemaQuery:::userSchemaQuery
+    fields = commentSchemaQuery ::: userSchemaQuery
   )
 
   val mutationType = ObjectType(

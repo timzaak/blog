@@ -1,6 +1,6 @@
 package com.timzaak.dao
 
-import slick.jdbc.{GetResult, PositionedParameters, SetParameter}
+import slick.jdbc.{ GetResult, PositionedParameters, SetParameter }
 import very.util.db.postgrel.BaseSqlDSL
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 import very.util.security.Permission
@@ -15,8 +15,8 @@ trait AccessDao extends Dao {
     val groupId = (_: GroupId).dbId + "g"
   }
 
-
-  override protected val fieldList: List[String] = "id,resource,permission".split(",").toList
+  override protected val fieldList: List[String] =
+    "id,resource,permission".split(",").toList
 
   private implicit val getPermissionResult = GetResult(r => Permission(r.<<))
 
@@ -33,7 +33,9 @@ trait AccessDao extends Dao {
   }
 
   protected def findPermission(resource: S, id: S): Future[O[Permission]] = {
-    sql"select permission from #${tableName} where resource=${resource} and id=${id} limit 1".as[Permission].headOption
+    sql"select permission from #${tableName} where resource=${resource} and id=${id} limit 1"
+      .as[Permission]
+      .headOption
   }
 
   def setPermission(id: S, resource: S, permission: Permission): Future[I] = {
@@ -41,11 +43,14 @@ trait AccessDao extends Dao {
           on conflict(id,resource) do update set permission = $permission"""
   }
 
-  def getUserPermission(resource: S, id: UserId) = findPermission(resource, genId.userId(id))
+  def getUserPermission(resource: S, id: UserId) =
+    findPermission(resource, genId.userId(id))
 
-  def getGroupPermission(resource: S, id: GroupId) = findPermission(resource, genId.groupId(id))
+  def getGroupPermission(resource: S, id: GroupId) =
+    findPermission(resource, genId.groupId(id))
 
   def getGroupsPermission(resource: S, ids: Seq[GroupId]): Future[Seq[Permission]] = {
-    sql"select permission from #${tableName} where resource=${resource} and id in (${ids.map(genId.groupId): Seq[String]})".as[Permission]
+    sql"select permission from #${tableName} where resource=${resource} and id in (${ids
+      .map(genId.groupId): Seq[String]})".as[Permission]
   }
 }

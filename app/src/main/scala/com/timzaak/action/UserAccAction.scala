@@ -22,14 +22,16 @@ trait UserAccAction extends Action with JwtAuthEncode {
     SHA(acc + pwd, SHA.SHA_256)
   }
 
-
   def login(acc: MobileNum, pwd: S) = {
-    userAccDao.getByAccAndPwd(acc, secretPwd(acc, pwd)).map(_.flatMap(_.id)).map {
-      case Some(userId) =>
-        jwtEncode(userId.toString)
-      case None =>
-        throw new IllegalArgumentException("账号或密码不能存在")
-    }
+    userAccDao
+      .getByAccAndPwd(acc, secretPwd(acc, pwd))
+      .map(_.flatMap(_.id))
+      .map {
+        case Some(userId) =>
+          jwtEncode(userId.toString)
+        case None =>
+          throw new IllegalArgumentException("?????????")
+      }
   }
 
   def sampleRegister(acc: S, pwd: S): Future[S] = {
@@ -38,31 +40,37 @@ trait UserAccAction extends Action with JwtAuthEncode {
     }
   }
 
-  def checkMobileExists(mobile: MobileNum):Future[Option[L]] = {
+  def checkMobileExists(mobile: MobileNum): Future[Option[L]] = {
     userAccDao.getAccId(mobile)
   }
 
-  def getRegisterCaptcha(mobile: MobileNum):Future[S] = {
+  def getRegisterCaptcha(mobile: MobileNum): Future[S] = {
     if (mobile.matches(Texts.Regex.Num)) {
       smsAction.getCaptcha(mobile).flatMap {
         case Some((_, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < 60 =>
-            new IllegalArgumentException("1分钟内不能多次请求")
+          new IllegalArgumentException("60??")
         case _ =>
           smsAction.sendCaptcha(mobile)
       }
-    }else{
-      new IllegalArgumentException("手机号格式错误")
+    } else {
+      new IllegalArgumentException("????????")
     }
   }
 
   def register(mobile: MobileNum, pwd: S, capture: Captcha): Future[S] = {
     smsAction.getCaptcha(mobile).flatMap {
-      case Some((code, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < expireTime && code == capture =>
-        userAccDao.newAcc(UserAccount(None, mobile, secretPwd(mobile, pwd))).recoverWith {
-          case _ => Future.failed(new IllegalArgumentException("账号已存在"))
-        }.map(userId => jwtEncode(userId.toString))
+      case Some((code, time))
+          if Duration
+            .between(time, LocalDateTime.now())
+            .getSeconds < expireTime && code == capture =>
+        userAccDao
+          .newAcc(UserAccount(None, mobile, secretPwd(mobile, pwd)))
+          .recoverWith {
+            case _ => Future.failed(new IllegalArgumentException("?????"))
+          }
+          .map(userId => jwtEncode(userId.toString))
       case _ =>
-        new IllegalArgumentException("验证码错误")
+        new IllegalArgumentException("??????")
     }
   }
 

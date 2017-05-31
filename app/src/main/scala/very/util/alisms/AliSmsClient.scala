@@ -1,7 +1,7 @@
 package very.util.alisms
 
 import com.aliyun.mns.client.CloudTopic
-import com.aliyun.mns.model.{BatchSmsAttributes, MessageAttributes, RawTopicMessage}
+import com.aliyun.mns.model.{ BatchSmsAttributes, MessageAttributes, RawTopicMessage }
 
 import scala.util.Try
 
@@ -13,16 +13,17 @@ trait AliSmsClient {
 
   protected def captchaTemplateCode: S
 
-
   def sendSms(signName: S, templateCode: S, params: (S, S)*)(phoneNumbers: S*) = {
     val msg = new RawTopicMessage
     msg.setMessageBody("sms-message")
-    val messageAttributes = new MessageAttributes
+    val messageAttributes  = new MessageAttributes
     val batchSmsAttributes = new BatchSmsAttributes
     batchSmsAttributes.setFreeSignName(signName)
     batchSmsAttributes.setTemplateCode(templateCode)
     val smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams()
-    params.foreach { case (key, value) => smsReceiverParams.setParam(key, value) }
+    params.foreach {
+      case (key, value) => smsReceiverParams.setParam(key, value)
+    }
     phoneNumbers.foreach(batchSmsAttributes.addSmsReceiver(_, smsReceiverParams))
     messageAttributes.setBatchSmsAttributes(batchSmsAttributes)
 

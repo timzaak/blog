@@ -9,7 +9,8 @@ case class Access(self: Long) extends AnyVal {
 
   def toPermission = Permission(self)
 
-  override def toString = f"${self.toBinaryString}%64s".replace(' ', '0').toString
+  override def toString =
+    f"${self.toBinaryString}%64s".replace(' ', '0').toString
 }
 
 object Access {
@@ -28,5 +29,5 @@ object Access {
 
   val Nothing = Access(0L)
 
-  def union(accesses: Iterable[Access]) = (Nothing /: accesses) (_ | _)
+  def union(accesses: Iterable[Access]) = (Nothing /: accesses)(_ | _)
 }

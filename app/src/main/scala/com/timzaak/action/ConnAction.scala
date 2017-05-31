@@ -1,5 +1,3 @@
 package com.timzaak.action
 
-trait ConnAction extends Action{
-  
-}
+trait ConnAction extends Action {}
