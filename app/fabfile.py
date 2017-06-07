@@ -28,4 +28,4 @@ def deploy():
     with settings(warn_only=True):
         run("ps x|grep Dlogback |awk '{print $1}'|xargs kill")
     cd(newPath)
-    run('./bin/backend  -Dlogback.configurationFile=logback.pro.xml &')
+    run('(./bin/backend  -Dlogback.configurationFile=logback.pro.xml &) && sleep 1')
