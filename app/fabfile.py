@@ -15,7 +15,6 @@ def scp():
     make_jar()
     getdirname = target_path()
     confirm('is this path ? '.getdirname)
-    #将本地的打包zip上传到远程服务器
     put('target/universal/*.zip', getdirname)
     cd(getdirname)
     run('unzip backend-0.1.0-SNAPSHOT.zip&&rm backend-0.1.0-SNAPSHOT.zip')
@@ -26,7 +25,7 @@ def scp():
 @task
 def deploy():
     newPath=scp()
-    #未测试
-    run("ps x|grep Dlogback |awk '{print $1}'|xargs kill")
+    with settings(warn_only=True):
+        run("ps x|grep Dlogback |awk '{print $1}'|xargs kill")
     cd(newPath)
     run('./bin/backend  -Dlogback.configurationFile=logback.pro.xml &')
