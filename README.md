@@ -46,4 +46,9 @@ fab -H $SERVER_HOST
 
 > 服务监控
 
-> akka cluster 微服务（发现，队列，定时）
+>  微服务（发现，队列，定时）
+
+
+### flyway-sbt无法download问题
+
+在`~/.sbt/repositories` 中添加`flyway: https://flywaydb.org/repo`
