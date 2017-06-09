@@ -1,16 +1,16 @@
 package com.timzaak.dao
 
 import java.time.LocalDateTime
-import java.time.format.{ DateTimeFormatter, DateTimeFormatterBuilder }
+import java.time.format.{DateTimeFormatter, DateTimeFormatterBuilder}
 import java.time.temporal.ChronoField
 
-import com.timzaak.di.DaoDI
+import com.timzaak.di.{DaoDI, WithTestConf}
 import org.scalatest._
 
 import scala.concurrent.Future
 
 //import scala.concurrent.ExecutionContext.Implicits.global
-class SlickApiTest extends AsyncFlatSpec with Matchers with DaoDI {
+class SlickApiTest extends AsyncFlatSpec with Matchers with DaoDI with WithTestConf {
   "Slick" should "deserialize LocalDateTime" in {
     val date2DateTimeFormatter =
       new DateTimeFormatterBuilder()

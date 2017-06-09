@@ -1,11 +1,11 @@
 package com.timzaak.chaos
 
-import com.timzaak.di.WithConf
-import org.scalatest.{ FlatSpec, Matchers }
-import pdi.jwt.{ Jwt, JwtAlgorithm }
+import com.timzaak.di.{WithConf, WithTestConf}
+import org.scalatest.{FlatSpec, Matchers}
+import pdi.jwt.{Jwt, JwtAlgorithm}
 
 //test-only com.timzaak.chaos.jwtTest
-class jwtTest extends FlatSpec with Matchers with WithConf {
+class jwtTest extends FlatSpec with Matchers with WithTestConf {
   "jwt" should "decode 1 with our configure" in {
     val jwtSecretKey = conf.getString("jwt.secrete")
     assert(
