@@ -37,6 +37,13 @@ logback.pro.xml
 cd ../app
 fab -H $SERVER_HOST
 ```
+### 构建docker
+
+```sh
+cd docker/build
+sh build.sh
+#docker run backend_server:$tag
+```
 
 ### 接口测试地址
 
