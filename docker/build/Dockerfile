@@ -6,7 +6,7 @@ RUN apk add --update bash && rm -rf /var/cache/apk/*
 
 expose 9000
 
-ADD entrypoint.sh /entrypoint.sh
-
+copy entrypoint.sh /entrypoint.sh
 ADD backend-1.0 /server
-ENTRYPOINT ["sh" "entrypoint.sh"]
+
+ENTRYPOINT ["/entrypoint.sh"]

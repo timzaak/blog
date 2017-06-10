@@ -1,5 +1,5 @@
 #!/bin/bash
-server="backen-1.0"
+server="backend-1.0"
 base=$(pwd)
 echo "Notice::========================="
 echo "Please keep the git repo is clean"
@@ -26,15 +26,15 @@ else
 fi
 
 echo "your tag is: $tag"
+export tag
 
 cd ../../app
 sbt clean universal:packageBin
 
-
-cp ../../app/target/universal/$server.zip $base
+cp target/universal/$server.zip $base/
 cd $base
 
-if [ -d $server];then
+if [ -d $server ];then
   rm -fr $server
 fi
 
@@ -42,6 +42,5 @@ unzip $server.zip
 rm -fr $server.zip
 
 cd $server
-tag="test"
 echo "===========build docker image.."
 docker build -t="backend_server:$tag" $base

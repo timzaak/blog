@@ -113,7 +113,7 @@ object Server
           }
       }
 
-  val port          = sys.props.get("http.port").fold(8080)(_.toInt)
+  val port          = sys.props.get("http.port").fold(9000)(_.toInt)
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", port)
   bindingFuture.onComplete {
     case Success(binding) =>
