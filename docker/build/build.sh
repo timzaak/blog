@@ -32,6 +32,11 @@ sbt clean universal:packageBin
 
 
 cp ../../app/target/universal/$server.zip $base
+cd $base
+
+if [ -d $server];then
+  rm -fr $server
+fi
 
 unzip $server.zip
 rm -fr $server.zip
