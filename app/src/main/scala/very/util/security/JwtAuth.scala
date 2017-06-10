@@ -6,7 +6,6 @@ import org.json4s.JsonAST.JString
 import pdi.jwt.{ JwtAlgorithm, JwtJson4s }
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-//TODO:???????????????????
 trait JwtAuthDecode extends JsonHelperWithDoubleMode {
   protected def secretKey: String
 

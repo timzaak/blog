@@ -1,5 +1,5 @@
 name := "backend"
-version := "0.1.0-SNAPSHOT"
+version := "1.0"
 
 description := "An example GraphQL server written with akka-http and sangria."
 
