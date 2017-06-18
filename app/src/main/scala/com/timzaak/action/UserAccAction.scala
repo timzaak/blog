@@ -30,7 +30,7 @@ trait UserAccAction extends Action with JwtAuthEncode {
         case Some(userId) =>
           jwtEncode(userId.toString)
         case None =>
-          throw new IllegalArgumentException("?????????")
+          throw new IllegalArgumentException("账号或密码错误")
       }
   }
 
@@ -48,12 +48,12 @@ trait UserAccAction extends Action with JwtAuthEncode {
     if (mobile.matches(Texts.Regex.Num)) {
       smsAction.getCaptcha(mobile).flatMap {
         case Some((_, time)) if Duration.between(time, LocalDateTime.now()).getSeconds < 60 =>
-          new IllegalArgumentException("60??")
+          new IllegalArgumentException("不要请求太快哟")
         case _ =>
           smsAction.sendCaptcha(mobile)
       }
     } else {
-      new IllegalArgumentException("????????")
+      new IllegalArgumentException("手机号格式错误")
     }
   }
 
@@ -66,11 +66,11 @@ trait UserAccAction extends Action with JwtAuthEncode {
         userAccDao
           .newAcc(UserAccount(None, mobile, secretPwd(mobile, pwd)))
           .recoverWith {
-            case _ => Future.failed(new IllegalArgumentException("?????"))
+            case _ => Future.failed(new IllegalArgumentException("账号已存在"))
           }
           .map(userId => jwtEncode(userId.toString))
       case _ =>
-        new IllegalArgumentException("??????")
+        new IllegalArgumentException("验证码错误")
     }
   }
 

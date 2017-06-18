@@ -31,4 +31,8 @@ trait CommentDao extends Dao {
                       whereClause = s"to_id=$userId or from_id=${userId}",
                       orderBy = "created_at desc")
   }
+
+  def all(): Future[Vector[Comment]] = {
+    sql"select * from #$tableName".as[Comment]
+  }
 }

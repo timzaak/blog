@@ -1,3 +1,4 @@
+import com.typesafe.config.ConfigFactory
 name := "backend"
 version := "1.0"
 
@@ -37,6 +38,7 @@ commands += Command.args("scalafmt", "Run scalafmt cli.") {
   case (state, args) =>
     val Right(scalafmt) =
       org.scalafmt.bootstrap.ScalafmtBootstrap.fromVersion(latestScalafmt)
+
     scalafmt.main("--non-interactive" +: args.toArray)
     state
 }
@@ -60,17 +62,26 @@ lazy val root = (project in file("."))
   .settings(slickSetting)
 
 flywayUrl := {
-  import com.typesafe.config._
   val conf = ConfigFactory
     .parseFile((resourceDirectory in Compile).value / "application.conf")
     .resolve()
   conf.getString("postgrel.url")
 }
 
+flywayUrl in Test := {
+  val conf = ConfigFactory
+    .parseFile((resourceDirectory in Test).value / "application.conf")
+    .resolve()
+  conf.getString("postgrel.url")
+}
+
+testOptions in Test += Tests.Setup(() => {
+  (flywayMigrate in Test).value
+})
+
 //package
 enablePlugins(JavaAppPackaging)
 mainClass in Compile := Some("Server")
-
 /*  .settings(slick := slickCodeGenTask.value)  //no need without code generate
 
   //.settings(sourceGenerators in Compile += slickCodeGenTask.taskValue) // register automatic code generation on every compile, remove for only manual use)

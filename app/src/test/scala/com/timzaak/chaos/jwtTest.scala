@@ -1,8 +1,8 @@
 package com.timzaak.chaos
 
-import com.timzaak.di.{WithConf, WithTestConf}
-import org.scalatest.{FlatSpec, Matchers}
-import pdi.jwt.{Jwt, JwtAlgorithm}
+import com.timzaak.di.{ WithConf, WithTestConf }
+import org.scalatest.{ FlatSpec, Matchers }
+import pdi.jwt.{ Jwt, JwtAlgorithm }
 
 //test-only com.timzaak.chaos.jwtTest
 class jwtTest extends FlatSpec with Matchers with WithTestConf {

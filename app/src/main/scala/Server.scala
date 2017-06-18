@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ActionDI, DI, WithConf}
+import com.timzaak.di.{ ActionDI, DI, WithConf }
 import com.timzaak.schema.GraphQLContext
 import com.typesafe.config.ConfigFactory
 import org.json4s._
@@ -15,10 +15,10 @@ import sangria.renderer.SchemaRenderer
 import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 
-trait ConfigLoad extends WithConf{
-  var conf               = ConfigFactory.load()
+trait ConfigLoad extends WithConf {
+  var conf = ConfigFactory.load()
 }
 
 /*

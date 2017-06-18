@@ -9,8 +9,8 @@ import scala.concurrent.Future
 
 trait BaseSqlDSL extends WithPostgrel {
   protected def tableName: String
-  protected val fieldList: List[String] = List.empty
-  protected val fields                  = fieldList.mkString(",")
+  protected def fieldList: List[String] = List.empty
+  protected def fields                  = fieldList.mkString(",")
 //
   //danger.
   protected def paginate[Entity](
