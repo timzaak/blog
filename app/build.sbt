@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "com.pauldijou"       %% "jwt-json4s-native"     % "0.12.0",
   "org.picoworks"       %% "pico-hashids"          % "4.4.141",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
+  "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
 )
 lazy val slickSetting = Seq(
@@ -74,6 +75,8 @@ flywayUrl in Test := {
     .resolve()
   conf.getString("postgrel.url")
 }
+
+parallelExecution in Test := false
 
 testOptions in Test += Tests.Setup(() => {
   (flywayMigrate in Test).value

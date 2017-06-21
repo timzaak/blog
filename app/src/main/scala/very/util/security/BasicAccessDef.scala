@@ -35,5 +35,5 @@ trait BasicAccessDef {
   def values: Seq[Access.Pos]
 
   def permission: Permission =
-    Access.union(values.map(_.toAccess)).toPermission
+    Access.union(values.map(_.toAccess): _*).toPermission
 }

@@ -13,4 +13,5 @@ trait FeatureFlag {
     }
   }
 
+  def variable(key: String): String
 }

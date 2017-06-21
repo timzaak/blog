@@ -48,4 +48,6 @@ trait BaseSqlDSL extends WithPostgrel {
 
   def extractSnakeFields[T: TypeTag] = extractFieldNames[T].map(snakify)
 
+  //for easy test
+  def _deleteAll = sqlu"TRUNCATE #$tableName"
 }

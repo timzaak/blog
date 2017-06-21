@@ -29,5 +29,5 @@ object Access {
 
   val Nothing = Access(0L)
 
-  def union(accesses: Iterable[Access]) = (Nothing /: accesses)(_ | _)
+  def union(accesses: Access*) = (Nothing /: accesses)(_ | _)
 }

@@ -6,7 +6,7 @@ import slick.jdbc.{ GetResult, PositionedParameters, PositionedResult, SetParame
 import very.util.db.postgrel.BaseSqlDSL
 import very.util.security.{ IntId, LongId }
 
-abstract class Dao(implicit val hashids: Hashids,
+abstract class Dao(implicit protected val hashids: Hashids,
                    implicit override val db: BasicBackend#DatabaseDef)
     extends BaseSqlDSL {
 

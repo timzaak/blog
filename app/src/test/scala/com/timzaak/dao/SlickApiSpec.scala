@@ -10,7 +10,7 @@ import org.scalatest._
 import scala.concurrent.Future
 
 //import scala.concurrent.ExecutionContext.Implicits.global
-class SlickApiTest extends AsyncFlatSpec with WithTestConf with Matchers with DaoDI {
+class SlickApiSpec extends AsyncFlatSpec with WithTestConf with Matchers with DaoDI {
   "Slick" should "deserialize LocalDateTime" in {
     val date2DateTimeFormatter =
       new DateTimeFormatterBuilder()

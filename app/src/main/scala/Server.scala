@@ -5,9 +5,8 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ ActionDI, DI, WithConf }
+import com.timzaak.di.{ ActionDI, ConfigDI, DI, WithConf }
 import com.timzaak.schema.GraphQLContext
-import com.typesafe.config.ConfigFactory
 import org.json4s._
 import sangria.execution._
 import sangria.parser.QueryParser
@@ -17,9 +16,7 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{ Failure, Success }
 
-trait ConfigLoad extends WithConf {
-  var conf = ConfigFactory.load()
-}
+trait ConfigLoad extends WithConf {}
 
 /*
 参看 《scala 程序设计》282：执行顺序
@@ -35,7 +32,7 @@ scala类初始化 线性化算法
 
 object Server
     extends App
-    with ConfigLoad
+    with ConfigDI
     with JsonHelperWithDoubleMode
     with DI
     with ClassSlf4j
