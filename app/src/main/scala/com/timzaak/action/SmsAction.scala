@@ -27,7 +27,7 @@ trait SmsAction extends Action with Mockable {
     mock2Default {
       smsClient.sendCaptchaSms("code" -> code)(mobile)
     } {
-      Success("TestId")
+      Success("123456")
     }.map { resultId =>
       smsDao.saveCaptcha(mobile, code, resultId).map(_ => code)
     }

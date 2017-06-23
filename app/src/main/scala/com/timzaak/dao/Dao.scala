@@ -24,6 +24,12 @@ abstract class Dao(implicit protected val hashids: Hashids,
     }
   }
 
+  implicit object SetOptionIntId extends SetParameter[O[IntId]] {
+    override def apply(v1: O[IntId], v2: PositionedParameters): U = {
+      v2.setIntOption(v1.map(_.dbId))
+    }
+  }
+
   implicit object GetLongId extends GetResult[LongId] {
     def apply(rs: PositionedResult) = LongId(rs.nextLong())
   }
@@ -38,4 +44,9 @@ abstract class Dao(implicit protected val hashids: Hashids,
     }
   }
 
+  implicit object SetOptionLongId extends SetParameter[O[LongId]] {
+    override def apply(v1: O[LongId], v2: PositionedParameters): U = {
+      v2.setLongOption(v1.map(_.dbId))
+    }
+  }
 }

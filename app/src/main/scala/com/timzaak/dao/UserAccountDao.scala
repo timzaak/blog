@@ -16,7 +16,7 @@ trait UserAccountDao extends Dao {
   implicit val getUserAccountResult = GetResult(r => UserAccount(r.<<, r.<<, r.<<))
 
   def getByAccAndPwd(account: S, pwd: S): Future[Option[UserAccount]] = {
-    sql"select * from #$tableName where acc=$account and pwd=$pwd"
+    sql"select #${fields} from #$tableName where acc=$account and pwd=$pwd"
       .as[UserAccount]
       .headOption
   }
@@ -30,5 +30,4 @@ trait UserAccountDao extends Dao {
     sql"select id from #${tableName} where acc=${mobile} limit 1"
       .as[L]
       .headOption
-
 }
