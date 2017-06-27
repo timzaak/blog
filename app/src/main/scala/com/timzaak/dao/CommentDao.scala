@@ -13,8 +13,8 @@ trait CommentDao extends Dao {
 
   implicit val getCommentImplicit = GetResult { r =>
     Comment(r.<<,
-            r.nextString().toLong,
-            r.nextString().toLong,
+            r.nextLong(),
+            r.nextLong(),
             r.nextString(),
             r.nextLocalDateTime())
   }

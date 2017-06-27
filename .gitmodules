@@ -1,9 +1,9 @@
 [submodule "very-util-json"]
 	path = very-util-json
-	url = git@git.oschina.net:mefaso/very-util-json.git
+	url = https://git.oschina.net:mefaso/very-util-json.git
 [submodule "very-util-lang"]
 	path = very-util-lang
-	url = git@git.oschina.net:mefaso/very-util-lang.git
+	url = https://git.oschina.net:mefaso/very-util-lang.git
 [submodule "scala-redis-client"]
 	path = scala-redis-client
 	url = https://git.oschina.net/mefaso/scala-redis-client.git
@@ -12,7 +12,7 @@
 	url = https://git.oschina.net/mefaso/very-util-db-redis.git
 [submodule "very-util-log"]
 	path = very-util-log
-	url = git@git.oschina.net:mefaso/very-util-log.git
+	url = https://git.oschina.net:mefaso/very-util-log.git
 [submodule "very-util-scalaj-http"]
 	path = very-util-scalaj-http
 	url = https://git.oschina.net/timzaak/very-util-scalaj-http.git
