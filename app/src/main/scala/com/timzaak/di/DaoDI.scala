@@ -14,7 +14,7 @@ trait DaoDI extends WithConf { di =>
   //  class Redis(db: I) extends SingleRedis(redisPool) with AutoSelectSingleRedis {
   //    val select: Int = db
   //  }
-  implicit val hashids = Hashids.reference(conf.getString("server.salt"))
+  implicit val hashids = Hashids.reference(conf.getString("server.salt"),4)
 
   object userAccountDao extends UserAccountDao {}
 
