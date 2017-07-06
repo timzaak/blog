@@ -1,5 +1,5 @@
 const config = require('./config');
-const client = require('marathon-lb')(config.url,config.option);
+const client = require('marathon-node')(config.url,config.option);
 /*
   基本上要限定死hostname ["hostname","cluster","x.x.x.x"]
   ref: https://lsword.github.io/2016/08/10.html
