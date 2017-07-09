@@ -5,16 +5,17 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ ActionDI, ConfigDI, DI, WithConf }
+import com.timzaak.di.{ActionDI, ConfigDI, DI}
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
 import sangria.execution._
 import sangria.parser.QueryParser
 import sangria.renderer.SchemaRenderer
+import very.util.config.WithConf
 import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scala.util.{ Failure, Success }
+import scala.util.{Failure, Success}
 
 trait ConfigLoad extends WithConf {}
 

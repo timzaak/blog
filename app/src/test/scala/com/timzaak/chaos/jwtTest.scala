@@ -1,6 +1,6 @@
 package com.timzaak.chaos
 
-import com.timzaak.di.{ WithConf, WithTestConf }
+import com.timzaak.di.WithTestConf
 import org.scalatest.{ FlatSpec, Matchers }
 import pdi.jwt.{ Jwt, JwtAlgorithm }
 

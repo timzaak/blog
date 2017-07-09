@@ -2,6 +2,7 @@ package com.timzaak.di
 
 import com.timzaak.dao._
 import org.pico.hashids.Hashids
+import very.util.config.WithConf
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 
 trait DaoDI extends WithConf { di =>

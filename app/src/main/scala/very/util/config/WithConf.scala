@@ -1,4 +1,4 @@
-package com.timzaak.di
+package very.util.config
 
 import com.typesafe.config.Config
 
