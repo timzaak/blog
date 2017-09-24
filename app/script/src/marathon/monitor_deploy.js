@@ -85,7 +85,7 @@ const influxdb = {
       hostPort:0
     },
     {
-      cotainerPort:8086,
+      containerPort:8086,
       hostPort:0
     }
   ],
