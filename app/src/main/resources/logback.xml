@@ -8,11 +8,12 @@
     </appender>
 
     <!--slick-->
-    <logger name="slick.jdbc.JdbcBackend.statement"         level="DEBUG" />
-    <logger name="slick.jdbc.JdbcBackend.parameter"         level="DEBUG" />
-    <logger name="slick.jdbc.JdbcBackend.benchmark"         level="DEBUG" />
+    <logger name="slick.jdbc"         level="ERROR" />
+    <logger name="slick.jdbc.JdbcBackend.statement"         level="ERROR" />
+    <logger name="slick.jdbc.JdbcBackend.parameter"         level="ERROR" />
+    <logger name="slick.jdbc.JdbcBackend.benchmark"         level="ERROR" />
 
-    <root level="DEBUG">
+    <root level="ERROR">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

@@ -19,3 +19,6 @@ target/
 
 # python 
 .pyc
+
+
+app/src/main/scala/com/timzaak/script/*

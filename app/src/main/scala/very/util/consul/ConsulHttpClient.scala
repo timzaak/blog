@@ -1,5 +1,7 @@
 package very.util.consul
 
-trait ConsulHttpClient extends KVStoreApi{
+import very.util.consul.api._
+
+trait ConsulHttpClient extends KVStoreApi with CatalogApi with StatusApi with AgentApi{
 
 }

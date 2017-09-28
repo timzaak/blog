@@ -52,7 +52,9 @@ trait AccessAction extends Action {
       }
   }
 
-  def withAccess(user: User, permissionDesc: PermissionCheckable, access: Access): Future[B] =
+  def withAccess(user: User,
+                 permissionDesc: PermissionCheckable,
+                 access: Access): Future[B] =
     withGroupsAccess(user.groupIds, permissionDesc, access).recoverWith {
       case _ => withUserAccess(user.id, permissionDesc, access)
     }

@@ -33,7 +33,7 @@ trait ActionDI extends DaoDI with AkkaDI { di =>
     override protected def smsDao: SmsDao = di.smsDao
   }
 
-  val jwtSecretKey = conf.getString("jwt.secrete")
+  val jwtSecretKey = conf.getString("jwt.secret")
 
   object userAccAction extends UserAccAction {
     override protected def userAccDao: UserAccountDao = di.userAccountDao
@@ -52,5 +52,4 @@ trait ActionDI extends DaoDI with AkkaDI { di =>
   object accessAction extends AccessAction {
     override def accessDao: AccessDao = di.accessDao
   }
-
 }

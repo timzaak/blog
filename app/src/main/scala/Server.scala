@@ -39,7 +39,7 @@ object Server
     with ClassSlf4j
     with JwtAuthDecode {
 
-  override def secretKey = jwtSecretKey
+  override def secretKey:String = jwtSecretKey
 
   val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](
     1000,
@@ -103,6 +103,9 @@ object Server
       }
     } ~
       get {
+        path("status") {
+          complete(OK)
+        } ~
         path("graphiql.html") {
           getFromResource("graphiql.html")
         } ~

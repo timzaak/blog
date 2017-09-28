@@ -1,4 +1,4 @@
-package very.util.consul
+package very.util.consul.api
 
 import very.util.consul.entity.{KVStoreGetRequest, KVStoreResponse}
 
