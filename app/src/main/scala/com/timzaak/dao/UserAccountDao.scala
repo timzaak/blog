@@ -1,7 +1,7 @@
 package com.timzaak.dao
 
 import com.timzaak.entity.UserAccount
-import very.util.db.postgrel.WithPostgrel
+import very.util.db.postgrel.WithSlick
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
 import slick.jdbc.GetResult
 import scala.concurrent.Future

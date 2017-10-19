@@ -7,7 +7,7 @@ import slick.jdbc.GetResult
 
 import scala.concurrent.Future
 
-trait BaseSqlDSL extends WithPostgrel {
+trait BaseSqlDSL extends WithSlick {
   protected def tableName: String
   protected def fieldList: List[String] = List.empty
   protected lazy val fields             = fieldList.mkString(",")

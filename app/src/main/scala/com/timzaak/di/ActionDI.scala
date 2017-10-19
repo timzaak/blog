@@ -6,7 +6,7 @@ import com.timzaak.dao.{ AccessDao, CommentDao, SmsDao, UserAccountDao }
 import very.util.alisms.{ AliMockSmsClient, AliSmsClient }
 
 trait ActionDI extends DaoDI with AkkaDI { di =>
-  val enableMock: B = conf.getBoolean("mode.mock")
+  protected val enableMock: B = conf.getBoolean("mode.mock")
 
   object smsAction extends SmsAction {
     override def enableMock: B = di.enableMock
@@ -50,6 +50,6 @@ trait ActionDI extends DaoDI with AkkaDI { di =>
   }
 
   object accessAction extends AccessAction {
-    override def accessDao: AccessDao = di.accessDao
+    override protected def accessDao: AccessDao = di.accessDao
   }
 }

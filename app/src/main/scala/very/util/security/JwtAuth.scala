@@ -30,3 +30,5 @@ trait JwtAuthEncode extends JsonHelperWithDoubleMode {
   protected def jwtEncode(userId: String) =
     JwtJson4s.encode(claim(userId), secretKey, JwtAlgorithm.HS256)
 }
+
+trait JwtAuth extends JwtAuthDecode with JwtAuthEncode

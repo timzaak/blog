@@ -23,10 +23,6 @@ trait UserSchema {
       ObjectTypeName("UserAccQueryAction"),
       IncludeMethods(
         "login",
-        /*
-         * "getRegisterCaptcha",
-         * "checkMobileExists" ??????User??????????????Auth??
-         * */
         "getRegisterCaptcha",
         "checkMobileExists"
       )

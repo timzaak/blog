@@ -46,7 +46,7 @@ trait CommentSchema extends Schema {
     )
   )
 
-  private implicit val commentObjectInputType = deriveInputObjectType[Comment](
+  private implicit val CommentObjectInputType = deriveInputObjectType[Comment](
     InputObjectTypeName("CommentArg"),
     ExcludeInputFields("time", "id")
   )
@@ -64,8 +64,11 @@ trait CommentSchema extends Schema {
           description = "post comment",
           arguments = toId :: content :: Nil,
           fieldType = LongType,
-          resolve =
-            c => c.ctx.withAuth(c.ctx.di.commentAction.postComment(_, c arg toId, c arg content))
+          resolve = {
+            c =>
+
+              c.ctx.withAuth(c.value.postComment(_, c arg toId, c arg content))
+          }
         )
       )
     )

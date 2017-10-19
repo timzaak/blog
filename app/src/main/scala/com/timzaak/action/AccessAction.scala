@@ -6,7 +6,7 @@ import very.util.security.{ Access, AccessDenied, Permission, PermissionCheckabl
 import scala.concurrent.Future
 
 trait AccessAction extends Action {
-  def accessDao: AccessDao
+  protected def accessDao: AccessDao
 
   def withUserAccess(userId: UserId,
                      permissionDesc: PermissionCheckable,
