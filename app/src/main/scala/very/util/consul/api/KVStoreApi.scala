@@ -9,7 +9,7 @@ private[consul] trait KVStoreApi extends ConsulApi {
     private def req(key: S) = api.req(s"kv/$key")
 
     def read(key: S) = {
-      req(key).extract[KVStoreResponse].toOption
+      req(key).extract[KVStoreResponse]
     }
 
     def read(request:KVStoreGetRequest) = {

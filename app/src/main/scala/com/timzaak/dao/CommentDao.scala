@@ -18,7 +18,6 @@ trait CommentDao extends Dao {
             r.nextString(),
             r.nextLocalDateTime())
   }
-
   def createComment(fromId: L, toId: L, content: S): Future[L] = {
     sql"insert into #$tableName(content,from_id,to_id) values ($content,$fromId, $toId) returning id"
       .as[L]

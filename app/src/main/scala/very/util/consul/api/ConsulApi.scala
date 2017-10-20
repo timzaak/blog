@@ -51,9 +51,8 @@ private[consul] trait ConsulApi extends JsonHelperWithDoubleMode {
         (key , value.toString)
       }.filter(_._2 == ""))
     }
-    def opResult = {
-      val resp = request.asString
-      resp.is2xx
+    def opResult:Boolean = {
+      request.asString.is2xx
     }
 
     def putData[T<: AnyRef](data:T) ={

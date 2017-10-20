@@ -50,6 +50,7 @@ trait AccessDao extends Dao {
     setPermission(genId.userId(id), resource, permission)
   }
 
+
   def getUserPermission(resource: S, id: UserId) =
     findPermission(resource, genId.userId(id))
 
