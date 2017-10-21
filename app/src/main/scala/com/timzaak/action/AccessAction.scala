@@ -10,14 +10,12 @@ trait AccessAction extends Action {
 
   def withUserAccess(userId: UserId,
                      permissionDesc: PermissionCheckable,
-                     access: Access): Future[B] = {
+                     access: Access): Future[Unit] = {
     accessDao
       .getUserPermission(permissionDesc.resource, userId)
       .map(_.getOrElse(Permission.Nothing))
       .map { permission =>
-        if (permission ? access) {
-          true
-        } else {
+        if (!(permission ? access)) {
           throw AccessDenied(permissionDesc.resource, access)
         }
       }
@@ -25,14 +23,12 @@ trait AccessAction extends Action {
 
   def withGroupAccess(groupId: GroupId,
                       permissionDesc: PermissionCheckable,
-                      access: Access): Future[B] = {
+                      access: Access): Future[Unit] = {
     accessDao
       .getGroupPermission(permissionDesc.resource, groupId)
       .map(_.getOrElse(Permission.Nothing))
       .map { permission =>
-        if (permission ? access) {
-          true
-        } else {
+        if (!(permission ? access)) {
           throw AccessDenied(permissionDesc.resource, access)
         }
       }
@@ -40,13 +36,11 @@ trait AccessAction extends Action {
 
   def withGroupsAccess(groupIds: Seq[GroupId],
                        permissionDesc: PermissionCheckable,
-                       access: Access): Future[B] = {
+                       access: Access): Future[Unit] = {
     accessDao
       .getGroupsPermission(permissionDesc.resource, groupIds)
       .map { permissions =>
-        if (Permission.union(permissions: _*) ? access) {
-          true
-        } else {
+        if (!(Permission.union(permissions: _*) ? access)) {
           throw AccessDenied(permissionDesc.resource, access)
         }
       }
@@ -54,7 +48,7 @@ trait AccessAction extends Action {
 
   def withAccess(user: User,
                  permissionDesc: PermissionCheckable,
-                 access: Access): Future[B] =
+                 access: Access): Future[Unit] =
     withGroupsAccess(user.groupIds, permissionDesc, access).recoverWith {
       case _ => withUserAccess(user.id, permissionDesc, access)
     }

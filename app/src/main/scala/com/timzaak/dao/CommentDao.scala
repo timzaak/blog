@@ -2,10 +2,8 @@ package com.timzaak.dao
 
 import com.timzaak.entity.Comment
 import slick.jdbc.GetResult
-import very.util.db.postgrel.{ BaseSqlDSL, WithSlick }
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
-
-import scala.concurrent.{ Future, Promise }
+import scala.concurrent.Future
 
 trait CommentDao extends Dao {
 

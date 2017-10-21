@@ -6,7 +6,7 @@ import very.util.security.Permission
 
 import scala.concurrent.Future
 
-trait AccessDao extends Dao {
+trait AccessDao extends Dao{
 
   private object genId {
     val userId = (_: UserId) + "_u"

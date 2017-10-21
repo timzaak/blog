@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-json4s-native" % "1.0.0",
   "com.pauldijou"       %% "jwt-json4s-native"     % "0.12.0",
   "org.picoworks"       %% "pico-hashids"          % "4.4.141",
+  "com.github.cb372"    %% "scalacache-core"       % "0.10.0",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
   "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test

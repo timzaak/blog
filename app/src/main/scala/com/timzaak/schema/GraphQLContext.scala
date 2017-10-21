@@ -1,12 +1,11 @@
 package com.timzaak.schema
 
 import com.timzaak.di.ActionDI
-import very.util.security.{Access, PermissionCheckable}
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 object AuthException extends Exception {
-  override def getMessage: String = "????"
+  override def getMessage: String = "您尚未登陆"
 }
 
 case class GraphQLContext(userIdOpt: O[UserId], di: ActionDI) {
@@ -24,18 +23,4 @@ case class GraphQLContext(userIdOpt: O[UserId], di: ActionDI) {
       case _ => throw AuthException
     }
   }
-
-  def withUserPermission[T](p: PermissionCheckable, access: Access = Access.Nothing)(func: UserId => T)(implicit ec: ExecutionContext) = {
-    withAuth { userId: UserId =>
-
-      di.accessAction.withUserAccess(userId, p, access).map { passed =>
-        if (passed) {
-          func(userId)
-        } else {
-          AuthException
-        }
-      }
-    }
-  }
-
 }

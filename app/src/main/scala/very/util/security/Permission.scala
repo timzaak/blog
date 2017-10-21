@@ -23,6 +23,6 @@ object Permission {
 trait PermissionCheckable {
   def resource: String
 
-  def AccessDef: BasicAccessDef
+  def accessDef: BasicAccessDef
 
 }
