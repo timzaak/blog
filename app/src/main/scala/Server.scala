@@ -78,10 +78,6 @@ object Server
                   variables = variables,
                   queryReducers = Nil,
                   operationName = operation,
-                  exceptionHandler = {
-                    case (_, e) =>
-                      HandledException(e.getMessage)
-                  }
                 )
                 .map { result =>
                   OK -> result

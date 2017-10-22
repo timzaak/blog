@@ -4,14 +4,13 @@ version := "1.0"
 
 description := "An example GraphQL server written with akka-http and sangria."
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.4"
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 enablePlugins(JavaAppPackaging)
 
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria"               % "1.0.0",
-  "taobao" % "taobao-sdk-java-auto" % "0.1",
+  "org.sangria-graphql" %% "sangria"               % "1.3.0",
   "com.typesafe.akka"   %% "akka-http"             % "10.0.3",
   "com.pauldijou"       %% "jwt-core"              % "0.12.0",
   "com.aliyun.mns"      % "aliyun-sdk-mns"         % "1.1.8",
@@ -27,7 +26,7 @@ libraryDependencies ++= Seq(
 lazy val slickSetting = Seq(
   scalaVersion := "2.12.1",
   libraryDependencies ++= List(
-    //slick posggreql
+    //slick postgresql
     "org.postgresql"      % "postgresql" % "42.0.0",
     "com.typesafe.slick"  %% "slick"     % "3.2.0",
     "com.github.tminglei" %% "slick-pg"  % "0.15.0-M4",
