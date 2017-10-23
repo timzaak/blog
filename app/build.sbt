@@ -19,12 +19,13 @@ libraryDependencies ++= Seq(
   "com.pauldijou"       %% "jwt-json4s-native"     % "0.12.0",
   "org.picoworks"       %% "pico-hashids"          % "4.4.141",
   "com.github.cb372"    %% "scalacache-core"       % "0.10.0",
+  "com.sksamuel.avro4s" %% "avro4s-core"           % "1.8.0",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
   "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
 )
 lazy val slickSetting = Seq(
-  scalaVersion := "2.12.1",
+  scalaVersion := "2.12.4",
   libraryDependencies ++= List(
     //slick postgresql
     "org.postgresql"      % "postgresql" % "42.0.0",
@@ -36,6 +37,7 @@ lazy val slickSetting = Seq(
 )
 
 def latestScalafmt = "1.0.0-RC1"
+
 commands += Command.args("scalafmt", "Run scalafmt cli.") {
   case (state, args) =>
     val Right(scalafmt) =
@@ -80,7 +82,7 @@ flywayUrl in Test := {
 parallelExecution in Test := false
 
 testOptions in Test += Tests.Setup(() => {
-  (flywayMigrate in Test).value
+  //(flywayMigrate in Test).value
 })
 
 //package

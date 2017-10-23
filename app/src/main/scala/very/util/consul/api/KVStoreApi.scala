@@ -1,9 +1,8 @@
 package very.util.consul.api
 
-import very.util.consul.entity.{KVStoreGetRequest, KVStoreResponse}
+import very.util.consul.entity.{ KVStoreGetRequest, KVStoreResponse }
 
-private[consul] trait KVStoreApi extends ConsulApi {
-  api =>
+private[consul] trait KVStoreApi extends ConsulApi { api =>
 
   private[consul] trait KVStore {
     private def req(key: S) = api.req(s"kv/$key")
@@ -12,7 +11,7 @@ private[consul] trait KVStoreApi extends ConsulApi {
       req(key).extract[KVStoreResponse]
     }
 
-    def read(request:KVStoreGetRequest) = {
+    def read(request: KVStoreGetRequest) = {
       ???
     }
 

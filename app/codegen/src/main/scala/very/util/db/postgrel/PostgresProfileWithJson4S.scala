@@ -20,7 +20,11 @@ trait PostgresProfileWithJson4S
 
   override val api = MyAPI
 
-  object MyAPI extends super.API with JsonImplicits with Date2DateTimePlainImplicits with ArrayImplicits{
+  object MyAPI
+      extends super.API
+      with JsonImplicits
+      with Date2DateTimePlainImplicits
+      with ArrayImplicits {
 
     implicit val strListTypeMapper =
       new SimpleArrayJdbcType[String]("text").to(_.toList)

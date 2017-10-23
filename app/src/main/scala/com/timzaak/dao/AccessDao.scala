@@ -6,7 +6,7 @@ import very.util.security.Permission
 
 import scala.concurrent.Future
 
-trait AccessDao extends Dao{
+trait AccessDao extends Dao {
 
   private object genId {
     val userId = (_: UserId) + "_u"
@@ -49,7 +49,6 @@ trait AccessDao extends Dao{
   def setUserPermission(id: UserId, resource: S, permission: Permission): Future[I] = {
     setPermission(genId.userId(id), resource, permission)
   }
-
 
   def getUserPermission(resource: S, id: UserId) =
     findPermission(resource, genId.userId(id))

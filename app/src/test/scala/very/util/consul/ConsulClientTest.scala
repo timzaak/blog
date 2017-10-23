@@ -1,6 +1,6 @@
 package very.util.consul
-import org.scalatest.{FreeSpec, Matchers}
-import very.util.consul.entity.{CatalogDeregisterRequest, CatalogRegisterRequest, Service}
+import org.scalatest.{ FreeSpec, Matchers }
+import very.util.consul.entity.{ CatalogDeregisterRequest, CatalogRegisterRequest, Service }
 
 class ConsulClientTest extends FreeSpec with Matchers {
   val client = new ConsulHttpClient {
@@ -11,7 +11,6 @@ class ConsulClientTest extends FreeSpec with Matchers {
     assert(client.Status.getLeader.isRight)
   }
 
-
   "agent" - {
     "can get members" in {
       assert(client.Agent.members.isRight)
@@ -19,13 +18,17 @@ class ConsulClientTest extends FreeSpec with Matchers {
   }
 
   "can register and deregister service" in {
-    val service = Service(Service = "hello_test", Tags = List("abc", "bbb"), Address = "localhost", Port = 3000)
+    val service = Service(Service = "hello_test",
+                          Tags = List("abc", "bbb"),
+                          Address = "localhost",
+                          Port = 3000)
     val registerResult = client.Catalog.register(
       CatalogRegisterRequest(
-        Node  = "node",
+        Node = "node",
         Address = "localhost",
         Service = Some(service)
-      ))
+      )
+    )
     assert(registerResult)
     assert(client.Catalog.deregister(CatalogDeregisterRequest("node")))
   }

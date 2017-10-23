@@ -1,5 +1,3 @@
 package com.timzaak
 
-package object chaos extends TypeImplicit{
-
-}
+package object chaos extends TypeImplicit {}

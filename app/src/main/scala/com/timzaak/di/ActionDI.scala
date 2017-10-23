@@ -1,11 +1,11 @@
 package com.timzaak.di
 
-import com.aliyun.mns.client.{CloudAccount, CloudTopic}
-import com.joyrec.util.db.redis.{AutoSelectSingleRedis, AvailableDB, SingleRedisTpl}
+import com.aliyun.mns.client.{ CloudAccount, CloudTopic }
+import com.joyrec.util.db.redis.{ AutoSelectSingleRedis, AvailableDB, SingleRedisTpl }
 import com.timzaak.action._
-import com.timzaak.dao.{AccessDao, CommentDao, SmsDao, UserAccountDao}
-import com.top10.redis.{Redis, SingleRedis}
-import very.util.alisms.{AliMockSmsClient, AliSmsClient}
+import com.timzaak.dao.{ AccessDao, CommentDao, SmsDao, UserAccountDao }
+import com.top10.redis.{ Redis, SingleRedis }
+import very.util.alisms.{ AliMockSmsClient, AliSmsClient }
 import very.util.cache.RedisCache
 
 import scala.language.implicitConversions
@@ -13,20 +13,22 @@ import scala.language.implicitConversions
 trait ActionDI extends DaoDI with AkkaDI { di =>
   protected val enableMock: B = conf.getBoolean("mode.mock")
 
-  lazy val redisPool = Redis.pool(Redis.config(40),conf.get[S]("redis.host"),conf.get[I]("redis.port"), conf.getOptional[S]("redis.pwd"),5000)
+  lazy val redisPool = Redis.pool(Redis.config(40),
+                                  conf.get[S]("redis.host"),
+                                  conf.get[I]("redis.port"),
+                                  conf.getOptional[S]("redis.pwd"),
+                                  5000)
 
-  case class _RedisDB(db:Int) extends SingleRedis(redisPool) with AutoSelectSingleRedis{
-    val select:Int = db
+  case class _RedisDB(db: Int) extends SingleRedis(redisPool) with AutoSelectSingleRedis {
+    val select: Int = db
   }
 
-  implicit def availableDBToRedis(v: AvailableDB):_RedisDB = _RedisDB(v.db)
-
+  implicit def availableDBToRedis(v: AvailableDB): _RedisDB = _RedisDB(v.db)
 
   private object cache extends RedisCache {
-    implicit protected def executor = di.executionContext
+    implicit protected def executor     = di.executionContext
     protected val redis: SingleRedisTpl = AvailableDB(1)
   }
-
 
   object smsAction extends SmsAction {
     override def enableMock: B = di.enableMock

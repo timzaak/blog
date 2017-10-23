@@ -1,3 +1,3 @@
 package very.util.consul.entity
 
-case class CatalogServicesForNodeGetRequest(node:S,dc:S="")
+case class CatalogServicesForNodeGetRequest(node: S, dc: S = "")

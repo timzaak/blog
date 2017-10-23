@@ -10,11 +10,7 @@ trait CommentDao extends Dao {
   override protected val fieldList: List[String] = extractSnakeFields[Comment]
 
   implicit val getCommentImplicit = GetResult { r =>
-    Comment(r.<<,
-            r.nextLong(),
-            r.nextLong(),
-            r.nextString(),
-            r.nextLocalDateTime())
+    Comment(r.<<, r.nextLong(), r.nextLong(), r.nextString(), r.nextLocalDateTime())
   }
   def createComment(fromId: L, toId: L, content: S): Future[L] = {
     sql"insert into #$tableName(content,from_id,to_id) values ($content,$fromId, $toId) returning id"

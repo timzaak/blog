@@ -64,10 +64,8 @@ trait CommentSchema extends Schema {
           description = "post comment",
           arguments = toId :: content :: Nil,
           fieldType = LongType,
-          resolve = {
-            c =>
-
-              c.ctx.withAuth(c.value.postComment(_, c arg toId, c arg content))
+          resolve = { c =>
+            c.ctx.withAuth(c.value.postComment(_, c arg toId, c arg content))
           }
         )
       )

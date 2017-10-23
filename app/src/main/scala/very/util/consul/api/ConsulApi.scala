@@ -4,7 +4,7 @@ import org.json4s.Formats
 import org.json4s.native.Serialization.write
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scalaj.http.{Http, HttpRequest, HttpResponse}
+import scalaj.http.{ Http, HttpRequest, HttpResponse }
 
 private[consul] trait ConsulApi extends JsonHelperWithDoubleMode {
 
@@ -46,20 +46,25 @@ private[consul] trait ConsulApi extends JsonHelperWithDoubleMode {
     }
 
     // TODO: 危险方法， 不支持 case class 复杂数据结构
-    def params[T<:Product](p:T) = {
-      request.params(getCCParams(p).map{case (key,value)=>
-        (key , value.toString)
-      }.filter(_._2 == ""))
+    def params[T <: Product](p: T) = {
+      request.params(
+        getCCParams(p)
+          .map {
+            case (key, value) =>
+              (key, value.toString)
+          }
+          .filter(_._2 == "")
+      )
     }
-    def opResult:Boolean = {
+    def opResult: Boolean = {
       request.asString.is2xx
     }
 
-    def putData[T<: AnyRef](data:T) ={
+    def putData[T <: AnyRef](data: T) = {
       request.put(write(data))
     }
 
-    def stringResult:Either[HttpResponse[String],String] = {
+    def stringResult: Either[HttpResponse[String], String] = {
       val resp = request.asString
       if (resp.is2xx) {
         resp.body

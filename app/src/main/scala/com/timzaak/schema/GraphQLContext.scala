@@ -13,14 +13,14 @@ case class GraphQLContext(userIdOpt: O[UserId], di: ActionDI) {
   def withAuth[T](func: UserId => Future[T]): Future[T] = {
     userIdOpt match {
       case Some(userId) => func(userId)
-      case _ => AuthException
+      case _            => AuthException
     }
   }
 
   def withAuth[T](func: UserId => T): T = {
     userIdOpt match {
       case Some(userId) => func(userId)
-      case _ => throw AuthException
+      case _            => throw AuthException
     }
   }
 }
