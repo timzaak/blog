@@ -10,7 +10,7 @@ import scalacache.serialization.Codec
 trait RedisStringBaseCache extends Cache[String] with WithRedis with PrimaryStringCodec {
   implicit protected def executor: ExecutionContext
 
-  implicit private def codec[V <: AnyRef: Manifest] = new JsonCodec[V]
+  implicit private def codec[V <: AnyRef: Manifest] = new Json4SCodec[V]
 
   override def get[V](key: String)(implicit codec: Codec[V, String]): Future[Option[V]] = {
     Future {
