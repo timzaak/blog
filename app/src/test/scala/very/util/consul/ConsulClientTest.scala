@@ -18,10 +18,8 @@ class ConsulClientTest extends FreeSpec with Matchers {
   }
 
   "can register and deregister service" in {
-    val service = Service(Service = "hello_test",
-                          Tags = List("abc", "bbb"),
-                          Address = "localhost",
-                          Port = 3000)
+    val service =
+      Service(Service = "hello_test", Tags = List("abc", "bbb"), Address = "localhost", Port = 3000)
     val registerResult = client.Catalog.register(
       CatalogRegisterRequest(
         Node = "node",

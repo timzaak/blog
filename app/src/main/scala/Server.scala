@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ActionDI, ConfigDI, DI}
+import com.timzaak.di.{ ActionDI, ConfigDI, DI }
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
 import sangria.execution._
@@ -15,7 +15,7 @@ import very.util.config.WithConf
 import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 
 trait ConfigLoad extends WithConf {}
 
@@ -39,7 +39,7 @@ object Server
     with ClassSlf4j
     with JwtAuthDecode {
 
-  override def secretKey:String = jwtSecretKey
+  override def secretKey: String = jwtSecretKey
 
   val rejectComplexQueries = QueryReducer.rejectComplexQueries[Any](
     1000,
@@ -102,9 +102,9 @@ object Server
         path("status") {
           complete(OK)
         } ~
-        path("graphiql.html") {
-          getFromResource("graphiql.html")
-        } ~
+          path("graphiql.html") {
+            getFromResource("graphiql.html")
+          } ~
           path("graph_schema") {
             complete(SchemaRenderer.renderSchema(graphQLSchema))
           }

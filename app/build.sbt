@@ -36,7 +36,7 @@ lazy val slickSetting = Seq(
   )
 )
 
-def latestScalafmt = "1.0.0-RC1"
+def latestScalafmt = "1.3.0"
 
 commands += Command.args("scalafmt", "Run scalafmt cli.") {
   case (state, args) =>
