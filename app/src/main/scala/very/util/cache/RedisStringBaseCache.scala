@@ -1,12 +1,18 @@
 package very.util.cache
 
 import com.joyrec.util.db.redis.WithRedis
-
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ExecutionContext, Future}
 import scalacache.Cache
 import scalacache.serialization.Codec
 
+
+/** 存在性能优化空间
+  * 1. 多次 String 复制转换
+  * 2. Avro 存在 output input 转移
+  * 3. 需要 Redis Bytes 级别的接口
+  * 4. Avro 使用 Bytes 级别的转换
+  */
 trait RedisStringBaseCache extends Cache[String] with WithRedis with PrimaryStringCodec {
   implicit protected def executor: ExecutionContext
 
