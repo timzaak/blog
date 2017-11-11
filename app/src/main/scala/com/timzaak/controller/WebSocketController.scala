@@ -20,7 +20,6 @@ abstract class WebSocketController {
   def webSocketFlow:Flow[Message, TextMessage.Strict, NotUsed] = {
     //TODO: identify ConnectedActor
     val connectedActorRef = system.actorOf(Props[ConnectedActor])
-    println("coming... to start")
     val in = Flow[Message].collect {
       case TextMessage.Strict(text) => Future.successful(ComingMsg(text))
       case TextMessage.Streamed(textStream) => textStream.runFold("")(_ + _).map(ComingMsg)

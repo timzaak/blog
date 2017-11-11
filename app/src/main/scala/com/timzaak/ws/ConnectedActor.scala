@@ -12,8 +12,6 @@ case class ConnectedMsg(actorRef: ActorRef) extends ConnMessage
 
 object ClosingMsg extends ConnMessage
 
-
-
 class ConnectedActor extends Actor {
   var client :ActorRef = _
   override def receive: Receive = {
@@ -25,12 +23,10 @@ class ConnectedActor extends Actor {
       println(s"connected")
       client = actorRef
       client ! OutMsg("connected")
-
   }
 
   override def postStop(): Unit = {
     client ! PoisonPill
     super.postStop()
-
   }
 }
