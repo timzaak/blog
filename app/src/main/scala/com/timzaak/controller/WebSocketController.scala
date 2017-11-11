@@ -1,26 +1,36 @@
 package com.timzaak.controller
 
-import akka.actor.{ActorSystem, Props}
-import akka.stream.scaladsl.{Flow, Sink}
+import akka.NotUsed
+import akka.actor.{ActorSystem, PoisonPill, Props}
+import akka.stream.scaladsl._
 import akka.http.scaladsl.model.ws.{Message, TextMessage}
-import akka.stream.ActorMaterializer
-import com.timzaak.ws.ConnectedActor
+import akka.stream.{ActorMaterializer, OverflowStrategy}
+import com.timzaak.ws._
 
-import scala.concurrent.ExecutionContext
-trait WebSocketController  {
-  implicit def system :ActorSystem
-  implicit def materializer :ActorMaterializer
-  implicit def executionContext:ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
-  def webSocketFlow() = {
-    val connectedActorRef = system.actorOf(Props[ConnectedActor], s"u_")
-    Flow[Message].collect{
-      case TextMessage.Strict(text) => text
-        connectedActorRef ! text
-        Sink.actorRefWithAck(connectedActorRef)
-      case TextMessage.Streamed(s) => s
+abstract class WebSocketController {
+  implicit protected def system: ActorSystem
 
+  implicit protected def materializer: ActorMaterializer
+
+  implicit protected def executionContext: ExecutionContext
+
+  //-Dwebsocket.frame.maxLength=1024k
+  def webSocketFlow:Flow[Message, TextMessage.Strict, NotUsed] = {
+    //TODO: identify ConnectedActor
+    val connectedActorRef = system.actorOf(Props[ConnectedActor])
+    println("coming... to start")
+    val in = Flow[Message].collect {
+      case TextMessage.Strict(text) => Future.successful(ComingMsg(text))
+      case TextMessage.Streamed(textStream) => textStream.runFold("")(_ + _).map(ComingMsg)
+    }.mapAsync(1)(identity).to(Sink.actorRef(connectedActorRef, PoisonPill))
+    val out = {
+      Source.actorRef(32, OverflowStrategy.fail).mapMaterializedValue { outActorRef =>
+        connectedActorRef ! ConnectedMsg(outActorRef)
+      }.map((outMsg: OutMsg) => TextMessage(outMsg.txt))
     }
+    Flow.fromSinkAndSource(in, out)
   }
 }
 

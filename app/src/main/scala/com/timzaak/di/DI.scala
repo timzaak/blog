@@ -1,5 +1,4 @@
 package com.timzaak.di
 
-trait DI extends SchemaDI with ActionDI {
-  //val enableMock:B = true
+trait DI extends SchemaDI with ControllerDI {
 }

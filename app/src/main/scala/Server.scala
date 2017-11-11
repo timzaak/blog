@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
-import com.timzaak.di.{ ActionDI, ConfigDI, DI }
+import com.timzaak.di.{ActionDI, ConfigDI, DI}
 import com.timzaak.schema.GraphQLContext
 import org.json4s._
 import sangria.execution._
@@ -15,7 +15,7 @@ import very.util.config.WithConf
 import very.util.security.JwtAuthDecode
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-import scala.util.{ Failure, Success }
+import scala.util.{Failure, Success}
 
 trait ConfigLoad extends WithConf {}
 
@@ -32,7 +32,7 @@ scala类初始化 线性化算法
  */
 
 object Server
-    extends App
+  extends App
     with ConfigDI
     with JsonHelperWithDoubleMode
     with DI
@@ -64,7 +64,7 @@ object Server
 
         val variables = requestJson \ "variables" match {
           case JNull | JNothing => JObject()
-          case other            => other
+          case other => other
         }
         val time = new Date().getTime
         QueryParser.parse(query) match {
@@ -97,20 +97,20 @@ object Server
             complete(BadRequest, "error" -> error.getMessage)
         }
       }
-    } ~
-      get {
-        path("status") {
-          complete(OK)
-        } ~
-          path("graphiql.html") {
-            getFromResource("graphiql.html")
-          } ~
-          path("graph_schema") {
-            complete(SchemaRenderer.renderSchema(graphQLSchema))
-          }
+    } ~ path("ws"){
+      handleWebSocketMessages(webSocketController.webSocketFlow)
+    } ~ get {
+      path("status") {
+        complete(OK)
+      } ~ path("graphiql.html") {
+        getFromResource("graphiql.html")
+      } ~ path("graph_schema") {
+        complete(SchemaRenderer.renderSchema(graphQLSchema))
       }
+    }
 
-  val port          = sys.props.get("http.port").fold(9000)(_.toInt)
+
+  val port = sys.props.get("http.port").fold(9000)(_.toInt)
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", port)
   bindingFuture.onComplete {
     case Success(binding) =>
