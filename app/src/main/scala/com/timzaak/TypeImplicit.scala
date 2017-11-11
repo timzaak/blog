@@ -1,11 +1,10 @@
 package com.timzaak
 
 import very.util.config.ConfigurationImplicit
-import very.util.security.{ IntId, LongId }
-import ws.very.util.lang.Implicits2
-
-import scala.concurrent.{ ExecutionContext, Future }
-import scala.util.{ Failure, Success, Try }
+import very.util.security.{IntId, LongId}
+import _root_.ws.very.util.lang.Implicits2
+import scala.concurrent.{ExecutionContext, Future}
+import scala.util.{Failure, Success, Try}
 
 trait TypeImplicit extends Implicits2 with ConfigurationImplicit {
   type UserId    = L

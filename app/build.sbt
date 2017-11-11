@@ -22,6 +22,7 @@ libraryDependencies ++= Seq(
   "com.sksamuel.avro4s" %% "avro4s-core"           % "1.8.0",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
   "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
+  "com.typesafe.akka"   %% "akka-testkit"          % "2.5.6" % Test,
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
 )
 lazy val slickSetting = Seq(

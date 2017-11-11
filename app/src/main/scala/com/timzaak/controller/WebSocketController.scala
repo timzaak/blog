@@ -1,5 +1,7 @@
 package com.timzaak.controller
 
+import java.util.UUID
+
 import akka.NotUsed
 import akka.actor.{ActorSystem, PoisonPill, Props}
 import akka.stream.scaladsl._
@@ -19,6 +21,7 @@ abstract class WebSocketController {
   //-Dwebsocket.frame.maxLength=1024k
   def webSocketFlow:Flow[Message, TextMessage.Strict, NotUsed] = {
     //TODO: identify ConnectedActor
+    ConnectedActor.props(UUID.randomUUID().toString)
     val connectedActorRef = system.actorOf(Props[ConnectedActor])
     val in = Flow[Message].collect {
       case TextMessage.Strict(text) => Future.successful(ComingMsg(text))
