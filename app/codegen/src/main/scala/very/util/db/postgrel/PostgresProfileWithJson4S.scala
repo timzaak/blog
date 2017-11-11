@@ -22,9 +22,9 @@ trait PostgresProfileWithJson4S
 
   object MyAPI
       extends super.API
-      with JsonImplicits
+      with Json4sJsonPlainImplicits
       with Date2DateTimePlainImplicits
-      with ArrayImplicits {
+      with SimpleArrayPlainImplicits {
 
     implicit val strListTypeMapper =
       new SimpleArrayJdbcType[String]("text").to(_.toList)
