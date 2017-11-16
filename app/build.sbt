@@ -23,6 +23,8 @@ libraryDependencies ++= Seq(
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
   "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
   "com.typesafe.akka"   %% "akka-testkit"          % "2.5.6" % Test,
+  "net.manub"           %% "scalatest-embedded-kafka" % "1.0.0" % "test",
+  "net.manub"           %% "scalatest-embedded-kafka-streams" % "1.0.0" % "test",
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
 )
 lazy val slickSetting = Seq(

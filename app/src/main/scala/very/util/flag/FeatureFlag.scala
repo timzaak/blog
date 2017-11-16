@@ -14,4 +14,6 @@ trait FeatureFlag {
   }
 
   def variable(key: String): String
+
+  //may be we need js to solve dynamic logic
 }

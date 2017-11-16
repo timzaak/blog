@@ -33,7 +33,6 @@ class AvroSeriaTest extends TestSpec {
 
     }
     "enumeration correctly" in {
-
     }
   }
 
