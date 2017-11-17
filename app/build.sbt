@@ -11,7 +11,6 @@ enablePlugins(JavaAppPackaging)
 
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria"               % "1.3.0",
-  //"com.typesafe.akka"   %% "akka-http"             % "10.0.3",
   "com.pauldijou"       %% "jwt-core"              % "0.12.0",
   "com.aliyun.mns"      % "aliyun-sdk-mns"         % "1.1.8",
   "de.heikoseeberger"   %% "akka-http-json4s"      % "1.12.0",

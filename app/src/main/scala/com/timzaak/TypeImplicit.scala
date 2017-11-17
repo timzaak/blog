@@ -1,8 +1,8 @@
 package com.timzaak
 
-import very.util.config.ConfigurationImplicit
 import very.util.security.{IntId, LongId}
 import _root_.ws.very.util.lang.Implicits2
+import _root_.ws.very.util.config.ConfigurationImplicit
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
