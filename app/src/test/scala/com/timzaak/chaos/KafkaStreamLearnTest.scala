@@ -25,7 +25,7 @@ class KafkaStreamLearnTest extends FreeSpec with Matchers with EmbeddedKafkaStre
       ) { consumer =>
 
         publishStringMessageToKafka(inputTopic,  message = "world")
-        consumeFirstStringMessageFrom(outputTopic) should "world"
+        consumeFirstStringMessageFrom(outputTopic) shouldBe "world"
       }
     }
   }
