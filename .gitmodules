@@ -16,3 +16,9 @@
 [submodule "very-util-scalaj-http"]
 	path = very-util-scalaj-http
 	url = https://git.oschina.net/timzaak/very-util-scalaj-http.git
+[submodule "very-util-akka"]
+	path = very-util-akka
+	url = https://gitee.com/mefaso/very-util-akka.git
+[submodule "very-util-config"]
+	path = very-util-config
+	url = https://gitee.com/mefaso/very-util-config.git

@@ -11,7 +11,7 @@ enablePlugins(JavaAppPackaging)
 
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria"               % "1.3.0",
-  "com.typesafe.akka"   %% "akka-http"             % "10.0.3",
+  //"com.typesafe.akka"   %% "akka-http"             % "10.0.3",
   "com.pauldijou"       %% "jwt-core"              % "0.12.0",
   "com.aliyun.mns"      % "aliyun-sdk-mns"         % "1.1.8",
   "de.heikoseeberger"   %% "akka-http-json4s"      % "1.12.0",
@@ -59,13 +59,16 @@ lazy val redis = RootProject(file("../very-util-db-redis"))
 lazy val log = RootProject(file("../very-util-log"))
 
 lazy val scalaj = RootProject(file("../very-util-scalaj-http"))
+
+lazy val akka = RootProject(file("../very-util-akka"))
+
 lazy val codegen = project
   .settings(slickSetting)
   .settings(libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.2.0")
   .dependsOn(json)
 
 lazy val root = (project in file("."))
-  .dependsOn(json, lang, redis, codegen, log, scalaj)
+  .dependsOn(json, lang, redis, codegen, log, scalaj, akka)
   .settings(slickSetting)
 
 flywayUrl := {
