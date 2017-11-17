@@ -15,10 +15,15 @@
 > 部署工具: python3 Fabric3
 
 ### 代码组织方式
+
 > app 目录下是主要的 bootstrap 、业务逻辑和未成熟的组件，基于 git submodule 来做组件分离代码管理，凡是成熟的组件尽量脱离 app 目录。
+
 > docker 目录存放一些 docker 配置，以及开发依赖的环境。
+
 > script 目录存放一些服务学习脚本。目前是 js 代码。
+
 > benchmark 目录存放性能测试代码。
+
 ### 开始
 ```sh
 #init docker
