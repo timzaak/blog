@@ -1,8 +1,8 @@
 package com.timzaak.di
 
 import com.typesafe.config.ConfigFactory
-import very.util.config.WithConf
+import ws.very.util.akka.util.Confable
 
-trait ConfigDI extends WithConf {
+trait ConfigDI extends Confable {
   var conf = ConfigFactory.load()
 }

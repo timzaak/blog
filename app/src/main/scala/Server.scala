@@ -11,13 +11,11 @@ import org.json4s._
 import sangria.execution._
 import sangria.parser.QueryParser
 import sangria.renderer.SchemaRenderer
-import very.util.config.WithConf
 import very.util.security.JwtAuthDecode
+import ws.very.util.akka.util.Confable
 import ws.very.util.json.JsonHelperWithDoubleMode
 
 import scala.util.{Failure, Success}
-
-trait ConfigLoad extends WithConf {}
 
 /*
 参看 《scala 程序设计》282：执行顺序

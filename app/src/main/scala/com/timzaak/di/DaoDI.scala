@@ -2,10 +2,10 @@ package com.timzaak.di
 
 import com.timzaak.dao._
 import org.pico.hashids.Hashids
-import very.util.config.WithConf
 import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import ws.very.util.akka.util.Confable
 
-trait DaoDI extends WithConf { di =>
+trait DaoDI extends Confable { di =>
 
   implicit val db =
     Database.forURL(url = conf.getString("postgrel.url"), driver = "org.postgresql.Driver")
