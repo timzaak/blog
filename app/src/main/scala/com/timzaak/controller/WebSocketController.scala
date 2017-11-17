@@ -3,11 +3,11 @@ package com.timzaak.controller
 import java.util.UUID
 
 import akka.NotUsed
-import akka.actor.{ActorRef, ActorSystem, PoisonPill, Props}
+import akka.actor.{ActorRef, ActorSystem, PoisonPill}
 import akka.stream.scaladsl._
 import akka.http.scaladsl.model.ws.{Message, TextMessage}
 import akka.stream.{ActorMaterializer, OverflowStrategy}
-import ws.very.util.akka.websocket.{ComingMsg, ConnectedActor, ConnectedMsg, OutMsg}
+import ws.very.util.akka.websocket.{ComingMsg, ConnectedMsg}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -32,7 +32,7 @@ abstract class WebSocketController {
     val out = {
       Source.actorRef(32, OverflowStrategy.fail).mapMaterializedValue { outActorRef =>
         connectedActorRef ! ConnectedMsg(uuid, outActorRef)
-      }.map((outMsg: OutMsg) => TextMessage(outMsg.txt))
+      }.map((txt: String) => TextMessage(txt))
     }
     Flow.fromSinkAndSource(in, out)
   }
