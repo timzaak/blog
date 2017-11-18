@@ -1,4 +1,6 @@
 ### Server Starter
+请注意，目前正在加紧学习并实现各种大 Feature ，下面的启动方式以及文档可能更新不及时。具体实现 Feature 参看 issues.
+
 目前用到的技术选型，如下
 > 数据交互格式： Graphql
 
