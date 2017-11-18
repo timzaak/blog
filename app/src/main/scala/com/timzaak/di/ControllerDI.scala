@@ -18,6 +18,9 @@ trait ControllerDI extends ActionDI with ConnectionSharding { di =>
 
     override implicit protected def executionContext: ExecutionContext = di.executionContext
 
-    override protected def connectedActorRef: ActorRef = WSActorRef
+    override protected def genConnectionActor(sessionId:S): ActorRef = WSActorRef
+
+    // this is for local actor
+    //override protected def genConnectionActor(sessionId:S): ActorRef = ConnectedActor.props(sessionId, Props[ConnectedActor])
   }
 }
