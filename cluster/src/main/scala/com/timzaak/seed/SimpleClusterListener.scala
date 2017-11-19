@@ -1,3 +1,5 @@
+package com.timzaak.seed
+
 import akka.cluster.Cluster
 import akka.cluster.ClusterEvent._
 import ws.very.util.akka.actor.Actor

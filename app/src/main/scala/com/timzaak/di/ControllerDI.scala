@@ -1,15 +1,15 @@
 package com.timzaak.di
 
-import akka.actor.{ActorRef, ActorSystem, Props}
+import akka.actor.{ActorRef, ActorSystem}
 import akka.stream.ActorMaterializer
 import com.timzaak.controller.WebSocketController
 
 import scala.concurrent.ExecutionContext
-import ws.very.util.akka.websocket.{ConnectedActor, ConnectionSharding}
+import ws.very.util.akka.websocket.ConnectionSharding
 
 trait ControllerDI extends ActionDI with ConnectionSharding { di =>
 
-  lazy val WSActorRef = startCusterSharding(Props[ConnectedActor])
+  lazy val WSActorRef = startClusterProxy()
 
   object webSocketController extends WebSocketController {
     override implicit protected def system: ActorSystem = di.system
