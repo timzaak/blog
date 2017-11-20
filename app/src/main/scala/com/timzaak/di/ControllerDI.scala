@@ -9,7 +9,7 @@ import ws.very.util.akka.websocket.ConnectionSharding
 
 trait ControllerDI extends ActionDI with ConnectionSharding { di =>
 
-  lazy val WSActorRef = startClusterProxy()
+  lazy val WSActorRef = startClusterProxy(Some("session"))
 
   object webSocketController extends WebSocketController {
     override implicit protected def system: ActorSystem = di.system

@@ -1,6 +1,6 @@
-### OpenResty extension
+### OpenResty
 
-本项目主要记录常见OpenResty配置，以及一些扩展。使用OpenResty官方的opm管理代码
+要记录常见OpenResty配置，以及一些扩展。使用OpenResty官方的opm管理代码
 
 ### 初始化脚本
 
