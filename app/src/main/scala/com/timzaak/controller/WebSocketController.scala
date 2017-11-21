@@ -7,7 +7,7 @@ import akka.actor.{ActorRef, ActorSystem, PoisonPill}
 import akka.stream.scaladsl._
 import akka.http.scaladsl.model.ws.{Message, TextMessage}
 import akka.stream.{ActorMaterializer, OverflowStrategy}
-import ws.very.util.akka.websocket.{ComingMsg, ConnectedMsg, EnableHeartBeat}
+import ws.very.util.akka.websocket.{ClosingMsg, PingMsg, ConnectedMsg, EnableHeartBeat}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -26,9 +26,13 @@ abstract class WebSocketController {
     val uuid = UUID.randomUUID().toString
     val actorRef = genConnectionActor(uuid)
     val in = Flow[Message].collect {
-      case TextMessage.Strict(text) => Future.successful(ComingMsg(uuid, text))
-      case TextMessage.Streamed(textStream) => textStream.runFold("")(_ + _).map(ComingMsg)
-    }.mapAsync(1)(identity).to(Sink.actorRef(actorRef, PoisonPill))
+      case TextMessage.Strict(text) =>
+        println("ws..s")
+        Future.successful(PingMsg(uuid, text))
+      case TextMessage.Streamed(textStream) =>
+        println("ws..messs")
+        textStream.runFold("")(_ + _).map(PingMsg(uuid, _))
+    }.mapAsync(1)(identity).to(Sink.actorRef(actorRef, ClosingMsg(uuid)))
     val out = {
       Source.actorRef(32, OverflowStrategy.fail).mapMaterializedValue { outActorRef =>
         actorRef ! ConnectedMsg(uuid, outActorRef)

@@ -1,4 +1,4 @@
-name := "seed"
+name := "cluster"
 version := "1.0"
 
 description := "app cluster"
