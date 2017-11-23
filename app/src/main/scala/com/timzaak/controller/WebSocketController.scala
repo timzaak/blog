@@ -20,7 +20,7 @@ abstract class WebSocketController {
 
   protected def genConnectionActor(sessionId:S): ActorRef
 
-  protected def handleMessage(uuid:String):PartialFunction[String,ConnMessageg] ={
+  protected def handleMessage(uuid:String):PartialFunction[String,ConnMessage] ={
     case msg if msg.length > 2 =>
       println("....")
       ServiceMsg(uuid,"simple", msg)
