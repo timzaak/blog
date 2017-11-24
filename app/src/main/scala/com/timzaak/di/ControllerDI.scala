@@ -7,9 +7,7 @@ import com.timzaak.controller.WebSocketController
 import scala.concurrent.ExecutionContext
 import ws.very.util.akka.websocket.ConnectionSharding
 
-trait ControllerDI extends ActionDI with ConnectionSharding { di =>
-
-  lazy val WSActorRef = startClusterProxy(Some("session"))
+trait ControllerDI extends ActionDI with ShardingDI { di =>
 
   object webSocketController extends WebSocketController {
     override implicit protected def system: ActorSystem = di.system
@@ -18,7 +16,7 @@ trait ControllerDI extends ActionDI with ConnectionSharding { di =>
 
     override implicit protected def executionContext: ExecutionContext = di.executionContext
 
-    override protected def genConnectionActor(sessionId:S): ActorRef = WSActorRef
+    override protected def genConnectionActor(sessionId:S): ActorRef = sessionActorRef
 
     // this is for local actor
     //override protected def genConnectionActor(sessionId:S): ActorRef = ConnectedActor.props(sessionId, Props[ConnectedActor])
