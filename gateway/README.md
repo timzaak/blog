@@ -15,6 +15,12 @@ opm --cwd detailyang/lua-resty-cors
 
 http://wiki.jikexueyuan.com/project/openresty/web/docker.html
 
+### docker镜像跑起来
+
+```shell
+docker run -d --net=host  -v ${PWD}:/usr/local/openresty/nginx  openresty/openresty:alpine  openresty
+```
+
 ### TODO
 
 - [X] 负载均衡
