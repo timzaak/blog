@@ -42,9 +42,8 @@ abstract class WebSocketController {
     }.mapAsync(1)(identity).to(Sink.actorRef(actorRef, ClosingMsg(uuid)))
     val out = {
       Source.actorRef(32, OverflowStrategy.fail).mapMaterializedValue { outActorRef =>
-
         actorRef ! ConnectedMsg(uuid, outActorRef)
-        actorRef ! EnableHeartBeat(uuid, 3)
+        actorRef ! EnableHeartBeat(uuid, 20)
       }.map((txt: String) => TextMessage(txt))
     }
     Flow.fromSinkAndSource(in, out)
