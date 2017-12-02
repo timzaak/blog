@@ -1,10 +1,9 @@
 package com.timzaak.di
 
-import akka.actor.ActorRef
+import ws.very.util.akka.util.Confable
 import ws.very.util.akka.websocket.ConnectionSharding
 
-trait ShardingDI extends ConnectionSharding{ di =>
-  lazy val sessionActorRef:ActorRef = startClusterProxy(Some("session"))
-
+trait ShardingDI extends ConnectionSharding with Confable{ di =>
+  def clusterEnabled:B = conf.getOptional[B]("server.cluster.enabled").exists(identity)
 
 }
