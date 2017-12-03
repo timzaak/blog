@@ -1,7 +1,9 @@
-<template>
-  <div>sdfkklasjdfjklsdfjk</div>
+<template lang="jade">
+  div p hello world
 </template>
-<style></style>
+<style lang="css" scoped>
+
+</style>
 <script>
 
 </script>
