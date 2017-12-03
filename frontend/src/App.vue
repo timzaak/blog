@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row id="navigator">
-      <el-col :offset="6" :span="18">
+      <el-col :offset="5" :span="19">
         <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
           <el-menu-item index="1"> 环境申请 </el-menu-item>
           <el-menu-item index="2"> Jenkins </el-menu-item>

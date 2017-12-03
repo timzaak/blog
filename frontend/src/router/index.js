@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import CIApplication from '../views/CIApplication/index.vue'
+import CIApplicationApply from '../views/CIApplication/views/Apply.vue'
 Vue.use(Router)
 
 export function createRouter() {
@@ -9,8 +10,13 @@ export function createRouter() {
     fallback: false,
     routes: [
       {
-        path: '*', component: {template: "<p>Hello World</p>"}
-      }
+        path: '*', component: CIApplication,
+        children: [
+          {
+            path: '*', component: CIApplicationApply,
+          }
+        ]
+      },
     ]
   })
 }
