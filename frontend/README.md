@@ -30,3 +30,7 @@ npm run dev
 # build for production with minification
 npm run build
 ```
+
+## Phabricator install
+https://github.com/RedpointGames/phabricator/blob/master/docker-compose.yml
+
