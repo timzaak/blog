@@ -16,7 +16,8 @@ class ConnectedActorTest extends TestKit(ActorSystem("test"))
     "can be got by path" in {
       val uid = "12312312"
       val ref = system.actorOf(TestActors.echoActorProps, uid)
-      assert(ref.path.mkString("/").endsWith(s"/user/$uid"), "path check error")
+
+      assert(ref.path.toString.endsWith(s"/user/$uid"), "path check error")
       system.actorSelection(s"/user/$uid") ! "123"
       expectMsg("123")
     }

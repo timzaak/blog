@@ -1,5 +1,5 @@
 package very.util.canduit
 
-class CanduitClient {
+trait CanduitClient extends CanduitApi {
 
 }

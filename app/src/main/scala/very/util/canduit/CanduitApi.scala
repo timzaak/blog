@@ -1,12 +1,25 @@
 package very.util.canduit
 
+import org.json4s.JsonAST.JObject
+import very.util.http.Http4SRequestWrapper
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-trait CanduitApi extends JsonHelperWithDoubleMode{
-  def canduitHost: S
+import scalaj.http.Http
 
-  def token:S
+trait CanduitApi extends JsonHelperWithDoubleMode with Http4SRequestWrapper {
+  protected def canduitHost: S
 
+  protected def token: S
 
-  //def req(route,params,data)
+  protected var session: Option[String] = None
+
+  def req(route: String, param: JObject) = {
+    val paramString = toJson(param ~ ("__conduit__"-> session.getOrElse(token)))
+    println(paramString)
+    Http(s"${canduitHost}/$route").postData(paramString)
+  }
+
+  def ping = {
+    Http(s"${canduitHost}/conduit.ping").asString
+  }
 }

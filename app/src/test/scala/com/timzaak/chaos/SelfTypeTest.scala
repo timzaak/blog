@@ -18,7 +18,7 @@ class SelfTypeTest extends FreeSpec with Matchers{
     val c0 = new Concrete0().get
     val c1 = new Concrete1().get
     val c2 = (c0.getList ::: c0.getList):List[Concrete0]
-    val c3: Iterable[Abstract0[Any]] = c0.getList:::c1.getList
+    //val c3: Iterable[Abstract0[Any]] = c0.getList:::c1.getList
 
     assert(true, "bad one")
   }
