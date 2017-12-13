@@ -4,17 +4,18 @@
 目前用到的技术选型，如下
 > 数据交互格式： Graphql
 
-> 框架：akka系列, sangrid
+> 框架：akka系列, sangrid , Vue
 
 > 语言：scala2.12
 
-> 数据库： postgrel
+> 数据库： postgres
 
 > 库： slick, json4s, flyway
 
 > 容器: docker
 
 > 部署工具: python3 Fabric3
+
 
 ### 代码组织方式
 
@@ -26,16 +27,22 @@
 
 > benchmark 目录存放性能测试代码。
 
-### 开始
+> cluster 目录存放和集群相关的地方
+
+> frontend 目录存放前端相关代码
+
+
+### 单机开始
 ```sh
-#init docker
+git submodule init
+git submodule update
+#init docker container
 cd docker
 docker-compose up
 
 #init database
 cd ../app
 sbt flywayMigrate
-
 ```
 
 ### 生产环境日志
@@ -58,8 +65,27 @@ sh build.sh
 ```
 
 ### GraphQL 接口测试地址
-主要是将 jwt token 注入到 headers 里面，方便识别
+需要将 jwt token 注入到 headers 里面，方便识别
 > http://127.0.0.1:8080/graphiql.html?headers={%22auth%22:%22eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.MQ.3GLuAeZtpOfdC1_q_9jqe-EtmZcO2ZZIvPb5gLuMrp0%22}
+
+### WebSocket akka 集群
+目前 WS akka 集群的基本功能做完了，但还有很多生产环境需要的 feature 还没做。所以目前仅供探索。具体关于其 WS集群 的思考请参照 [#19](https://github.com/timzaak/graphql-backend-starter/issues/19)
+
+#### 运行 WS akka 集群
+app/src/main/resources/application.conf 添加 `include "cluster.conf"`
+```sh
+cd cluster
+# run akka seeder， 启动一个
+sbt "runMain Seed -Dconfig.resource=seed.conf"
+# run akka ws session  ，按需求，可以启动 n 多个
+sbt "runMain Session -Dconfig.resource=session.conf"
+```
+
+#### 前端 Vue 单页应用
+```sh
+yarn install
+npm run dev
+```
 
 ### TODO:
 基本上都会放入 issue， 要做的事情乱七八糟的。

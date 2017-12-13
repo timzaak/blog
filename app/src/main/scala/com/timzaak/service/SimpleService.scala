@@ -8,9 +8,6 @@ object SimpleService {
   def startClusterService(serviceActorRef:ActorRef)(implicit system:ActorSystem) ={
     ClusterClientReceptionist(system).registerService(serviceActorRef)
   }
-  def startLocalService(serviceActorRef:ActorRef)(implicit system:ActorSystem) = {
-
-  }
 }
 
 

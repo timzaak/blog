@@ -7,9 +7,9 @@ trait ServiceDI extends ActionDI with ShardingDI { di =>
   protected val sampleServiceActorRef:ActorRef = system.actorOf(Props[SimpleServiceActor], "simple")
 
 
-
-  SimpleService.startClusterService(sampleServiceActorRef)
-
-
+  // start cluster
+  if(clusterEnabled){
+    SimpleService.startClusterService(sampleServiceActorRef)
+  }
 
 }
