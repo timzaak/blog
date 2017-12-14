@@ -2,9 +2,12 @@ import com.typesafe.config.ConfigFactory
 name := "backend"
 version := "1.0"
 
-description := "An example GraphQL server written with akka-http and sangria."
+description := "Try everything I like"
 
 scalaVersion := "2.12.4"
+
+resolvers += Resolver.bintrayRepo("kamon-io", "snapshots")
+
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 enablePlugins(JavaAppPackaging)
@@ -19,6 +22,7 @@ libraryDependencies ++= Seq(
   "org.picoworks"       %% "pico-hashids"          % "4.4.141",
   "com.github.cb372"    %% "scalacache-core"       % "0.10.0",
   "com.sksamuel.avro4s" %% "avro4s-core"           % "1.8.0",
+  "io.kamon"            %% "kamon-core"            % "1.0.0-RC5"% Test,
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
   "org.scalacheck"      %% "scalacheck"            % "1.13.4" % Test,
   "com.typesafe.akka"   %% "akka-testkit"          % "2.5.6" % Test,
