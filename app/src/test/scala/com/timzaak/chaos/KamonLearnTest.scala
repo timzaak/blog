@@ -1,6 +1,6 @@
 package com.timzaak.chaos
 
-
+/*
 import com.typesafe.config.ConfigFactory
 import kamon.{Kamon, MetricReporter, SpanReporter}
 import org.scalatest.{FreeSpec, Matchers}
@@ -22,3 +22,4 @@ class KamonLearnTest extends FreeSpec with Matchers {
     }
   }
 }
+*/

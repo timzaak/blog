@@ -1,7 +1,6 @@
 package very.util.kamon
-
-import java.time.{Instant, ZoneId}
-
+/*
+import java.time.ZoneId
 import com.joyrec.util.log.impl.slf4j.{ClassSlf4j, WithSlf4j}
 import com.typesafe.config.Config
 import kamon.metric.TickSnapshot
@@ -147,5 +146,5 @@ object KamonLogReporter extends KamonLogReporter with ClassSlf4j {
 
 }
 
-
+*/
 
