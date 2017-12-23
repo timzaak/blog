@@ -19,7 +19,6 @@ class MetricsLearnTest extends FreeSpec with Matchers {
       loading.time {
         Thread.sleep(1000)
       }
-
       1 shouldBe 1
     }
   }
