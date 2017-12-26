@@ -8,7 +8,7 @@ scalaVersion := "2.12.4"
 
 resolvers += Resolver.bintrayRepo("kamon-io", "snapshots")
 
-scalacOptions ++= Seq("-deprecation", "-feature")
+scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions")
 
 enablePlugins(JavaAppPackaging)
 
@@ -96,7 +96,6 @@ testOptions in Test += Tests.Setup(() => {
 })
 
 //package
-enablePlugins(JavaAppPackaging)
 mainClass in Compile := Some("Server")
 /*  .settings(slick := slickCodeGenTask.value)  //no need without code generate
 
