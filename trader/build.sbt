@@ -9,7 +9,7 @@ scalaVersion := "2.12.4"
 scalacOptions ++= Seq("-deprecation","-language:implicitConversions")
 
 libraryDependencies ++= Seq(
-
+  "org.scalatest"       %% "scalatest"             % "3.0.1" % Test
 )
 
 def latestScalafmt = "1.3.0"
@@ -29,7 +29,9 @@ lazy val log = RootProject(file("../very-util-log"))
 
 lazy val scalaj = RootProject(file("../very-util-scalaj-http"))
 
-lazy val root = (project in file("."))
-  .dependsOn(json, lang, log, scalaj)
+lazy val akka = RootProject(file("../very-util-akka"))
 
-//mainClass in Compile := Some("Server")
+lazy val root = (project in file("."))
+  .dependsOn(json, lang, log, scalaj, akka)
+
+mainClass in Compile := Some("Server")
