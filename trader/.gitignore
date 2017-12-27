@@ -21,3 +21,6 @@ target/
 .pyc
 
 app/src/main/scala/com/timzaak/scripts/*
+
+src/test/resources/private.conf
+src/main/resources/private.conf
