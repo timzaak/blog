@@ -3,6 +3,7 @@ package com.timzaak.coin.binance
 import java.net.URLEncoder
 
 import com.timzaak.coin.binance.request.{DepthRequest, KlinesRequest}
+import com.timzaak.coin.binance.response.KlinesResponse
 import very.util.http.Http4SRequestWrapper
 
 import scalaj.http.Http
@@ -49,9 +50,11 @@ trait HttpBinanceApi extends BinanceApi with Http4SRequestWrapper {
   def depth(param:DepthRequest) = get("depth",param)
 
   def klines(param: KlinesRequest) = {
-    get("klines", param).asString
+    KlinesResponse.parse(get("klines", param).json)
   }
 
-
+  def allBookTickers = {
+    get("ticker/allBookTickers").asString
+  }
 
 }

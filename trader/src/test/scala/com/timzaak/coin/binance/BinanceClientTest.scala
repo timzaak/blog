@@ -29,7 +29,7 @@ class BinanceClientTest extends FreeSpec with Matchers with ConfigDI with JsonHe
   }
 
   "depth" ignore {
-    println(client.depth(DepthRequest(Sym.LTCBTC)).asString)
+    println(client.depth(DepthRequest("LTCBTC")).asString)
     1 shouldBe 1
   }
 
@@ -61,7 +61,7 @@ class BinanceClientTest extends FreeSpec with Matchers with ConfigDI with JsonHe
 
   "klines" ignore {
     println(client.klines(KlinesRequest(
-      Sym.LTCBTC,
+      "LTCBTC",
       Interval.`1m`
     )))
     1 shouldBe 1
