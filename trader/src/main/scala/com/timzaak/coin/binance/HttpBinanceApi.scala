@@ -3,7 +3,7 @@ package com.timzaak.coin.binance
 import java.net.URLEncoder
 
 import com.timzaak.coin.binance.request.{DepthRequest, KlinesRequest}
-import com.timzaak.coin.binance.response.KlinesResponse
+import com.timzaak.coin.binance.response.{KlinesResponse, SymbolPriceResponse}
 import very.util.http.Http4SRequestWrapper
 
 import scalaj.http.Http
@@ -12,7 +12,7 @@ import ws.very.util.security.HmacSHA256
 trait HttpBinanceApi extends BinanceApi with Http4SRequestWrapper {
 
   def encode(params: S, secret: S = ApiSecret): S = {
-    HmacSHA256(secret, params).toLowerCase
+    HmacSHA256.hex(secret, params).toLowerCase
   }
 
   private def getQueryString(cc: Product) = {
@@ -50,7 +50,11 @@ trait HttpBinanceApi extends BinanceApi with Http4SRequestWrapper {
   def depth(param:DepthRequest) = get("depth",param)
 
   def klines(param: KlinesRequest) = {
-    KlinesResponse.parse(get("klines", param).json)
+    get("klines", param).jsonResult.map(KlinesResponse.parse)
+  }
+
+  def allPrices = {
+    get("ticker/allPrices").extract[List[SymbolPriceResponse]]
   }
 
   def allBookTickers = {

@@ -33,7 +33,7 @@ class BinanceClientTest extends FreeSpec with Matchers with ConfigDI with JsonHe
     1 shouldBe 1
   }
 
-  "klines response parse" in {
+  "klines response parse" ignore {
     val stringResponse =
       """
         |[
@@ -60,11 +60,14 @@ class BinanceClientTest extends FreeSpec with Matchers with ConfigDI with JsonHe
   }
 
   "klines" ignore {
-    println(client.klines(KlinesRequest(
+    client.klines(KlinesRequest(
       "LTCBTC",
       Interval.`1m`
-    )))
-    1 shouldBe 1
+    )).isRight shouldBe true
+  }
+
+  "allPrices" in {
+    client.allPrices.isRight shouldBe true
   }
 
 }
