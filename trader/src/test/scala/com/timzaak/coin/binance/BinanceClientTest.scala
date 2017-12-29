@@ -1,7 +1,6 @@
 package com.timzaak.coin.binance
 
-import com.timzaak.coin.binance.entity.{Interval, Sym}
-import com.timzaak.coin.binance.entity.Sym.Sym
+import com.timzaak.coin.binance.entity.Interval
 import com.timzaak.coin.binance.request.{DepthRequest, KlinesRequest}
 import com.timzaak.coin.binance.response.KlinesResponse
 import com.timzaak.di.ConfigDI
