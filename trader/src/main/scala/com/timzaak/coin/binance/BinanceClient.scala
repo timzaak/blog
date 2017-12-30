@@ -1,5 +1,6 @@
 package com.timzaak.coin.binance
 
+import com.timzaak.coin.binance.api.HttpBinanceApi
 import ws.very.util.json.JsonHelperWithDoubleMode
 
 class BinanceClient(

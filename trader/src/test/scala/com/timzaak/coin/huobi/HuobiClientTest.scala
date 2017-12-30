@@ -1,9 +1,9 @@
 package com.timzaak.coin.huobi
 
 
-import com.timzaak.coin.huobi.request.KlineRequest
-import com.timzaak.coin.huobi.entity.{DepthType, Period}
-import com.timzaak.coin.huobi.response.DepthResponse
+import com.timzaak.coin.huobi.api.request.KlineRequest
+import com.timzaak.coin.huobi.api.entity.{DepthType, Period}
+import com.timzaak.coin.huobi.api.response.DepthResponse
 import com.timzaak.di.ConfigDI
 import org.scalatest.{FreeSpec, Matchers}
 import ws.very.util.json.JsonHelperWithDoubleMode

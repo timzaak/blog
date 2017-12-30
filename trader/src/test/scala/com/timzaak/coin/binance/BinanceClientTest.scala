@@ -1,8 +1,8 @@
 package com.timzaak.coin.binance
 
-import com.timzaak.coin.binance.entity.Interval
-import com.timzaak.coin.binance.request.{DepthRequest, KlinesRequest}
-import com.timzaak.coin.binance.response.KlinesResponse
+import com.timzaak.coin.binance.api.entity.Interval
+import com.timzaak.coin.binance.api.request.{DepthRequest, KlinesRequest}
+import com.timzaak.coin.binance.api.response.KlinesResponse
 import com.timzaak.di.ConfigDI
 import org.scalatest._
 import ws.very.util.json.JsonHelperWithDoubleMode
