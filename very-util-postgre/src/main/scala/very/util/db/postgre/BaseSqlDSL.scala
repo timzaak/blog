@@ -1,12 +1,13 @@
-package very.util.db.postgrel
+package very.util.db.postgre
 
-import PostgresProfileWithJson4S.api._
+import PostgresPlainProfileWithJson4S.api._
 import scala.reflect.runtime.universe._
 
 import slick.jdbc.GetResult
 
 import scala.concurrent.Future
 
+//@deprecated do not use this again...
 trait BaseSqlDSL extends WithSlick {
   protected def tableName: String
   protected def fieldList: List[String] = List.empty

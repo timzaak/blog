@@ -6,17 +6,23 @@ version := "1.0-SNAPSHOT"
 
 scalaVersion := "2.12.3"
 
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+
+
+libraryDependencies ++= Seq(
+  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+)
 
 lazy val lang = RootProject(file("../very-util-lang"))
 
 lazy val json = RootProject(file("../very-util-json"))
 
+lazy val postgre = RootProject(file("../very-util-postgre"))
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .disablePlugins(PlayLayoutPlugin)
   .disablePlugins(PlayLogback)
-  .dependsOn(lang,json)
+  .dependsOn(lang, json, postgre)
 
 
 // Adds additional packages into Twirl

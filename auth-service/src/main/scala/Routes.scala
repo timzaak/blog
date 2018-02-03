@@ -1,4 +1,4 @@
-import com.timzaak.di.DIWithPlay
+import _root_.com.timzaak.di.DIWithPlay
 import play.api.routing.{Router, SimpleRouter}
 import play.api._
 import play.api.mvc._

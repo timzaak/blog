@@ -1,7 +1,7 @@
 package com.timzaak.dao
 
 import slick.jdbc.{ GetResult, PositionedParameters, SetParameter }
-import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import very.util.db.postgre.PostgresPlainProfileWithJson4S.api._
 import very.util.security.Permission
 
 import scala.concurrent.Future

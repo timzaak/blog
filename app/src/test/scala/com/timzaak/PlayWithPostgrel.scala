@@ -6,7 +6,7 @@ import slick.sql.SqlProfile.ColumnOption.SqlType
 import scala.concurrent.Await
 import scala.util.{ Failure, Success }
 //import slick.lifted.{TableQuery, Tag}
-import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import very.util.db.postgre.PostgresPlainProfileWithJson4S.api._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 case class User(id: Option[Int], first: S, last: S)

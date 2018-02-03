@@ -1,32 +1,29 @@
-package very.util.db.postgrel
-
+package very.util.db.postgre
 import com.github.tminglei.slickpg._
-import org.json4s.{ JValue, JsonMethods }
+import org.json4s.native.Document
+import org.json4s.{JValue, JsonMethods}
 import slick.jdbc.PostgresProfile
 
-trait PostgresProfileWithJson4S
-    extends PostgresProfile
-    with PgJson4sSupport
-    with PgDate2Support
-    with PgArraySupport
-    with array.PgArrayJdbcTypes {
+trait PostgresProfileWithJson4S extends PostgresProfile
+with PgJson4sSupport
+with PgDate2Support
+with PgArraySupport
+with array.PgArrayJdbcTypes {
 
   def pgjson = "jsonb"
 
   type DOCType = org.json4s.native.Document
 
-  override val jsonMethods =
-    org.json4s.native.JsonMethods.asInstanceOf[JsonMethods[DOCType]]
+  override val jsonMethods: JsonMethods[Document] = org.json4s.native.JsonMethods.asInstanceOf[JsonMethods[DOCType]]
+
 
   override val api = MyAPI
 
-  object MyAPI
-      extends super.API
-      with Json4sJsonPlainImplicits
-      with Date2DateTimePlainImplicits
-      with SimpleArrayPlainImplicits {
-
-    implicit val strListTypeMapper =
+  object MyAPI extends super.API
+    with ArrayImplicits
+    with Json4sJsonImplicits
+    with DateTimeImplicits {
+    implicit val strSetTypeMapper =
       new SimpleArrayJdbcType[String]("text").to(_.toList)
 
     implicit val json4sJsonArrayTypeMapper =
@@ -41,7 +38,6 @@ trait PostgresProfileWithJson4S
             .mkString[JValue](j => jsonMethods.compact(jsonMethods.render(j)))(v)
       ).to(_.toList)
   }
-
 }
 
 object PostgresProfileWithJson4S extends PostgresProfileWithJson4S

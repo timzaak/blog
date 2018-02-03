@@ -2,7 +2,7 @@ package com.timzaak.di
 
 import com.timzaak.dao._
 import org.pico.hashids.Hashids
-import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import very.util.db.postgre.PostgresPlainProfileWithJson4S.api._
 import ws.very.util.akka.util.Confable
 
 trait DaoDI extends Confable { di =>

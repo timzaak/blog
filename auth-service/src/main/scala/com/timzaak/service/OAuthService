@@ -1,0 +1,156 @@
+package com.timzaak.service
+
+import com.timzaak.entity.User
+import io.github.algd.oauth.authorizer._
+import io.github.algd.oauth.data.DataManager
+import io.github.algd.oauth.data.model.{AuthorizationData, Client}
+import io.github.algd.oauth.granter._
+import io.github.algd.oauth.utils.OAuthParams
+
+import scala.concurrent.{ExecutionContext, Future}
+
+
+abstract class OAuthService extends Service with DataManager[User]{
+
+
+
+
+  /**
+    * Obtain a OAuth2 client from an identifier
+    *
+    * @param id     OAuth2 client id
+    * @param params OAuth2 parameters
+    * @param ec     execution context
+    * @return Future with optional client (found/not found)
+    */
+  override def getClient(id: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[Client]] = ???
+
+  /**
+    * Obtain and validate an OAuth2 client from an identifier and its secret
+    *
+    * @param id     OAuth2 client id
+    * @param secret OAuth2 client secret
+    * @param params OAuth2 parameters
+    * @param ec     execution context
+    * @return Future with optional client (found/not found)
+    */
+override def getClient(id: String, secret: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[Client]] = ???
+
+  /**
+    * Validate an user from its credentials
+    *
+    * @param username user login name
+    * @param password user password
+    * @param params   OAuth2 parameters
+    * @param ec       execution context
+    * @return Future with optional user (found/not found)
+    */
+  override def getUser(username: String, password: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[User]] = ???
+
+  /**
+    * Retrieve authorization data from an authorization code.
+    * This data should be queried only once, so any associated data should
+    * be always removed.
+    * If the authorization code is expired this method should return None.
+    *
+    * @param code   authorization code
+    * @param params OAuth 2 parameters
+    * @param ec     execution context
+    * @return Future with optional authorization data (found/not found)
+    */
+  override def getAuthCodeData(code: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[AuthorizationData[User]]] = ???
+
+  /**
+    * Get authorization data from refresh token
+    * If the refresh token is expired this method should return None and
+    * remove any associated data.
+    *
+    * @param refreshToken refresh token
+    * @param params       OAuth 2 parameters
+    * @param ec           execution context
+    * @return Future with optional authorization data (found/not found)
+    */
+  override def getRefreshTokenData(refreshToken: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[AuthorizationData[User]]] = ???
+
+  /**
+    * Get authorization data from access token
+    * If the access token is expired this method should return None and
+    * remove any associated data.
+    *
+    * @param token  access token
+    * @param params OAuth 2 parameters
+    * @param ec     execution context
+    * @return Future with optional authorization data (found/not found)
+    */
+  override def getAccessTokenData(token: String)(implicit params: OAuthParams, ec: ExecutionContext): Future[O[AuthorizationData[User]]] = ???
+
+  /**
+    * Validate an URI using the registered client URIs
+    *
+    * @param uri        given URI
+    * @param clientUris registered client URIs
+    * @param params     OAuth2 parameters
+    * @return Boolean expressing the validation result
+    */
+  override def isValidRedirectUri(uri: String, clientUris: List[String])(implicit params: OAuthParams): B = ???
+
+  /**
+    * Generate the string that represents the access token using the
+    * authorization data
+    *
+    * @param authInfo authorization data
+    * @param params   OAuth2 parameters
+    * @param ec       execution context
+    * @return generated string for access token
+    */
+  override def generateAccessToken(authInfo: AuthorizationData[User])(implicit params: OAuthParams, ec: ExecutionContext): Future[String] = ???
+
+  /**
+    * Generate the string that represents the refresh token using the
+    * authorization data
+    *
+    * @param authInfo authorization data
+    * @param params   OAuth2 parameters
+    * @param ec       execution context
+    * @return generated string for refresh token
+    */
+  override def generateRefreshToken(authInfo: AuthorizationData[User])(implicit params: OAuthParams, ec: ExecutionContext): Future[String] = ???
+
+  /**
+    * Generate the string that represents the authorization code using
+    * the authorization data
+    *
+    * @param authInfo authorization data
+    * @param params   OAuth2 parameters
+    * @param ec       execution context
+    * @return generated string for authorization code
+    */
+  override def generateAuthCode(authInfo: AuthorizationData[User])(implicit params: OAuthParams, ec: ExecutionContext): Future[String] = ???
+
+  /**
+    * Extract the OAuth2 scope from a instance of type T that represents
+    * a user
+    *
+    * @param user   user
+    * @param params OAuth2 parameters
+    * @param ec     execution context
+    * @return if the user won't be
+    *         considered when scope is calculated, None should be returned.
+    *         Otherwise return Some containing the set that represents the
+    *         user scope
+    */
+  override def getUserScope(user: O[User])(implicit params: OAuthParams, ec: ExecutionContext): Future[O[Set[String]]] = ???
+val _authorizer = new BaseAuthorizer(this) +
+    new ImplicitAuthorizer +
+    new CodeAuthorizer
+
+  def authorizer[T<:User](user:T, params:Map[String,String]) = _authorizer(user, params)
+
+  val _granter = new BaseGranter(this) +
+    new AuthorizationCodeGranter +
+    new PasswordGranter +
+    new ClientCredentialsGranter +
+    new RefreshTokenGranter
+
+  def granter(params:Map[String,String]) = _granter(params)
+}

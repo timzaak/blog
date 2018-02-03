@@ -2,8 +2,8 @@ package com.timzaak.dao
 
 import java.time.LocalDateTime
 
-import very.util.db.postgrel.{ BaseSqlDSL, WithSlick }
-import very.util.db.postgrel.PostgresProfileWithJson4S.api._
+import very.util.db.postgre.{ BaseSqlDSL, WithSlick }
+import very.util.db.postgre.PostgresPlainProfileWithJson4S.api._
 
 import scala.concurrent.Future
 

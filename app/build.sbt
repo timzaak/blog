@@ -6,8 +6,6 @@ description := "Try everything I like"
 
 scalaVersion := "2.12.4"
 
-resolvers += Resolver.bintrayRepo("kamon-io", "snapshots")
-
 scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions")
 
 enablePlugins(JavaAppPackaging)
@@ -30,17 +28,6 @@ libraryDependencies ++= Seq(
   "net.manub"           %% "scalatest-embedded-kafka" % "1.0.0" % "test",
   "net.manub"           %% "scalatest-embedded-kafka-streams" % "1.0.0" % "test",
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
-)
-lazy val slickSetting = Seq(
-  scalaVersion := "2.12.4",
-  libraryDependencies ++= List(
-    //slick postgresql
-    "org.postgresql"      % "postgresql" % "42.0.0",
-    "com.typesafe.slick"  %% "slick"     % "3.2.0",
-    "com.github.tminglei" %% "slick-pg"  % "0.15.0-M4",
-    // json4s adapter
-    "com.github.tminglei" %% "slick-pg_json4s" % "0.15.0-M4"
-  )
 )
 
 def latestScalafmt = "1.3.0"
@@ -66,14 +53,10 @@ lazy val scalaj = RootProject(file("../very-util-scalaj-http"))
 
 lazy val akka = RootProject(file("../very-util-akka"))
 
-lazy val codegen = project
-  .settings(slickSetting)
-  .settings(libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.2.0")
-  .dependsOn(json)
+lazy val postgre = RootProject(file("../very-util-postgre"))
 
 lazy val root = (project in file("."))
-  .dependsOn(json, lang, redis, codegen, log, scalaj, akka)
-  .settings(slickSetting)
+  .dependsOn(json, lang, redis, postgre, log, scalaj, akka)
 
 flywayUrl := {
   val conf = ConfigFactory

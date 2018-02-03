@@ -3,7 +3,7 @@ package com.timzaak.dao
 import org.pico.hashids.Hashids
 import slick.basic.BasicBackend
 import slick.jdbc.{ GetResult, PositionedParameters, PositionedResult, SetParameter }
-import very.util.db.postgrel.BaseSqlDSL
+import very.util.db.postgre.BaseSqlDSL
 import very.util.security.{ IntId, LongId }
 
 abstract class Dao(implicit protected val hashids: Hashids,
