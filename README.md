@@ -4,7 +4,7 @@
 目前用到的技术选型，如下
 > 数据交互格式： Graphql
 
-> 框架：akka系列, sangrid , Vue
+> 框架：akka系列, sangrid , Vue, Play!2
 
 > 语言：scala2.12
 
@@ -22,6 +22,8 @@
 > app 目录下是主要的 bootstrap 、业务逻辑和未成熟的组件，基于 git submodule 来做组件分离代码管理，凡是成熟的组件尽量脱离 app 目录。
 
 > docker 目录存放一些 docker 配置，以及开发依赖的环境。
+
+> auth-service 基于OAuth2.0，Play!2 做的认证服务，目前只创建了相关表以及搭建了最基本Play!2开发架子
 
 > script 目录存放一些服务学习脚本。目前是 js 代码。
 
@@ -52,7 +54,6 @@ logback.pro.xml
 
 ### 生产环境部署脚本
 ```sh
-#
 cd ../app
 fab -H $SERVER_HOST
 ```

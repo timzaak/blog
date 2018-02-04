@@ -18,7 +18,6 @@ App客户端加密过程： 加密函数(有序请求参数 + &timestamp=${X-Tim
 App服务器端加密过程： 加密函数(有序请求参数 + &secret=${clientSecret}&timestamp=${X-Timestamp}) 
 
   
-  
 不准备支持： client credentials
 
 
