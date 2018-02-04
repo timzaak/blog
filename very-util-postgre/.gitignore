@@ -4,6 +4,7 @@
 /.settings
 /.cache
 /bin
+/project/target
 /*.bak
 *.cache-main
 *.cache-tests

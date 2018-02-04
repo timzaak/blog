@@ -26,9 +26,6 @@ trait PostgresPlainProfileWithJson4S
       with Date2DateTimePlainImplicits
       with SimpleArrayPlainImplicits {
 
-//    implicit val strSetTypeMapper =
-//      new SimpleArrayJdbcType[String]("text").to(_.toList)
-
     implicit val json4sJsonArrayTypeMapper =
       new AdvancedArrayJdbcType[JValue](
         pgjson,
