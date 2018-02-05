@@ -9,6 +9,7 @@ scalaVersion := "2.12.3"
 
 
 libraryDependencies ++= Seq(
+  "io.kanaka" %% "play-monadic-actions" % "2.1.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 )
 
