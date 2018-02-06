@@ -1,5 +1,4 @@
-package com.timzaak.entity
-
+package com.timzaak.oauth.entity
 
 import org.joda.time.{DateTime, DateTimeZone}
 
@@ -11,8 +10,8 @@ case class OAuthToken(
                        client_id: String,
                        access_token: String,
                        refresh_token: String,
+                       token_type:String,
                        scope: Option[String] = None
-
                      ) {
 
 }

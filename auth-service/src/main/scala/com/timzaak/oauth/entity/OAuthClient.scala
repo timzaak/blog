@@ -1,4 +1,5 @@
-package com.timzaak.entity
+package com.timzaak.oauth.entity
+
 import org.joda.time.{DateTime, DateTimeZone}
 
 case class OAuthClient(
