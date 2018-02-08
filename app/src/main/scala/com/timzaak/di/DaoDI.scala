@@ -3,7 +3,9 @@ package com.timzaak.di
 import com.timzaak.dao._
 import org.pico.hashids.Hashids
 import very.util.db.postgre.PostgresPlainProfileWithJson4S.api._
-import ws.very.util.akka.util.Confable
+import ws.very.util.akka.util.{AkkaSystemable, Confable}
+
+import scala.concurrent.ExecutionContext
 
 trait DaoDI extends Confable { di =>
 
@@ -16,6 +18,7 @@ trait DaoDI extends Confable { di =>
   //    val select: Int = db
   //  }
   implicit val hashids = Hashids.reference(conf.getString("server.salt"), 4)
+  implicit def executionContext:ExecutionContext
 
   object userAccountDao extends UserAccountDao {}
 

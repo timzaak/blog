@@ -2,11 +2,14 @@ package com.timzaak.dao
 
 import org.pico.hashids.Hashids
 import slick.basic.BasicBackend
-import slick.jdbc.{ GetResult, PositionedParameters, PositionedResult, SetParameter }
+import slick.jdbc.{GetResult, PositionedParameters, PositionedResult, SetParameter}
 import very.util.db.postgre.BaseSqlDSL
-import very.util.security.{ IntId, LongId }
+import very.util.security.{IntId, LongId}
+
+import scala.concurrent.ExecutionContext
 
 abstract class Dao(implicit protected val hashids: Hashids,
+                   implicit protected val ec: ExecutionContext,
                    implicit override val db: BasicBackend#DatabaseDef)
     extends BaseSqlDSL {
 

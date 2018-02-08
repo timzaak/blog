@@ -2,7 +2,7 @@ package very.util.db.postgre
 
 import com.github.tminglei.slickpg._
 import org.json4s.{JValue, JsonMethods}
-import slick.jdbc.{JdbcType, PostgresProfile}
+import slick.jdbc.PostgresProfile
 
 trait PostgresPlainProfileWithJson4S
     extends PostgresProfile
