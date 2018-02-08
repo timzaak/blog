@@ -8,6 +8,9 @@ scalaVersion := "2.12.4"
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions", "-Ypartial-unification")
 
+resolvers += "bintray/non" at "http://dl.bintray.com/non/maven"
+
+addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
 
 enablePlugins(JavaAppPackaging)
 
@@ -21,7 +24,8 @@ libraryDependencies ++= Seq(
   "org.picoworks"       %% "pico-hashids"          % "4.4.141",
   "com.github.cb372"    %% "scalacache-core"       % "0.10.0",
   "com.sksamuel.avro4s" %% "avro4s-core"           % "1.8.0",
-  "org.typelevel"       %% "cats-core"             % "1.0.1",
+  "org.typelevel"       %% "cats-core"             % "1.0.1" % Test,
+  "org.typelevel"       %% "cats-free"             % "1.0.1" % Test,
   //"io.kamon"            %% "kamon-core"            % "1.0.0-RC5",
   "nl.grons"            %% "metrics-scala"         % "3.5.9",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,
