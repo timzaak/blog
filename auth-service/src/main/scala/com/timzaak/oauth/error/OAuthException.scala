@@ -1,6 +1,6 @@
 package com.timzaak.oauth.error
 
-trait OAuthException {
+trait OAuthException extends Throwable{
   def message: String
 
   def code: Int
@@ -18,6 +18,9 @@ object OAuthException {
   val RedirectUriError = OAuthException("回调 redirect_uri 错误", 102)
 
   val InvalidUserOrPassword = OAuthException("错误账号或密码", 103)
+
+  val InvalidToken = OAuthException("token 或 refresh_token 错误", 104)
+
 
 
 }

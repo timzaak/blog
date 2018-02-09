@@ -10,7 +10,7 @@ scalaVersion := "2.12.3"
 
 libraryDependencies ++= Seq(
   "io.kanaka" %% "play-monadic-actions" % "2.1.0",
-  "org.scalaz" %% "scalaz-core" % "7.2.19",
+  "org.typelevel"       %% "cats-core"             % "1.0.1",
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 )
 

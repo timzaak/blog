@@ -8,6 +8,4 @@ trait OAuthController extends Controller {
     Ok("world")
   }
 
-
-
 }

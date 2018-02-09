@@ -16,16 +16,13 @@ case class PasswordRequest(
 
 trait PasswordAuthorization {
   implicit def ec: ExecutionContext
-
-  def getUser(username: S, password: S): Future[O[OAuthUser]]
-
-  def createToken(client_id: S, user_id: I): Future[OAuthToken]
+  val provider:OAuthDataProvider
 
   def token(req: PasswordRequest):Future[Either[OAuthException,OAuthToken]] = {
     import req._
-    getUser(username, password).flatMap {
+    provider.getUser(username, password).flatMap {
       case Some(user) =>
-        createToken(client_id, user.id).map(Right(_))
+        provider.createToken(client_id, user.id).map(Right(_))
       case None =>
         Future.successful(Left(InvalidUserOrPassword))
     }

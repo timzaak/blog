@@ -2,6 +2,9 @@ package com.timzaak.oauth.entity
 
 import org.joda.time.{DateTime, DateTimeZone}
 
+/*
+ * promise one user one client has only record
+ */
 trait OAuthToken {
   def id: String
 

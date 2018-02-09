@@ -19,11 +19,11 @@ trait SimpleAuthorization {
 
   implicit def ec: ExecutionContext
 
-  def getOAuthClientByClientId(client_id: S): Future[O[OAuthClient]]
+  val provider:OAuthDataProvider
 
   def authorize(req: SimpleRequest): Future[Either[OAuthException, OAuthClient]] = {
     import req._
-    getOAuthClientByClientId(client_id).map {
+    provider.getOAuthClientByClientId(client_id).map {
       case Some(client) =>
         if (!client.redirect_url.contains(redirect_uri)) {
           Left(RedirectUriError)
