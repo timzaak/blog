@@ -5,7 +5,9 @@ import cats._
 import data._
 import free._
 import Free.liftF
+import cats.arrow.FunctionK
 import implicits._
+
 //sbt "testOnly com.timzaak.chaos.CatsDataTypeLearn"
 class CatsDataTypeLearn extends FreeSpec with Matchers {
 
@@ -41,7 +43,48 @@ class CatsDataTypeLearn extends FreeSpec with Matchers {
   }
 
   "FunctionK" in {
-    val first: List~> Option =  λ[List~>Option](_.headOption)
+    val first: List ~> Option = λ[List ~> Option](_.headOption)
 
+    first(List(1,2)) shouldBe Some(1)
+//    val firstA = FunctionK.lift[List[?],Option[?]](_.headOption)
+//    firstA(List(1,2)) shouldBe Some(1)
+
+    val firstB = new FunctionK[List,Option]{
+      override def apply[A](fa: List[A]): O[A] = fa.headOption
+    }
+    firstB(List(1,2)) shouldBe Some(1)
+
+  }
+  "Kleisli" in {
+    val parse = Kleisli[Option,String,Int]((s: String) => if (s.matches("-?[0-9]+")) Some(s.toInt) else None)
+    val reciprocal:Kleisli[Option,Int,Double] = Kleisli((i: Int) => if (i != 0) Some(1.0 / i) else None)
+
+    val abc = parse.andThen(reciprocal)
+    abc("1") shouldBe Some(1.0d)
+    parse.andThen(reciprocal).apply("1") shouldBe Some(1.0d)
+  }
+
+  case class User(name:String,pwd:String)
+  sealed trait FormvalidatorNel {
+    type ValidationResult[A] = ValidatedNel[String, A]
+
+    private def validateUserName(userName:String) =
+      if (userName.matches("^[a-zA-Z0-9]+$")) userName.validNel else "bad user name".invalidNel
+
+    private def validatePasswored(password:String): ValidationResult[String] =
+      if (password.matches("(?=^.{10,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")) password.validNel[String]
+      else "bad password".invalidNel
+
+    def valid(userName:String, password:String):ValidationResult[User] = {
+      (validateUserName(userName),
+        validatePasswored(password)).mapN(User)
+
+    }
+  }
+  object FormvalidatorNel extends FormvalidatorNel
+
+  "Validated" in {
+    val result = FormvalidatorNel.valid("123123123123321","1231123zZE-23")
+    result.toEither.isRight shouldBe true
   }
 }
