@@ -46,8 +46,10 @@ class CatsDataTypeLearn extends FreeSpec with Matchers {
     val first: List ~> Option = λ[List ~> Option](_.headOption)
 
     first(List(1,2)) shouldBe Some(1)
-//    val firstA = FunctionK.lift[List[?],Option[?]](_.headOption)
-//    firstA(List(1,2)) shouldBe Some(1)
+    val firstA = new (List~>Option){
+      def apply[A](fa:List[A]):Option[A] = fa.headOption
+    }
+    firstA(List(1,2)) shouldBe Some(1)
 
     val firstB = new FunctionK[List,Option]{
       override def apply[A](fa: List[A]): O[A] = fa.headOption
