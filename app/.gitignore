@@ -20,4 +20,6 @@ target/
 # python 
 .pyc
 
-app/src/main/scala/com/timzaak/scripts/*
+src/main/scala/com/timzaak/scripts/*
+
+src/test/resources/wechat.conf

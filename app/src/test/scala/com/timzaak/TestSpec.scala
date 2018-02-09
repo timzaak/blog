@@ -1,7 +1,6 @@
 package com.timzaak
 
 import com.timzaak.di.{ AkkaDI, WithTestConf }
-import com.typesafe.config.{ Config, ConfigFactory }
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{ Millis, Seconds, Span }
 import org.scalatest.{ FreeSpec, Matchers }
