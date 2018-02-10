@@ -21,6 +21,10 @@ class ShapelessLearn extends FreeSpec with Matchers{
   }
 
   "choose" in {
+    ({
+      case 1 => "1"
+      case 2 => "2"
+    }:PartialFunction[Int,String]).lift
     choose(Set(1,2,3)) shouldBe Some(1)
   }
 }
