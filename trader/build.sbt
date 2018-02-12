@@ -9,6 +9,7 @@ scalaVersion := "2.12.4"
 scalacOptions ++= Seq("-deprecation","-language:implicitConversions")
 
 libraryDependencies ++= Seq(
+  "com.squareup.okhttp3" % "okhttp" % "3.9.1",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test
 )
 
