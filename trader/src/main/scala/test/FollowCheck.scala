@@ -1,7 +1,7 @@
 package test
 
 import com.timzaak.coin.huobi.HuobiWebSocketClient
-import com.timzaak.coin.huobi.api.common.entity.{Kline, Trade}
+import com.timzaak.coin.huobi.api.common.entity.Trade
 import com.timzaak.coin.huobi.api.websocket.{HuobiWebSocketListener, RequestTopic}
 import com.timzaak.coin.huobi.api.websocket.RequestTopic.RequestTopic
 import com.timzaak.coin.huobi.api.websocket.response.ChResponse

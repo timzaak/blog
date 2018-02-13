@@ -14,7 +14,6 @@ import org.json4s.JValue
 import org.json4s.JsonAST._
 import ws.very.util.json.JsonHelperWithDoubleMode
 import scala.collection.mutable.ListMap
-
 import scala.concurrent.{Future, Promise}
 
 class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j with JsonHelperWithDoubleMode{self =>
@@ -32,7 +31,7 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
   }
 
 
-  private val _listener = new WebSocketListener {
+  protected val _listener = new WebSocketListener {
     override def onOpen(webSocket: WebSocket, response: Response): U = {
       info(s"huobi ws client open")
       listener.onOpen(self)
@@ -82,6 +81,14 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
     ws.send(command)
     info(s"send:$command")
     promise.future
+  }
+
+  def close():Unit = {
+    ws.close(1000, null)
+    commandMap.foreach{case (_, promise)=>
+      promise.failure(new InterruptedException("connection closed"))
+    }
+    commandMap.clear()
   }
 
 }

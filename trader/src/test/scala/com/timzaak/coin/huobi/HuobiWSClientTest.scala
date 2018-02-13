@@ -1,7 +1,6 @@
 package com.timzaak.coin.huobi
 
 import com.timzaak.coin.huobi.api.websocket.{HuobiWebSocketListener, RequestTopic}
-import com.timzaak.coin.huobi.api.websocket.entity.WsResponse
 import org.json4s.JValue
 import org.scalatest.{FreeSpec, Matchers}
 import ws.very.util.json.JsonHelperWithDoubleMode

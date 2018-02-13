@@ -27,11 +27,11 @@ lazy val json = RootProject(file("../very-util-json"))
 
 lazy val log = RootProject(file("../very-util-log"))
 
+lazy val config = RootProject(file("../very-util-config"))
+
 lazy val scalaj = RootProject(file("../very-util-scalaj-http"))
 
-lazy val akka = RootProject(file("../very-util-akka"))
-
 lazy val root = (project in file("."))
-  .dependsOn(json, lang, log, scalaj, akka)
+  .dependsOn(json, lang, log, scalaj, config)
 
 mainClass in Compile := Some("Server")
