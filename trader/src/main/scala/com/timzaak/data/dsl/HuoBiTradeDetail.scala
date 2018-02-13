@@ -10,7 +10,6 @@ import monix.reactive.Observable
 import org.json4s.JValue
 
 //TODO: 重试策略
-//TODO: 看看 Cats.State 编码范式
 class HuoBiTradeDetail(symbol: S) extends Observable[Trade] {
   protected var wsClient: Option[HuobiWebSocketClient] = None
   protected var subscribers:List[Subscriber[Trade]] = Nil
