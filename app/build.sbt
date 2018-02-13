@@ -28,6 +28,7 @@ libraryDependencies ++= Seq(
   "org.typelevel"       %% "cats-core"             % "1.0.1" % Test,
   "org.typelevel"       %% "cats-free"             % "1.0.1" % Test,
   //"io.kamon"            %% "kamon-core"            % "1.0.0-RC5",
+  "io.monix"            %% "monix"                 % "3.0.0-M3" % Test,
   "nl.grons"            %% "metrics-scala"         % "3.5.9",
   "com.chuusai"         %% "shapeless"             % "2.3.3" % Test,
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test,

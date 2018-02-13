@@ -2,14 +2,13 @@ name:= "coin-trader"
 
 version := "0.1"
 
-description := "auto buy and sale from each platforms to get price difference"
-
 scalaVersion := "2.12.4"
 
 scalacOptions ++= Seq("-deprecation","-language:implicitConversions")
 
 libraryDependencies ++= Seq(
   "com.squareup.okhttp3" % "okhttp" % "3.9.1",
+  "io.monix" %% "monix" % "3.0.0-M3",
   "org.scalatest"       %% "scalatest"             % "3.0.1" % Test
 )
 

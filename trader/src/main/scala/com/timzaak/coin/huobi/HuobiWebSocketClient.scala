@@ -51,6 +51,7 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
     override def onMessage(webSocket: WebSocket, bytes: ByteString): U = {
       val text = decompress(bytes)
       val data = parseJson(text)
+      //debug(s"receive: $text")
       data \ "ping" match {
         case JNothing =>
           data \ "id" match {
@@ -63,7 +64,6 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
               listener.onMessage(self, data)
           }
         case JInt(time) =>
-          debug(s"ping")
           webSocket.send(toJson("pong"-> time))
       }
     }
@@ -78,7 +78,9 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
     val promise = Promise[Either[JValue, JValue]]
     val id = genRandomKey
     commandMap += id-> promise
-    ws.send(("id",id)~("sub",rt))
+    val command = toJson(("id",id)~("sub",rt))
+    ws.send(command)
+    info(s"send:$command")
     promise.future
   }
 
