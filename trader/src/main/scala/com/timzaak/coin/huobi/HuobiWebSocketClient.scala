@@ -4,7 +4,6 @@ package com.timzaak.coin.huobi
 import java.io.ByteArrayInputStream
 import java.util.UUID
 import java.util.zip.GZIPInputStream
-
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
 import com.timzaak.coin.huobi.api.websocket.HuobiWebSocketListener
 import com.timzaak.coin.huobi.api.websocket.RequestTopic.RequestTopic
@@ -21,7 +20,7 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
 
   protected def wsUrl = "wss://api.huobi.pro/ws"
 
-  private val commandMap: ListMap[String, Promise[Either[JValue, JValue]]] = ListMap.empty
+  private val commandMap: ListMap[String, Promise[JValue]] = ListMap.empty
 
   private def genRandomKey = UUID.randomUUID().toString
 
@@ -50,13 +49,17 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
     override def onMessage(webSocket: WebSocket, bytes: ByteString): U = {
       val text = decompress(bytes)
       val data = parseJson(text)
-      //debug(s"receive: $text")
+      debug(s"receive: $text")
       data \ "ping" match {
         case JNothing =>
           data \ "id" match {
             case JString(id) =>
               commandMap.get(id).foreach {promise =>
-                  promise.success(Right(data))
+                  if(data \ "status" == JString("error")){
+                    promise.failure(new Exception(text))
+                  }else{
+                    promise.success(data)
+                  }
                   commandMap -= id
               }
             case _ =>
@@ -73,8 +76,8 @@ class HuobiWebSocketClient(listener: HuobiWebSocketListener) extends ClassSlf4j 
     client.newWebSocket(request, _listener)
   }
 
-  def subscribe(rt: RequestTopic): Future[Either[JValue, JValue]] = {
-    val promise = Promise[Either[JValue, JValue]]
+  def subscribe(rt: RequestTopic): Future[JValue] = {
+    val promise = Promise[JValue]
     val id = genRandomKey
     commandMap += id-> promise
     val command = toJson(("id",id)~("sub",rt))
