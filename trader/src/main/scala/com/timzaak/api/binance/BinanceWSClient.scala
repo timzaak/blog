@@ -5,8 +5,9 @@ import com.timzaak.api.binance.api.BinanceWSApi
 import okhttp3._
 import com.timzaak.api.binance.api.ws.listener.{WebSocketListener => Listener}
 import org.json4s.JValue
+import ws.very.util.json.JsonHelperWithDoubleMode
 
-class BinanceWSClient extends BinanceWSApi with ClassSlf4j{self =>
+class BinanceWSClient extends BinanceWSApi with ClassSlf4j with JsonHelperWithDoubleMode{self =>
   private val client = new OkHttpClient
   import BinanceWSClient._
 
@@ -16,25 +17,25 @@ class BinanceWSClient extends BinanceWSApi with ClassSlf4j{self =>
     client.newWebSocket(request, new WebSocketListener {
       override def onOpen(webSocket: WebSocket, response: Response): U = {
         info("binance open")
-        tradeListener.onOpen(self)
+        tradeListener.onOpen()
       }
 
       override def onClosed(webSocket: WebSocket, code: I, reason: Str): U = {
         info("binance Closed")
-        tradeListener.onClosed(self)
+        tradeListener.onClosed()
       }
 
       override def onFailure(webSocket: WebSocket, t: Throwable, response: Response): U = {
-        info("binance failue", t)
-        tradeListener.onFailure(self, t)
+
+        tradeListener.onFailure(t)
       }
 
       override def onMessage(webSocket: WebSocket, text: Str): U = {
-        println("text",text)
+        tradeListener.onMessage(parseJson(text))
       }
     })
   }
 }
 object BinanceWSClient {
-  type TradeListener = Listener[BinanceWSClient,JValue]
+  type TradeListener = Listener[JValue]
 }

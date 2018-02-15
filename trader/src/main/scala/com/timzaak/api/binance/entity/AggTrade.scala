@@ -1,5 +1,4 @@
-package com.timzaak.api.binance.api.ws.entity
-
+package com.timzaak.api.binance.entity
 
 //{
 //"e": "aggTrade",  // Event type

@@ -1,12 +1,12 @@
 package com.timzaak.api.binance.api.ws.listener
 
-class WebSocketListener[Client, Message] {
+class WebSocketListener[Message] {
 
-  def onOpen(client:Client):Unit = {}
+  def onOpen():Unit = {}
 
-  def onMessage(client:Client, message:Message):Unit = {}
+  def onMessage(message:Message):Unit = {}
 
-  def onClosed(client:Client):Unit ={}
+  def onClosed():Unit ={}
 
-  def onFailure(client:Client, t: Throwable):Unit = {}
+  def onFailure(t: Throwable):Unit = {}
 }

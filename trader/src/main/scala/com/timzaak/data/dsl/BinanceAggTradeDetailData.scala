@@ -2,16 +2,18 @@ package com.timzaak.data.dsl
 
 import com.joyrec.util.log.impl.slf4j.ClassSlf4j
 import com.timzaak.api.binance.BinanceWSClient
+import com.timzaak.api.binance.entity.AggTrade
 import monix.execution.Cancelable
 import monix.execution.cancelables.BooleanCancelable
 import monix.reactive.Observable
 import monix.reactive.observers.Subscriber
 import okhttp3.WebSocket
 import org.json4s.JsonAST.JValue
+import ws.very.util.json.JsonHelperWithDoubleMode
 
-class BinanceAggTradeDetailData(symbol:S) extends Observable[String] with ClassSlf4j{self =>
+class BinanceAggTradeDetailData(symbol:S) extends Observable[AggTrade] with ClassSlf4j with JsonHelperWithDoubleMode{self =>
   private var client:Option[WebSocket] = None
-  private var subscribers: List[Subscriber[String]] = Nil
+  private var subscribers: List[Subscriber[AggTrade]] = Nil
   private val cancelable = BooleanCancelable {()=>
     subscribers.foreach(_.onComplete())
     subscribers = Nil
@@ -21,24 +23,31 @@ class BinanceAggTradeDetailData(symbol:S) extends Observable[String] with ClassS
 
   private val _listener =  new BinanceWSClient.TradeListener{
 
-    override def onMessage(client:BinanceWSClient, message:JValue):Unit = {
+    override def onMessage(message:JValue):Unit = {
+      val aggTrade = message.extract[AggTrade]
+      subscribers.foreach(_.onNext(aggTrade))
     }
 
-    override def onClosed(client:BinanceWSClient):Unit ={
-
+    override def onClosed():Unit ={
+      if(!cancelable.isCanceled){
+        self.client = Option(generateClient)
+      }
     }
 
-    override def onFailure(client:BinanceWSClient, t: Throwable):Unit = {
-      self.client = Option(generateClient)
+    override def onFailure( t: Throwable):Unit = {
+      if(!cancelable.isCanceled){
+        self.client = Option(generateClient)
+      }
+
     }
   }
 
 
   private def generateClient: WebSocket = (new BinanceWSClient).aggTradeStream(symbol, _listener)
 
-  override def unsafeSubscribeFn(subscriber: Subscriber[String]): Cancelable = {
+  override def unsafeSubscribeFn(subscriber: Subscriber[AggTrade]): Cancelable = {
     subscribers = subscriber::subscribers
-    client = client orElse(Some(generateClient))
+    client = client orElse Some(generateClient)
     cancelable
   }
 }
