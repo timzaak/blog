@@ -1,10 +1,10 @@
 package test
 
-import com.timzaak.coin.huobi.HuobiWebSocketClient
-import com.timzaak.coin.huobi.api.common.entity.Trade
-import com.timzaak.coin.huobi.api.websocket.{HuobiWebSocketListener, RequestTopic}
-import com.timzaak.coin.huobi.api.websocket.RequestTopic.RequestTopic
-import com.timzaak.coin.huobi.api.websocket.response.ChResponse
+import com.timzaak.api.huobi.HuobiWSClient
+import com.timzaak.api.huobi.api.ws.{HuobiWebSocketListener, RequestTopic}
+import com.timzaak.api.huobi.api.ws.RequestTopic.RequestTopic
+import com.timzaak.api.huobi.api.ws.response.ChResponse
+import com.timzaak.api.huobi.entity.Trade
 import org.json4s.JValue
 import ws.very.util.json.JsonHelperWithDoubleMode
 
@@ -26,27 +26,27 @@ object FollowCheck extends App with JsonHelperWithDoubleMode{
     }
   }
   def subscribe(rt:RequestTopic, func:JValue => Unit) = new HuobiWebSocketListener {
-    override def onOpen(client: HuobiWebSocketClient): U = {
+    override def onOpen(client: HuobiWSClient): U = {
       client.subscribe(rt).failed.foreach{e=>
         e.printStackTrace()
       }
     }
 
-    override def onMessage(client: HuobiWebSocketClient, message: JValue): U = {
+    override def onMessage(client: HuobiWSClient, message: JValue): U = {
       func(message)
     }
 
-    override def onClosed(client: HuobiWebSocketClient, code: I, reason: S): U = {
+    override def onClosed(client: HuobiWSClient, code: I, reason: S): U = {
       println("close...",code,reason)
     }
 
-    override def onFailure(client: HuobiWebSocketClient, t: Throwable): U = {
+    override def onFailure(client: HuobiWSClient, t: Throwable): U = {
       println("throwin...", now.mill)
     }
   }
 
 
-  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("bchusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("bchusdt"),checkTime))
 //  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("etcusdt"),checkTime))
 //  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("ethusdt"),checkTime))
 //  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("btcusdt"),checkTime))
