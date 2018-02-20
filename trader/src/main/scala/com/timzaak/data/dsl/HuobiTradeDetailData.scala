@@ -18,6 +18,7 @@ class HuobiTradeDetailData(symbol: S)(implicit ec:ExecutionContext) extends Obse
   protected var wsClient: Option[HuobiWSClient] = None
   protected var subscribers:List[Subscriber[Trade]] = Nil
   protected var cancelable = BooleanCancelable { () =>
+    println("huobi Cancel")
     wsClient.foreach(_.close())
     wsClient = None
     subscribers.foreach(_.onComplete)

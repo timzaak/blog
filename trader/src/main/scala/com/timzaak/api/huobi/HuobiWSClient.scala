@@ -49,7 +49,7 @@ class HuobiWSClient(listener: HuobiWebSocketListener) extends ClassSlf4j with Js
     override def onMessage(webSocket: WebSocket, bytes: ByteString): U = {
       val text = decompress(bytes)
       val data = parseJson(text)
-      debug(s"receive: $text")
+      //debug(s"receive: $text")
       data \ "ping" match {
         case JNothing =>
           data \ "id" match {

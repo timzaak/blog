@@ -15,6 +15,7 @@ class BinanceAggTradeDetailData(symbol:S) extends Observable[AggTrade] with Clas
   private var client:Option[WebSocket] = None
   private var subscribers: List[Subscriber[AggTrade]] = Nil
   private val cancelable = BooleanCancelable {()=>
+    info("binance cancel")
     subscribers.foreach(_.onComplete())
     subscribers = Nil
     client.foreach(_.close(1000,null))

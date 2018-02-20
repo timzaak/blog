@@ -47,14 +47,14 @@ object FollowCheck extends App with JsonHelperWithDoubleMode{
 
 
   new HuobiWSClient(subscribe(RequestTopic.tradeDetail("bchusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("etcusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("ethusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("btcusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("ltcusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("eosusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("xrpusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("omgusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("dashusdt"),checkTime))
-//  new HuobiWebSocketClient(subscribe(RequestTopic.tradeDetail("zecusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("etcusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("ethusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("btcusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("ltcusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("eosusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("xrpusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("omgusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("dashusdt"),checkTime))
+  new HuobiWSClient(subscribe(RequestTopic.tradeDetail("zecusdt"),checkTime))
 
 }

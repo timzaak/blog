@@ -26,7 +26,7 @@ class BinanceWSClient extends BinanceWSApi with ClassSlf4j with JsonHelperWithDo
       }
 
       override def onFailure(webSocket: WebSocket, t: Throwable, response: Response): U = {
-
+        error("binance failure",t)
         tradeListener.onFailure(t)
       }
 
