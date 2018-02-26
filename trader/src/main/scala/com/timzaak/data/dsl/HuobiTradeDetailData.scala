@@ -17,14 +17,16 @@ import scala.concurrent.ExecutionContext
 class HuobiTradeDetailData(symbol: S)(implicit ec:ExecutionContext) extends Observable[Trade] with ClassSlf4j{
   protected var wsClient: Option[HuobiWSClient] = None
   protected var subscribers:List[Subscriber[Trade]] = Nil
+  //TODO. cancable has problem
   protected var cancelable = BooleanCancelable { () =>
     println("huobi Cancel")
     wsClient.foreach(_.close())
     wsClient = None
     subscribers.foreach(_.onComplete)
     subscribers = Nil
-
   }
+
+
   private val _listener = new HuobiWebSocketListener {
     override def onOpen(client: HuobiWSClient): U = {
       client.subscribe(RequestTopic.tradeDetail(symbol)).failed.map{ t=>

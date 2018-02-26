@@ -14,6 +14,7 @@ import ws.very.util.json.JsonHelperWithDoubleMode
 class BinanceAggTradeDetailData(symbol:S) extends Observable[AggTrade] with ClassSlf4j with JsonHelperWithDoubleMode{self =>
   private var client:Option[WebSocket] = None
   private var subscribers: List[Subscriber[AggTrade]] = Nil
+  //TODO. cancable has problem
   private val cancelable = BooleanCancelable {()=>
     info("binance cancel")
     subscribers.foreach(_.onComplete())

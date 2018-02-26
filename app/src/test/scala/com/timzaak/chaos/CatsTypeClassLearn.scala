@@ -229,6 +229,4 @@ class CatsTypeClassLearn extends FreeSpec with Matchers {
     show"$john works at $engineering" shouldBe "John works at Department(2, Engineering)"
 
   }
-
-
 }

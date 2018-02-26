@@ -27,7 +27,7 @@ class MonixLearn extends FreeSpec with Matchers {
   // Consumer 是拿观察到的数据具体去干什么， 和 Subscriber 解耦
 
   implicit val testScheduler = TestScheduler()
-  "task" in {
+  "task" ignore {
 
 
     val task = Task(1 + 1)
@@ -37,14 +37,14 @@ class MonixLearn extends FreeSpec with Matchers {
     testScheduler.tick(1.seconds)
     result.value shouldBe defined
   }
-  "scheduler" in {
+  "scheduler" ignore {
     var a = false
     testScheduler.scheduleOnce(1, TimeUnit.SECONDS, () => a = true)
     testScheduler.tick(2.seconds)
     a shouldBe true
   }
   "Cancel" - {
-    "boolean" in {
+    "boolean" ignore {
       val c = BooleanCancelable.alreadyCanceled
       c.isCanceled shouldBe true
       val c2 = BooleanCancelable()
@@ -53,7 +53,7 @@ class MonixLearn extends FreeSpec with Matchers {
       c2.isCanceled shouldBe true
     }
 
-    "composite" in {
+    "composite" ignore {
       val c = CompositeCancelable()
       var a1, a2, a3 = false
       c += Cancelable(() => a1 = true)
@@ -63,7 +63,18 @@ class MonixLearn extends FreeSpec with Matchers {
       Seq(a1, a2, a3).contains(false) shouldBe false
     }
 
-    "multiAssignment" in {
+    "composite2" ignore {
+      var a1, a2,all = false
+      val c = CompositeCancelable(()=> all = true)
+      val Array(c1,c2) = Array(Cancelable(()=>a1= !a1),Cancelable(()=> a2= !a2))
+      c += c1
+      c += c2
+      c1.cancel()
+      c2.cancel()
+      Seq(a1, a2, all).contains(false) shouldBe true
+    }
+
+    "multiAssignment" ignore {
       val c = MultiAssignCancelable()
       var a1, a2, a3 = false
       c := Cancelable(() => a1 = true)
@@ -72,7 +83,7 @@ class MonixLearn extends FreeSpec with Matchers {
       c := Cancelable(() => a3 = true)
       List(a1, a2, a3) shouldBe List(false, true, true)
     }
-    "SingleAssignment" in {
+    "SingleAssignment" ignore {
       //val c = SingleAssignCancelable()
       var a1, a2, a3 = false
       val c = SingleAssignCancelable.plusOne(Cancelable(() => a1 = true))
@@ -83,7 +94,7 @@ class MonixLearn extends FreeSpec with Matchers {
     }
   }
 
-  "mvar" in {
+  "mvar" ignore {
     def sum(state: MVar[Int], list: List[Int]): Task[Int] = {
       list match {
         case Nil => state.take
@@ -101,7 +112,7 @@ class MonixLearn extends FreeSpec with Matchers {
     result.value shouldBe Some(Success(4951))
   }
 
-  "Observable" in {
+  "Observable" ignore {
     val source = Observable.interval(1.seconds)
       .filter(_ % 2 == 0)
       .flatMap(x => Observable(x, x))
@@ -112,7 +123,7 @@ class MonixLearn extends FreeSpec with Matchers {
   }
 
   "Subscribe" - {
-    "dump" in {
+    "dump" ignore {
       val out = Observer.dump("0")
       out.onNext(1)
       out.onNext(2)
@@ -122,14 +133,14 @@ class MonixLearn extends FreeSpec with Matchers {
       1 shouldBe 1
     }
 
-    "buffer" in {
+    "buffer" ignore {
       val s = Subscriber.dump("0")
       val subscriber = BufferedSubscriber(s, OverflowStrategy.DropOld(2))
 
     }
   }
 
-  "consumer" in {
+  "consumer" ignore {
 
     val sumConsumer = Consumer.foldLeft[Long, Long](0L)(_ + _)
     val loadBalancer =
@@ -143,7 +154,7 @@ class MonixLearn extends FreeSpec with Matchers {
     result.value shouldBe Some(Success(45))
   }
 
-  "one observable with more consumers" in {
+  "one observable with more consumers" ignore {
     val atom = Atomic(0L)
     val data = Observable.interval(1.seconds).take(3)
     val c = Consumer.foreach[Long]{v =>
@@ -156,8 +167,7 @@ class MonixLearn extends FreeSpec with Matchers {
     data.consumeWith(c).runAsync(testScheduler)
     data.consumeWith(c2).runAsync(testScheduler)
     testScheduler.tick(11.seconds)
-    println("---------->",atom.get)
-    1 shouldBe 1
+    atom.get shouldBe 9
   }
 
   "mix Observable and Consumer" ignore {
@@ -187,6 +197,16 @@ class MonixLearn extends FreeSpec with Matchers {
 
     //Observable.empty[Int].subscribe(subscribe)
     //Consumer.fromObserver(_ => subscribe)
+  }
+
+//  "buffer" in {
+//    Observable.fromIterable(0 to 10).bufferSliding(10,1).foreach(println(_))(testScheduler)
+//    1 shouldBe 1
+//  }
+
+  "foldLeft" in {
+    //Observable.fromIterable(1 to 10).foldLeftF(0)(_+_).foreach{_ => println("111")}
+    Observable.fromIterable(1 to 10).foldLeftF()
 
   }
 }
