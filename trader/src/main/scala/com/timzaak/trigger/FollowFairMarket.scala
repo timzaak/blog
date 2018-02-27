@@ -53,7 +53,7 @@ trait FollowFairMarket {
               val diffAvg = c.getDiffPriceAvg
               //(==<><<>..,854.98,853.67,849.92,0.2547607037723765)
 
-              val sellPrice = BigDecimal(diffAvg + c.fairPrice).setScale(2,BigDecimal.RoundingMode.HALF_UP).toDouble
+              val sellPrice = BigDecimal(diffAvg + price).setScale(2,BigDecimal.RoundingMode.HALF_UP).toDouble
               //println(diffAvg,c.slowPrice, (1+ alpha)*c.slowPrice/((1-buyFee)*(1-sellFee)) - sellPrice)
               val profile = sellPrice - (1 + alpha) * c.slowPrice / ((1 - buyFee) * (1 - sellFee))
               if (profile > 0) {
