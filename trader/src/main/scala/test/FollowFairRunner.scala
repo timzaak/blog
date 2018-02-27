@@ -28,15 +28,26 @@ object FollowFairRunner extends App{di=>
           (a.T, a.q.toDouble, a.p.toDouble)
       }
     }
-
-    tri.calculate(20, 10*1000).foldLeftL(0d){ case (mount,(buyPrice,sellPrice,profile))=>
-      val money = assets.withdrawAssets
-      if(money >= 495D){//止损价格
-        money/buyPrice
-      }else{
-        mount
-      }
-
+    Observable.merge(huobiData,tri.calculate(20, 10*1000)).foldLeftL(0d->0d){
+      case (sum@(mount,expectSellPrice), (buyPrice:Double,sellPrice:Double, profile:Double)) =>
+        val money = assets.withdrawAssets
+        if(money >= 495D){//止损价格
+          money/buyPrice-> sellPrice
+        }else{
+          println(s"${now.mill} 剩余 $money, Game Over" )
+          sum
+        }
+      case (sum@(mount,expectSellPrice), (timestamp:Long, _ :Double,price:Double)) if mount > 0 =>
+        println("...", mount, expectSellPrice, price)
+        if(price>=expectSellPrice){
+          val money = price*mount
+          print(s"now money is $money")
+          assets.addAssets(money)
+          0d->0d
+        }else{
+          sum
+        }
+      case (sum, _) => sum
     }.runAsync
   }
 
@@ -56,16 +67,21 @@ object FollowFairRunner extends App{di=>
 
  }
 
-  trigger("btcusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
-    assets
-  }.runAsync
-  trigger("ethusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
-    assets
-  }.runAsync
-  trigger("neousdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
-    assets
-  }.runAsync
-  trigger("ltcusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
-    assets
-  }.runAsync
+//  trigger("btcusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
+//    assets
+//  }.runAsync
+//  trigger("ethusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
+//    assets
+//  }.runAsync
+//  trigger("neousdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
+//    assets
+//  }.runAsync
+//  trigger("ltcusdt").calculate(20, 20*1000).foldLeftL(assets){ (assets,v)=>
+//    assets
+//  }.runAsync
+
+  run("btcusdt")
+  run("ethusdt")
+  run("neousdt")
+  run("ltcusdt")
 }
