@@ -28,7 +28,7 @@ object FollowFairRunner extends App{di=>
           (a.T, a.q.toDouble, a.p.toDouble)
       }
     }
-    Observable.merge(huobiData,tri.calculate(20, 10*1000)).foldLeftL(0d->0d){
+    Observable.merge(huobiData,tri.calculate(50, 20*1000)).foldLeftL(0d->0d){
       case (sum@(mount,expectSellPrice), (buyPrice:Double,sellPrice:Double, profile:Double)) =>
         val money = assets.withdrawAssets
         if(money >= 495D){//止损价格

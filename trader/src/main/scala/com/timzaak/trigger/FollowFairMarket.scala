@@ -59,7 +59,7 @@ trait FollowFairMarket {
               val sellPrice = BigDecimal(diffAvg + price).setScale(2,BigDecimal.RoundingMode.HALF_UP).toDouble
               //println(diffAvg,c.slowPrice, (1+ alpha)*c.slowPrice/((1-buyFee)*(1-sellFee)) - sellPrice)
               val profile = sellPrice - (1 + alpha) * c.slowPrice / ((1 - buyFee) * (1 - sellFee))
-              if (profile > 0) {
+              if (profile > 0&& price> c.getFairPriceAvg) {
                 subscribe.onNext((c.slowPrice,sellPrice, profile))
                 println("==<><<>..", c.slowPrice, sellPrice, price, profile)
               }
@@ -76,7 +76,7 @@ trait FollowFairMarket {
               val sellPrice = BigDecimal(diffAvg + c.fairPrice).setScale(2,BigDecimal.RoundingMode.HALF_UP).toDouble
               val profile = sellPrice - (1 + alpha) * price / ((1 - buyFee) * (1 - sellFee))
               //println(diffAvg,price, (1+ alpha)*c.slowPrice/((1-buyFee)*(1-sellFee))-sellPrice)
-              if (profile > 0) {
+              if (profile > 0 && c.fairPrice> c.getFairPriceAvg) {
                 subscribe.onNext((price,sellPrice, profile))
                 println("=====>...", price, sellPrice, c.fairPrice, profile)
               }
