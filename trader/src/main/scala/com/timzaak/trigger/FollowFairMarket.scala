@@ -48,6 +48,9 @@ trait FollowFairMarket {
       val task = Observable.merge(fairMarketBuyTrade.map("f" -> _), slowMarketBuyTrade.map("s" -> _)).foldLeftL(Cache()) {
         case (c, (symbol, (time, _, price))) =>
           val nowTime = now.mill
+          if ( nowTime - time > allowLatency){
+            println("延迟有些大:", nowTime - time)
+          }
           if (symbol == "f") {
             if (c.recentFairPrice.size >= recentCount && c.recentDiffPrice.size >= recentCount && nowTime - time <= allowLatency) {
               val diffAvg = c.getDiffPriceAvg

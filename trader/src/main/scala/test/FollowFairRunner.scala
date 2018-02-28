@@ -32,16 +32,19 @@ object FollowFairRunner extends App{di=>
       case (sum@(mount,expectSellPrice), (buyPrice:Double,sellPrice:Double, profile:Double)) =>
         val money = assets.withdrawAssets
         if(money >= 495D){//止损价格
-          money/buyPrice-> sellPrice
+          money/buyPrice*0.998 -> sellPrice
         }else{
-          println(s"${now.mill} 剩余 $money, Game Over" )
+          if(money>0) {
+            println(s"${now.mill} 剩余 $money, Game Over")
+            System.exit(-1)
+          }
           sum
         }
       case (sum@(mount,expectSellPrice), (timestamp:Long, _ :Double,price:Double)) if mount > 0 =>
         println("...", mount, expectSellPrice, price)
         if(price>=expectSellPrice){
-          val money = price*mount
-          print(s"now money is $money")
+          val money = expectSellPrice*mount*0.998
+          println(s"now money is $money")
           assets.addAssets(money)
           0d->0d
         }else{
