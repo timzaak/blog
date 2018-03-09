@@ -206,7 +206,7 @@ class MonixLearn extends FreeSpec with Matchers {
 
   "foldLeft" in {
     //Observable.fromIterable(1 to 10).foldLeftF(0)(_+_).foreach{_ => println("111")}
-    Observable.fromIterable(1 to 10).foldLeftF()
+    //Observable.fromIterable(1 to 10).foldLeftF()
 
   }
 }

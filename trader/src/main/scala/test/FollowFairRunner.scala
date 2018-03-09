@@ -1,5 +1,7 @@
 package test
 
+import java.util.logging.{Level, Logger}
+
 import com.timzaak.assets.SimpleAssetsProvider
 import com.timzaak.data.dsl.{BinanceAggTradeDetailData, HuobiTradeDetailData}
 import com.timzaak.trigger.FollowFairMarket
@@ -10,6 +12,9 @@ import monix.reactive.Observable
 object FollowFairRunner extends App{di=>
   implicit val scheduler =  monix.execution.Scheduler.global
 
+  import okhttp3.OkHttpClient
+
+  Logger.getLogger(classOf[OkHttpClient].getName).setLevel(Level.FINE)
   val assets = new SimpleAssetsProvider(500)
 
   def run(symbol:String) = {
@@ -28,7 +33,7 @@ object FollowFairRunner extends App{di=>
           (a.T, a.q.toDouble, a.p.toDouble)
       }
     }
-    Observable.merge(huobiData,tri.calculate(50, 20*1000)).foldLeftL(0d->0d){
+    Observable.merge(huobiData,tri.calculate(30, 5*1000)).foldLeftL(0d->0d){
       case (sum@(mount,expectSellPrice), (buyPrice:Double,sellPrice:Double, profile:Double)) =>
         val money = assets.withdrawAssets
         if(money >= 495D){//止损价格
@@ -84,7 +89,10 @@ object FollowFairRunner extends App{di=>
 //  }.runAsync
 
   run("btcusdt")
+  Thread.sleep(3000)
   run("ethusdt")
+  Thread.sleep(3000)
   run("neousdt")
+  Thread.sleep(3000)
   run("ltcusdt")
 }

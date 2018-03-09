@@ -43,8 +43,11 @@ class HuobiTradeDetailData(symbol: S)(implicit ec:ExecutionContext) extends Obse
       subscribers.foreach(_.onNext(tick))
     }
     override def onFailure(client:HuobiWSClient, t:Throwable):Unit = {
-      if(!cancelable.isCanceled)
+      if(!cancelable.isCanceled){
+        //client.close()
         wsClient = Option(createWebSocketClient)
+      }
+
     }
 
     override def onClosed(client: HuobiWSClient, code: I, reason: S): U = {
