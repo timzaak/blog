@@ -56,7 +56,9 @@ class CatsTypeClassLearn extends FreeSpec with Matchers {
 
   "Contravariant" - {
     "simple" in {
-      val showMoney: Show[Money] = Show.show[Money](m => s"$$${m.value}")
+      implicit val showMoney: Show[Money] = Show.show[Money](m => s"$$${m.value}")
+
+
       implicit val showSalary = showMoney.contramap[Salary](_.size)
       Salary(Money(1000L)).show shouldBe "$1000"
       import scala.math.Ordered._
@@ -227,6 +229,20 @@ class CatsTypeClassLearn extends FreeSpec with Matchers {
     john.show shouldBe "John"
     val engineering = Department(2, "Engineering")
     show"$john works at $engineering" shouldBe "John works at Department(2, Engineering)"
+
+  }
+
+  "Arrow" in {
+    val i2s: Int=> String = _.toString
+    val s2l: String => Long = _.toLong
+    val i2l = i2s >>> s2l
+    i2l(10) shouldBe 10L
+  }
+
+  "Kleisli" in {
+    //val a = Kleisli((v:List[Int]) => v.headOption)
+    val lastK = Kleisli((_: List[Int]).lastOption)
+
 
   }
 }
