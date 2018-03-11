@@ -9,6 +9,7 @@ import monix.reactive.observers.Subscriber
 
 import scala.collection.immutable.Queue
 
+// 本策略尤其是在普遍跌的时候，还不好搞。
 trait FollowFairMarket {
   import FollowFairMarket._
    //(Long,D,D) timestamp, count, price

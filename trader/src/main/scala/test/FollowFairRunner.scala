@@ -2,7 +2,7 @@ package test
 
 import java.util.logging.{Level, Logger}
 
-import com.timzaak.assets.SimpleAssetsProvider
+import com.timzaak.currency.SimpleCurrencyProvider
 import com.timzaak.data.dsl.{BinanceAggTradeDetailData, HuobiTradeDetailData}
 import com.timzaak.trigger.FollowFairMarket
 import monix.execution.Scheduler
@@ -15,7 +15,7 @@ object FollowFairRunner extends App{di=>
   import okhttp3.OkHttpClient
 
   Logger.getLogger(classOf[OkHttpClient].getName).setLevel(Level.FINE)
-  val assets = new SimpleAssetsProvider(500)
+  val assets = new SimpleCurrencyProvider(500)
 
   def run(symbol:String) = {
     val huobiData = new HuobiTradeDetailData(symbol).collect {
@@ -35,7 +35,7 @@ object FollowFairRunner extends App{di=>
     }
     Observable.merge(huobiData,tri.calculate(30, 5*1000)).foldLeftL(0d->0d){
       case (sum@(mount,expectSellPrice), (buyPrice:Double,sellPrice:Double, profile:Double)) =>
-        val money = assets.withdrawAssets
+        val money = assets.withdrawCurrency
         if(money >= 495D){//止损价格
           money/buyPrice*0.998 -> sellPrice
         }else{
@@ -50,7 +50,7 @@ object FollowFairRunner extends App{di=>
         if(price>=expectSellPrice){
           val money = expectSellPrice*mount*0.998
           println(s"now money is $money")
-          assets.addAssets(money)
+          assets.addCurrency(money)
           0d->0d
         }else{
           sum
