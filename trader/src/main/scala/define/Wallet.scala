@@ -69,7 +69,7 @@ object Wallet {
 
     def putCurrency(currency: define.Wallet.Currency): Unit = {
       val oldValue = coin2Currency.get(currency.id)
-      if (!coin2Currency.replace(currency.id, oldValue, Option(oldValue).map(_ + currency.mount).getOrElse(currency)))
+      if (!coin2Currency.replace(currency.id, oldValue, Option(oldValue).map(_ + currency).getOrElse(currency)))
         putCurrency(currency)
     }
 
