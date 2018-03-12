@@ -18,16 +18,15 @@ object Wallet {
   trait Currency {
     def id: Coin
 
-    def mount: Long
 
-    def unit: BigDecimal
+    def mount: BigDecimal
 
-    def toStr: String = s"${id.id}: ${unit * mount}"
+    def toStr: String = s"${id.id}: $mount"
 
     //TODO: different MarketInfo is a problem
-    def +(otherMount: Long): Currency
+    def +(otherMount: BigDecimal): Currency
 
-    def -(otherMount: Long): Currency
+    def -(otherMount: BigDecimal): Currency
 
     def -(otherCurrency: Currency): Currency = this.-(otherCurrency.mount)
 
@@ -41,16 +40,15 @@ object Wallet {
       implicit val order: Ordering[Currency] = Ordering.by(_.mount)
     }
 
-    def apply(mount:Long, id:Coin)(implicit marketInfo: MarketInfo) = DefaultCurrency(mount,id)
+    def apply(mount:BigDecimal, id:Coin)(implicit marketInfo: MarketInfo) = DefaultCurrency(mount,id)
 
   }
 
-  case class DefaultCurrency(mount: Long, id: Coin = ustd)(implicit marketInfo: MarketInfo) extends Currency {
-    def unit: BigDecimal = marketInfo.coinBit
+  case class DefaultCurrency(mount: BigDecimal, id: Coin = ustd)(implicit marketInfo: MarketInfo) extends Currency {
 
-    def +(otherMount: Long): DefaultCurrency = this.copy(mount = mount + otherMount)
+    def +(otherMount: BigDecimal): DefaultCurrency = this.copy(mount = mount + otherMount)
 
-    def -(otherMount: Long): DefaultCurrency = {
+    def -(otherMount: BigDecimal): DefaultCurrency = {
       val newMount = mount - otherMount
       if (newMount < 0) {
         throw new IndexOutOfBoundsException(s"currency can not be 负数, $mount, $otherMount")

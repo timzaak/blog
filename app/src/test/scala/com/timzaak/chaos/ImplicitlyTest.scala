@@ -3,37 +3,37 @@ package com.timzaak.chaos
 import org.scalatest.{FreeSpec, Matchers}
 
 import scala.reflect.api.TypeTags
+
 // sbt "testOnly com.timzaak.chaos.ImplicitlyTest"
-class ImplicitlyTest extends FreeSpec with Matchers{
+class ImplicitlyTest extends FreeSpec with Matchers {
 
-  trait Extract[A]{
-    def extract(a:A):String
-  }
+  "implicit auto fill param" in {
 
 
-  object AScope{
-    implicit object StringExtract extends Extract[String]{
-      override def extract(a: String): String = a
-    }
-    implicit object IntExtract extends Extract[Int]{
-      override def extract(a: Int): String = a.toString
-    }
+    //    def add(b:Int,c:Double):Int = b+c.toInt
+    //
+    //    class A()(implicit b:Int,c:Double) {
+    //      def a = add(implicitly,implicitly)
+    //    }
+    //    implicit val imInt:Int = 3
+    //    implicit val imString:Double = 4D
+    //    new A().a shouldBe (1+3+4)
   }
-  object BScope{
-//    def implicitlyHandler[A:TypeTags](a:A) = {
-//      implicitly[Extract[A]].extract(a)
-//    }
+  "extend Value function" in {
+    trait ExtendValue[T] {
+      def value: T
+    }
+
+    class WrapValueFunc[A, B <: ExtendValue[A]](trans: A => B) {
+        def identityB(implicit e:A):B = trans(implicitly(e))
+    }
+
+
+
+    new WrapValueFunc((v:String)=> new ExtendValue[String] {def  value = v}).identityB("123").value shouldBe "123"
+
+
+
   }
 
-  "hello world" in {
-    //import AScope._
-    implicit object StringExtract extends Extract[String]{
-      override def extract(a: String): String = a
-    }
-    implicit object IntExtract extends Extract[Int]{
-      override def extract(a: Int): String = a.toString
-    }
-//    BScope.implicitlyHandler(1) shouldBe "1"
-//    BScope.implicitlyHandler("a") shouldBe "a"
-  }
 }
