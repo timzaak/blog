@@ -12,5 +12,4 @@ object Cost{
 
   case class FeeCost(mount:BigDecimal) extends Cost[Nothing]
 
-
 }

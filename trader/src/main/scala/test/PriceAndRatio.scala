@@ -15,5 +15,5 @@ object PriceAndRatio extends App{
     }
   }
 
-  expectByRatio(9173,-0.005,(BigDecimal(0) to BigDecimal(-0.03) by -0.005), 0.5)
+  expectByRatio(9334.34,0.0181,(BigDecimal(0.05) to BigDecimal(-0.05) by -0.005), 0.3)
 }
