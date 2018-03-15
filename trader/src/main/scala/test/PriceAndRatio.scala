@@ -6,8 +6,8 @@ import define.Coin._
 import scala.math.BigDecimal.RoundingMode._
 
 //sbt "runMain test.PriceAndRatio"
-object PriceAndRatio extends App{
-  def expectByRatio(nowPrice: BigDecimal,nowRatio:BigDecimal, expectedRatios:Seq[BigDecimal], mount:BigDecimal)= {
+object PriceAndRatio{
+  def expectByRatio(nowPrice: BigDecimal,nowRatio:BigDecimal, expectedRatios:Seq[BigDecimal], mount:BigDecimal) :Unit= {
     val beginPrice =nowPrice/(nowRatio + 1)
     expectedRatios.foreach{ratio =>
       val actionPrice = beginPrice * (1 + ratio)
@@ -15,5 +15,8 @@ object PriceAndRatio extends App{
     }
   }
 
-  expectByRatio(9334.34,0.0181,(BigDecimal(0.05) to BigDecimal(-0.05) by -0.005), 0.3)
+  def main(args:Array[String]): Unit = {
+    expectByRatio(9334.34,0.0181,BigDecimal(0.05) to BigDecimal(-0.05) by -0.005, 0.3)
+  }
+
 }
