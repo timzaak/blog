@@ -25,12 +25,14 @@ trait UserDao extends Dao with CRUDFeatureWithId[Int, User]{
   override def extract(rs: WrappedResultSet, n: scalikejdbc.ResultName[User]): User = {
     User(
       id = rs.get[Int](n.id),
-      name = rs.get[String](n.name)
+      name = rs.get[String](n.name),
+      password = rs.get[String](n.password),
+      email = rs.get[String](n.email)
     )
   }
 
-  def insert(user: User):I = {
-    this.createWithNamedValues(c.name -> user.name)
-  }
+//  def insert(user: User):I = {
+//    this.createWithNamedValues(c.name -> user.name)
+//  }
 
 }
