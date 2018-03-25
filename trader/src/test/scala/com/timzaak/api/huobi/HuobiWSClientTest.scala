@@ -5,7 +5,7 @@ import org.json4s.JValue
 import org.scalatest.{FreeSpec, Matchers}
 import ws.very.util.json.JsonHelperWithDoubleMode
 
-// sbt "testOnly com.timzaak.coin.huobi.HuobiWSClientTest"
+// sbt "testOnly com.timzaak.api.huobi.HuobiWSClientTest"
 class HuobiWSClientTest extends FreeSpec with Matchers with JsonHelperWithDoubleMode{
   "hello" in {
     val client:HuobiWSClient =
@@ -23,7 +23,7 @@ class HuobiWSClientTest extends FreeSpec with Matchers with JsonHelperWithDouble
         }
 
         override def onMessage(client: HuobiWSClient, message: JValue): U = {
-
+          println(message.toString)
         }
       })
 
