@@ -17,7 +17,8 @@ trait OAuthService extends Service {
     }
 
     override def createToken(client_id: String, user_id: Int): Future[OAuthToken] = {
-      authTokenDao.createWithAttributes('client_id -> client_id, 'user_id -> user_id)
+      val id = authTokenDao.createWithNamedValues(authTokenDao.c.client_id -> client_id, authTokenDao.c.user_id -> user_id)
+      Future.successful(authTokenDao.findById(id).get)
     }
 
     override def getOAuthClientByClientId(client_id: _root_.com.timzaak.oauth.S): Future[_root_.com.timzaak.oauth.O[OAuthClient]] = ???

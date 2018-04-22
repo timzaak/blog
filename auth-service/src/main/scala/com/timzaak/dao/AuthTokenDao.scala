@@ -15,6 +15,9 @@ class AuthTokenDao extends CRUDFeatureWithId[Int, DefaultOAuthToken]{
 
   override def defaultAlias: Alias[DefaultOAuthToken] = createAlias("at")
 
+  def c=  this.column
+
+
   override def extract(rs: WrappedResultSet, n: scalikejdbc.ResultName[DefaultOAuthToken]): DefaultOAuthToken = {
 
     DefaultOAuthToken(

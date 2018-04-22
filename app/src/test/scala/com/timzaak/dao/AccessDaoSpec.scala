@@ -19,9 +19,6 @@ class AccessDaoSpec
   before {
     accessDao._deleteAll
   }
-  after {
-    accessDao._deleteAll
-  }
 
   "accessDao" - {
     "can insert data" in {

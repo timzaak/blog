@@ -31,8 +31,4 @@ trait UserDao extends Dao with CRUDFeatureWithId[Int, User]{
     )
   }
 
-//  def insert(user: User):I = {
-//    this.createWithNamedValues(c.name -> user.name)
-//  }
-
 }

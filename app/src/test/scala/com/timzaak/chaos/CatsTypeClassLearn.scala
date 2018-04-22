@@ -50,7 +50,7 @@ class CatsTypeClassLearn extends FreeSpec with Matchers {
     Applicative[Option].ap(Some((a: Int) => a.toString))(None) shouldBe None
     Applicative[Option].product(Some(2), None) shouldBe None
     Applicative[Option].map3(Some(1), Some(1), Some(2))(_ + _ + _)
-
+    Semigroup
     (Option(1), Option(2), Option(3)).mapN(_ + _ + _)
   }
 
