@@ -6,7 +6,7 @@ import monix.eval._
 import monix.execution.Ack.Continue
 import monix.execution._
 import monix.execution.atomic.Atomic
-import monix.execution.cancelables.{BooleanCancelable, CompositeCancelable, MultiAssignCancelable, SingleAssignCancelable}
+import monix.execution.cancelables._
 import org.scalatest._
 import monix.execution.schedulers.TestScheduler
 import monix.reactive._
@@ -25,6 +25,8 @@ class MonixLearn extends FreeSpec with Matchers {
   // Observable 是对可观察的持续性(数据源/事件)的封装
   // Observer 是具体的观察者，而实际运行时，需要用Scheduler驱动观察者，也就是 Subscriber
   // Consumer 是拿观察到的数据具体去干什么， 和 Subscriber 解耦
+
+  // RefCountCancelable 可以将引用给其它 Cancel，当其它全挂了，它才挂。
 
   implicit val testScheduler = TestScheduler()
   "task" ignore {
@@ -53,7 +55,7 @@ class MonixLearn extends FreeSpec with Matchers {
       c2.isCanceled shouldBe true
     }
 
-    "composite" ignore {
+    "composite" in {
       val c = CompositeCancelable()
       var a1, a2, a3 = false
       c += Cancelable(() => a1 = true)
@@ -63,8 +65,9 @@ class MonixLearn extends FreeSpec with Matchers {
       Seq(a1, a2, a3).contains(false) shouldBe false
     }
 
-    "composite2" ignore {
+    "composite2" in {
       var a1, a2,all = false
+      // composite will not trigger init cancel when all children cancel
       val c = CompositeCancelable(()=> all = true)
       val Array(c1,c2) = Array(Cancelable(()=>a1= !a1),Cancelable(()=> a2= !a2))
       c += c1
@@ -75,6 +78,7 @@ class MonixLearn extends FreeSpec with Matchers {
     }
 
     "multiAssignment" ignore {
+      // multi one
       val c = MultiAssignCancelable()
       var a1, a2, a3 = false
       c := Cancelable(() => a1 = true)
@@ -82,6 +86,35 @@ class MonixLearn extends FreeSpec with Matchers {
       c.cancel()
       c := Cancelable(() => a3 = true)
       List(a1, a2, a3) shouldBe List(false, true, true)
+    }
+
+    "multiAssignment2" ignore {
+      var a,a1, a2 = false
+      val c = MultiAssignCancelable{ () =>
+        println("a go to true")
+        a = true
+      }
+
+      val c1 =  Cancelable{() =>
+        println("a1 go to true")
+        a1 = true
+      }
+      c := c1
+      val c2 =  Cancelable{() =>
+        println("a2 go to true")
+        a2 = true
+      }
+      c := c2
+      c2.cancel()
+      c.isCanceled shouldBe false
+
+      a2 shouldBe true
+      a1 shouldBe false
+      c1 cancel()
+      a1 shouldBe true
+      c.isCanceled shouldBe false
+      a shouldBe false
+
     }
     "SingleAssignment" ignore {
       //val c = SingleAssignCancelable()
@@ -91,6 +124,13 @@ class MonixLearn extends FreeSpec with Matchers {
       c.cancel()
       //c := Cancelable(() => a3 = true)
       List(a1, a2, a3) shouldBe List(true, true, false)
+    }
+
+    "refCount" in {
+      val refs = RefCountCancelable { () =>
+        println("Everything was canceled")
+      }
+
     }
   }
 
@@ -204,7 +244,7 @@ class MonixLearn extends FreeSpec with Matchers {
 //    1 shouldBe 1
 //  }
 
-  "foldLeft" in {
+  "foldLeft" ignore {
     //Observable.fromIterable(1 to 10).foldLeftF(0)(_+_).foreach{_ => println("111")}
     //Observable.fromIterable(1 to 10).foldLeftF()
 
