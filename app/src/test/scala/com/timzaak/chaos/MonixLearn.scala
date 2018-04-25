@@ -65,7 +65,7 @@ class MonixLearn extends FreeSpec with Matchers {
       Seq(a1, a2, a3).contains(false) shouldBe false
     }
 
-    "composite2" in {
+    "composite2" ignore {
       var a1, a2,all = false
       // composite will not trigger init cancel when all children cancel
       val c = CompositeCancelable(()=> all = true)
@@ -244,7 +244,40 @@ class MonixLearn extends FreeSpec with Matchers {
 //    1 shouldBe 1
 //  }
 
-  "foldLeft" ignore {
+  "combineLatest" in {
+    val a = Observable.interval(1.seconds).take(5).map(v => s"a$v")
+    val b = Observable.interval(2.seconds).take(5).map(v => s"b$v")
+//    (a1,b0)
+//    (a2,b0)
+//    (a2,b1)
+//    (a3,b1)
+//    (a4,b1)
+//    (a4,b2)
+//    (a4,b3)
+//    (a4,b4)
+
+//    a.combineLatest(b).foreach(println(_))
+
+//    (b0,a0)
+//    (b0,a1)
+//    (b0,a2)
+//    (b1,a2)
+//    (b1,a3)
+//    (b1,a4)
+//    (b2,a4)
+//    (b3,a4)
+//    (b4,a4)
+
+//    b.combineLatest(a).foreach(println(_))
+
+//    (a0,b0)
+//    (a1,b1)
+//    (a2,b2)
+//    (a3,b3)
+//    (a4,b4)
+//    a.zip(b).foreach(println(_))
+    testScheduler.tick(20.seconds)
+
     //Observable.fromIterable(1 to 10).foldLeftF(0)(_+_).foreach{_ => println("111")}
     //Observable.fromIterable(1 to 10).foldLeftF()
 
