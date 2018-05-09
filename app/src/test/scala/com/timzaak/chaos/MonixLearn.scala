@@ -3,6 +3,7 @@ package com.timzaak.chaos
 import java.util.concurrent.TimeUnit
 
 import monix.eval._
+import cats.implicits._
 import monix.execution.Ack.Continue
 import monix.execution._
 import monix.execution.atomic.Atomic
@@ -245,8 +246,8 @@ class MonixLearn extends FreeSpec with Matchers {
 //  }
 
   "combineLatest" in {
-    val a = Observable.interval(1.seconds).take(5).map(v => s"a$v")
-    val b = Observable.interval(2.seconds).take(5).map(v => s"b$v")
+    //val a = Observable.interval(1.seconds).take(5).map(v => s"a$v")
+    //val b = Observable.interval(2.seconds).take(5).map(v => s"b$v")
 //    (a1,b0)
 //    (a2,b0)
 //    (a2,b1)
@@ -276,6 +277,10 @@ class MonixLearn extends FreeSpec with Matchers {
 //    (a3,b3)
 //    (a4,b4)
 //    a.zip(b).foreach(println(_))
+
+    val a = Observable.interval(1.seconds).take(5).map(v => s"a$v")
+    val b = Observable.interval(2.seconds).take(4).map(v => s"b$v")
+    a.combineLatest(b).distinctUntilChangedByKey(v => v._1).foreach(println(_))
     testScheduler.tick(20.seconds)
 
     //Observable.fromIterable(1 to 10).foldLeftF(0)(_+_).foreach{_ => println("111")}

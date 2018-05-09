@@ -64,6 +64,6 @@ trait TrendFollow {
 
   def go(dataStream: HuobiTradeDetailData) = {
     val p = profileProtect(dataStream)
-    dataStream.map(p).runAsyncGetLast
+    //dataStream.map(p).runAsyncGetLast
   }
 }
