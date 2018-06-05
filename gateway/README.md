@@ -1,4 +1,7 @@
-### OpenResty
+### OpenResty[Deprecated]
+Deprecated的原因主要是
+1. consul 等动态配置直接使用集群管理工具就可以替代了
+2. 一些配置随着版本变化太大，到时候，还是要现查配置，另外一些配置问题，比较诡异。需要深入理解 Nginx 后，才能解决。目前的配置没啥价值
 
 要记录常见OpenResty配置，以及一些扩展。使用OpenResty官方的opm管理代码
 
