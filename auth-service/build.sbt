@@ -9,12 +9,12 @@ scalaVersion := "2.12.4"
 
 val scalikejdbc = Seq(
   "org.skinny-framework" %% "skinny-orm" % "2.5.2",
-  "org.postgresql" % "postgresql" % "42.2.1"
+  "org.postgresql" % "postgresql" % "42.2.4"
 )
 
 libraryDependencies ++= (Seq(
   "io.kanaka" %% "play-monadic-actions" % "2.1.0",
-  "org.typelevel"       %% "cats-core"             % "1.0.1",
+  "org.typelevel"       %% "cats-core"             % "1.2.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 ) ++ scalikejdbc)
 

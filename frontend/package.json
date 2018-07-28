@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "canduit": "git://github.com/timzaak/canduit.git#1c0e26d5d3a3eac0f18d44a8e4d2c99314812c45",
-    "element-ui": "^2.0.0",
+    "element-ui": "^2.4.5",
     "jade": "^1.11.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
