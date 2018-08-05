@@ -22,3 +22,6 @@
 [submodule "very-util-config"]
 	path = very-util-config
 	url = https://gitee.com/mefaso/very-util-config.git
+[submodule "ucloud-client"]
+	path = ucloud-sdk
+	url = https://github.com/timzaak/ucloud-sdk.git
