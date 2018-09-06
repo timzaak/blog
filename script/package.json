@@ -1,9 +1,0 @@
-{
-  "name": "script",
-  "version": "0.0.1",
-  "descrption": "js 脚本",
-  "dependencies": {
-    "marathon-node": "^1.1.0",
-    "node-fetch": "^1.7.1"
-  }
-}
