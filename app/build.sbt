@@ -36,6 +36,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka"   %% "akka-testkit"          % "2.5.6" % Test,
   "net.manub"           %% "scalatest-embedded-kafka" % "1.0.0" % "test",
   "net.manub"           %% "scalatest-embedded-kafka-streams" % "1.0.0" % "test",
+  "org.seleniumhq.selenium" % "selenium-java" % "2.35.0" % Test,
   "com.typesafe.slick"  %% "slick-testkit"         % "3.2.0" % Test
 )
 
