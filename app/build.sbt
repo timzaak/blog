@@ -65,6 +65,7 @@ lazy val akka = RootProject(file("../very-util-akka"))
 
 lazy val postgre = RootProject(file("../very-util-postgre"))
 
+
 lazy val root = (project in file("."))
   .dependsOn(json, lang, redis, postgre, log, scalaj, akka)
 

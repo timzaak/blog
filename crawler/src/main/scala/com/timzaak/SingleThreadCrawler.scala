@@ -13,9 +13,6 @@ object SingleThreadCrawler extends App with WebBrowser with Driver {
 
   override implicit val webDriver: WebDriver = new ChromeDriver()
   val host = "https://www.baidu.com"
-  println("???")
   go to (host)
-  println("???!!!")
   assert(pageTitle == "百度一下，你就知道")
-  println("OK!")
 }

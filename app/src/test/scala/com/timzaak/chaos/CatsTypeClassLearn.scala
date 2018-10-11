@@ -8,6 +8,9 @@ import org.scalatest.{FreeSpec, Matchers}
 import cats.data._
 import cats.implicits._
 
+import scala.concurrent.Future
+import scala.util.{Success, Try}
+
 // sbt "testOnly com.timzaak.chaos.CatsTypeClassLearn"
 class CatsTypeClassLearn extends FreeSpec with Matchers {
   "type class" in {
@@ -258,7 +261,7 @@ class CatsTypeClassLearn extends FreeSpec with Matchers {
   "Kleisli" in {
     //val a = Kleisli((v:List[Int]) => v.headOption)
     val lastK = Kleisli((_: List[Int]).lastOption)
-
+    val b: Kleisli[Option,String,Int] = Kleisli((v:String) => Option(1))
 
   }
 }

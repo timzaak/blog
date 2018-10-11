@@ -82,11 +82,14 @@ class CatsDataTypeLearn extends FreeSpec with Matchers {
         validatePasswored(password)).mapN(User)
 
     }
+
   }
   object FormvalidatorNel extends FormvalidatorNel
 
   "Validated" in {
+    (Right("21"),Right("d")).mapN(User)
     val result = FormvalidatorNel.valid("123123123123321","1231123zZE-23")
     result.toEither.isRight shouldBe true
   }
+
 }
