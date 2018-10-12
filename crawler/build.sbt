@@ -4,17 +4,21 @@ lazy val lang = RootProject(file("../very-util-lang"))
 
 lazy val config = RootProject(file("../very-util-config"))
 
+lazy val http = RootProject(file("../very-util-scalaj-http"))
+
 libraryDependencies ++= Seq(
   scalaTest,
-  selenium
+  selenium,
+  jsoup,
+  diffJ,
 )
 
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization := "com.timzaak",
-      scalaVersion := "2.12.5",
-      version      := "0.1.0-SNAPSHOT"
+      scalaVersion := "2.12.7",
+      version      := "0.1.0"
     )),
     name := "Crawler"
-  ).dependsOn(lang, config)
+  ).dependsOn(lang, config, http)
