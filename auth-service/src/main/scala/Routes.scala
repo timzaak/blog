@@ -10,6 +10,8 @@ trait Routes extends DIWithPlay {
   def router: Router = SimpleRouter(
     {
       case GET(p"/hello") => OAuthController.index()
+      case GET(p"/token") => OAuthController.token
+      case GET(p"/authorize") => OAuthController.authorize
     }: Router.Routes)
 
 }

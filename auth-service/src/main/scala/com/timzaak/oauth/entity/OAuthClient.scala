@@ -17,7 +17,7 @@ trait OAuthClient {
 
   def status: String
 
-  def redirect_url: Option[String]
+  def redirect_url: String
 
 
 }

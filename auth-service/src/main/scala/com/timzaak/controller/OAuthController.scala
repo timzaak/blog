@@ -8,4 +8,10 @@ trait OAuthController extends Controller {
     Ok("world")
   }
 
+  def token = Action{implicit req:Request[_] =>
+    Ok("world")
+  }
+  def authorize = Action{ implicit req:Request[_] =>
+    Ok("world")
+  }
 }

@@ -2,9 +2,9 @@ name := "auth-service"
 
 organization := "com.timzaak"
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.7"
 
 
 val scalikejdbc = Seq(
@@ -13,22 +13,21 @@ val scalikejdbc = Seq(
 )
 
 libraryDependencies ++= (Seq(
-  "io.kanaka" %% "play-monadic-actions" % "2.1.0",
-  "org.typelevel"       %% "cats-core"             % "1.2.0",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+//  "io.kanaka" %% "play-monadic-actions" % "2.1.0",
+ // "org.typelevel"       %% "cats-core"             % "1.2.0"
+  //"org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 ) ++ scalikejdbc)
 
 lazy val lang = RootProject(file("../very-util-lang"))
 
 lazy val json = RootProject(file("../very-util-json"))
 
-lazy val log = RootProject(file("../very-util-log"))
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .disablePlugins(PlayLayoutPlugin)
   .disablePlugins(PlayLogback)
-  .dependsOn(lang, json, log)
+  .dependsOn(lang, json)
 
 
 // Adds additional packages into Twirl
