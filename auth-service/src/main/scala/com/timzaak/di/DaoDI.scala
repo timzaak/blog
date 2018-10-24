@@ -1,6 +1,6 @@
 package com.timzaak.di
 
-import com.timzaak.dao.{AuthTokenDao, OAuthAuthorizationDao, UserDao}
+import com.timzaak.dao.{AuthTokenDao, OAuthAuthorizationDao, OAuthClientDao, UserDao}
 import scalikejdbc.{AutoSession, DBSession}
 import scalikejdbc.config.DBs
 
@@ -14,4 +14,6 @@ trait DaoDI {
   object authTokenDao extends AuthTokenDao
 
   object authAuthorizationDao extends OAuthAuthorizationDao
+
+  object authClientDao extends OAuthClientDao
 }

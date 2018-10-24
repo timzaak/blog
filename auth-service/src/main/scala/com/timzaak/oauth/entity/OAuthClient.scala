@@ -28,9 +28,9 @@ case class DefaultOAuthClient(
                                client_secret: String,
                                name: String,
                                status: String,
+                               redirect_url: String,
                                created_at: DateTime = DateTime.now(DateTimeZone.UTC),
                                updated_at: DateTime = DateTime.now(DateTimeZone.UTC),
-                               redirect_url: Option[String] = None
                              ) extends OAuthClient
 
 object OAuthClient {
@@ -42,6 +42,6 @@ object OAuthClient {
              status: String,
              created_at: DateTime = DateTime.now(DateTimeZone.UTC),
              updated_at: DateTime = DateTime.now(DateTimeZone.UTC),
-             redirect_url: Option[String] = None
-           ): OAuthClient = DefaultOAuthClient(id, client_id, client_secret, name, status, created_at, updated_at, redirect_url)
+             redirect_url: String
+           ): OAuthClient = DefaultOAuthClient(id, client_id, client_secret, name, status, redirect_url, created_at, updated_at)
 }

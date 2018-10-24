@@ -11,7 +11,6 @@ trait UserDao extends Dao with CRUDFeatureWithId[Int, User]{
     id
   }
 
-
   override def rawValueToId(rawValue: Any): Int = {
     rawValue.toString.toInt
   }
