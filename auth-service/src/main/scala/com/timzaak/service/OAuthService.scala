@@ -20,7 +20,12 @@ trait OAuthService extends Service with OAuthDataProvider {
   }
 
   override def createToken(client_id: String, user_id: Int): Future[OAuthToken] = {
-    val id = authTokenDao.createWithNamedValues(authTokenDao.c.client_id -> client_id, authTokenDao.c.user_id -> user_id)
+    def randomCode: String = ???
+    val id = authTokenDao.createWithNamedValues(
+      authTokenDao.c.client_id -> client_id,
+      authTokenDao.c.user_id -> user_id,
+      authTokenDao.c.code-> randomCode
+    )
     Future.successful(authTokenDao.findById(id).get)
   }
 
@@ -28,7 +33,9 @@ trait OAuthService extends Service with OAuthDataProvider {
     Future.successful(authClientDao.findBy(sqls"client_id=$client_id").head)
   }
 
-  override def createCode(user_id: I, client: OAuthClient): Future[OAuthAuthorization] = ???
+  override def createCode(user_id: I, client: OAuthClient): Future[OAuthAuthorization] = {
+    ???
+  }
 
   override def getAuthorizationCode(client_id: S, code: S): Future[_root_.com.timzaak.oauth.O[OAuthAuthorization]] = ???
 
