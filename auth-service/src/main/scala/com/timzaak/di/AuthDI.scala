@@ -1,6 +1,6 @@
 package com.timzaak.di
 
-import com.timzaak.dao.{AuthTokenDao, UserDao}
+import com.timzaak.dao.{AuthTokenDao, OAuthClientDao, UserDao}
 import com.timzaak.oauth.{ImplicitAuthorization, OAuthDataProvider}
 import com.timzaak.service.OAuthService
 
@@ -11,6 +11,7 @@ trait AuthDI extends DaoDI{di =>
   object oAuthService extends OAuthService {
     override def userDao: UserDao = di.userDao
     override def authTokenDao: AuthTokenDao = di.authTokenDao
+    override def authClientDao: OAuthClientDao = di.authClientDao
   }
 
 

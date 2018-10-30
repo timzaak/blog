@@ -9,7 +9,14 @@ import scala.util.Try
 
 case class ProxyJump(ip:String, port:Int,`type`:String)
 object IpCrawler extends App {
-  println((new XiCiCrawler {}).getData)
+
+  val result = Try(
+    Http("https://www.oschina.net").timeout(1000,2000)
+      .header("user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")
+    .proxy("61.135.155.82", 	1080,Proxy.Type.SOCKS).asString)
+  println(result)
+  println("???")
+  // println((new XiCiCrawler {}).getData)
 }
 
 

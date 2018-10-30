@@ -23,8 +23,7 @@ trait OAuthService extends Service with OAuthDataProvider {
     def randomCode: String = ???
     val id = authTokenDao.createWithNamedValues(
       authTokenDao.c.client_id -> client_id,
-      authTokenDao.c.user_id -> user_id,
-      authTokenDao.c.code-> randomCode
+      authTokenDao.c.user_id -> user_id
     )
     Future.successful(authTokenDao.findById(id).get)
   }
