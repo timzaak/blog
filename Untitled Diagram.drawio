@@ -1,1 +1,113 @@
-<mxfile host="app.diagrams.net" modified="2020-08-11T03:53:10.989Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36" etag="5klCCnzWz4E5BCJpgQed" version="13.4.9" type="github"><diagram id="Zo-XHowbz03e_hiTDd_9" name="Page-1">7Vpbc6M2FP41mmkfNsPVwCPYuNtOs83U6bTbNwUUmwYjKuS1vb++R0Jgg3DizfqSyTQzmcCRdBDfd3RuBNnj5eYnhsvFLU1Jjiwj3SB7gizL9AIH/gjJtpYEtlUL5ixL1aSdYJZ9JUpoKOkqS0nVmcgpzXlWdoUJLQqS8I4MM0bX3WmPNO8+tcRz9URjJ5glOCfatD+zlC+UNNif/pFk80XzaMtQI0vczFaCaoFTut4T2TGyx4xSXl8tN2OSC/QaYOp10wOj7c4YKfgxC5zpvUfxr6Pb5fSP8t/JP+O/P//ywVGb+4LzlXpltVu+bTBgdFWkRGgxkR1hliiagCM7SnG1aMcqzugTGdOcMrnUNuQPjDxmed7IC1rA8mjOcJrB3ntiofAOc05YAUIftmLDryn/Nk9oqAAMI7V/wjjZHETGbPEGSyV0STjbwhS1wHWtG7detN6R3DK52OPXa4RYGda81baDHi4U+t/AhG3+z4TlN/Z4PR4sjYbfCjIj7EuWEGSNcthA9MDgai6uaJWSEsUuCizkjz+B/0PxCIUmCl15AVLzGRoFIetFxsmsxIkYXYMbBdmCL3PF5AlQHSmslA+2bR1k0xoAeXQ2W9dNHSCMAhTZ4sKfosgQ8AUeCg0pccVQH0dAhHfBwnk2F8aaADIETDkSuGXgzkM1sMzSVCyPGKmyr/hBqhIslDQruHxPN0LuROhacVqp83UiHky3Q4SnOx1vgAbrXDQ4Gg21OWtWLg3cQL4zRJODIh8FtuRrjPwgvPsZlIoJYYyCGMUe8mMxs0/f+Q3f97uWb+qADxq+dy7EfQ1xsM38ASdPGjqkSEORwAhrznFVZUkXHoCAbf/av/ksTBkCmbqdbJRp13fb5m6TcbHsg3FjSEcuBGqp6aj73Vpxs7/0jrAMsBCHS8rqfZO0SaMOcQTvRlcsIUfkIhyzOeEvueiDpBs3ph2MalWM5JhnX7p7G2JVabsTXmAvMTB6nrPvEet3Uqv2c6+eojafVYo0C6vfWVMEFoC3e9OUlzq4YfvAhnc2W2vsrW7U08fHinDUt/IW49cbvjns8n0PRRPpOdzGl4TIj+RFhKKRGAJnE/oqCITut3oRyLpLMbLczEWFcvOA4STdpDRZLYnC+vt8jBX0IB/w6sGAj3HO5WPMkQb1PRPwPJ9Nnt8buz2krKvnIaanQTVbZzxZDIVAT8QzyOzgQsRCsE0IewEKQmGkYLPBVAyBOQemtNaJmPzWMLcHEuwLY67HwNtVLpK0SkSVwdwDMg0BaoAgnkM+LZwCQO5L4CHVnr45mJ3R1WEOdC9ASyjw5tth41aG6wnHC3mcsmmZ1vmBGHprGLvetTFuHrbvPkj+GK7FO5GqOg5oSI9DFeqUecuhyJGSEIUy6w4imUv7Ikz6eil0bTLMq/tyS++fiDZGW4lAKR5LpxF50pdHQ37j4rW4eaw/ts+Gm6vh9onwNWVPM465njXoRXe316SaRwNtpuOL8yEauk2TEzARGN1q3B7w2Rctxy09cYv5grCC8Htc/gC/0ppfzjp+fL+k+VaPNF8nrT0rFzk/ts6aJGIs6pW6bwK+po6ivtF2SZ7zSvEURWOhoe6tQDAA0kOZ6wiFU1EkqVIp/sh5qZycbEHC9V6/sk6Zgnr6dCghvXb51AaOpiiwdEKHyqeztWhsvSbQQHuxN6N6LKoboxoszchwcwWdrpHSfil7ZSPlO7smZr/r1ufq2K5JT49WMh9ompyqZ+HoGUXT4BdHeCKPefgWD9WoH9qOO1Nna0k4eqc5yiAwsPcbqNovxE1FOBConEtmF46e590n5e9w1LfvmIVe33WoLh9dlAU9utwt3jMBvWPQdtSvdQzcgUZ0H/092PvoPVDO6VJ+VGlTAFqSov/9HYbVt3n/xLHdPTK2173Nkwf39gt9E1qCVwZ3r/9Vuq/o1dEdbnf/VVNP3/1zkh3/Bw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-08-13T06:18:36.775Z" agent="5.0 (X11)" etag="O93XTPtJu4zHRFfA3qiq" version="13.6.2" type="github">
+  <diagram id="Zo-XHowbz03e_hiTDd_9" name="Page-1">
+    <mxGraphModel dx="2073" dy="1344" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-40" value="" style="rounded=1;arcSize=10;dashed=1;strokeColor=#000000;fillColor=none;gradientColor=none;dashPattern=8 3 1 3;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="552.5" width="200" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-31" value="" style="rounded=1;arcSize=10;dashed=1;strokeColor=#000000;fillColor=none;gradientColor=none;dashPattern=8 3 1 3;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="840" width="200" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-2" value="OneService&lt;br&gt;osdep和Node桥梁" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-3" value="平台无关" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="615" y="75" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-4" value="osdep&lt;br&gt;各平台专有API 实现" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="880" y="15" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-8" value="callback" style="endArrow=classic;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=-0.003;exitY=0.514;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="4FT7oaL6MmFUpqDjCZYJ-40" target="4FT7oaL6MmFUpqDjCZYJ-2" edge="1">
+          <mxGeometry x="0.1396" relative="1" as="geometry">
+            <mxPoint x="500" y="360" as="sourcePoint" />
+            <mxPoint x="210" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="360" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-13" value="函数事件注入" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document" parent="1" vertex="1">
+          <mxGeometry x="290" y="375" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-16" value="&lt;div&gt;Trace&lt;/div&gt;&lt;div&gt;跟踪记录&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-17" value="&lt;font color=&quot;#FF0000&quot;&gt;&lt;b&gt;Switch&lt;br&gt;管理数据进出&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-18" value="Multicaster&lt;br&gt;发送消息" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-19" value="Topology&lt;br&gt;网络拓扑" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-20" value="SelfAwareness&lt;br&gt;网络状态维护回调" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-21" value="one 客户端" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="160" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-25" value="NetworkState" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="905" y="360" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-26" value="EthernetTap(Tap 虚拟网卡)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="825" y="380" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-36" value="包含所有客户端，主要基于Http 和 OneService通信" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document" parent="1" vertex="1">
+          <mxGeometry x="240" y="230" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-37" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="4FT7oaL6MmFUpqDjCZYJ-21" target="4FT7oaL6MmFUpqDjCZYJ-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="170" as="sourcePoint" />
+            <mxPoint x="80" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-41" value="Node服务" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document" parent="1" vertex="1">
+          <mxGeometry x="605" y="30" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-44" value="Binder" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="920" y="480" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-45" value="TcpRelay" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="910" y="460" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-47" value="Phy" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="920" y="410" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4FT7oaL6MmFUpqDjCZYJ-53" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" source="4FT7oaL6MmFUpqDjCZYJ-25" target="4FT7oaL6MmFUpqDjCZYJ-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="390" as="sourcePoint" />
+            <mxPoint x="760" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-2" value="" style="rounded=1;arcSize=10;dashed=1;strokeColor=#000000;fillColor=none;gradientColor=none;dashPattern=8 3 1 3;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="-280" width="200" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-4" value="监听服务器端/客户端指令" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-260" y="85" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-5" value="&lt;div&gt;Http Handler&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document" vertex="1" parent="1">
+          <mxGeometry x="-260" y="20" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-6" value="" style="endArrow=classic;html=1;entryX=1;entryY=0.514;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="4FT7oaL6MmFUpqDjCZYJ-2" target="bhILbmvNSMo4NeSS-7qC-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="61" y="360" as="sourcePoint" />
+            <mxPoint x="-70" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-7" value="PhyTemplate 实现" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="bhILbmvNSMo4NeSS-7qC-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-10" value="&lt;ol&gt;&lt;li&gt;multipath&lt;br&gt;&lt;/li&gt;&lt;li&gt;data compress&lt;br&gt;&lt;/li&gt;&lt;li&gt;数据流量加密&lt;br&gt;&lt;/li&gt;&lt;/ol&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="1">
+          <mxGeometry x="870" y="170" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="bhILbmvNSMo4NeSS-7qC-11" value="&lt;div&gt;Switch 最为核心，流量枢纽，其次是Peer::getAppropriatePath 获取发送流量的路径&lt;br&gt;&lt;/div&gt;" style="shape=ext;rounded=1;html=1;whiteSpace=wrap;dashed=1;dashPattern=1 4;" vertex="1" parent="1">
+          <mxGeometry x="220" y="640" width="270" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
