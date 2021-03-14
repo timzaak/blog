@@ -1,5 +1,0 @@
-dump.rdb
-*.log
-db/postgres/data
-*.zip
-backend-1.0/

@@ -1,9 +1,0 @@
-binance{
-  apiKey:""
-  apiSecret:""
-}
-
-huobi{
-  accessKey:""
-  secretKey:""
-}

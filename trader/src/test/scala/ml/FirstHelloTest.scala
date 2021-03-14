@@ -1,5 +1,0 @@
-package ml
-
-class FirstHelloTest  {
-
-}

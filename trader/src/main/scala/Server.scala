@@ -1,3 +1,0 @@
-object Server extends App{
-
-}
