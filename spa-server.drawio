@@ -1,1 +1,34 @@
-<mxfile host="app.diagrams.net" modified="2022-03-26T11:21:51.862Z" agent="5.0 (Macintosh)" version="17.2.4" etag="0BJCwsY9RvWSgqHJtIDN" type="github"><diagram id="CWeF-Dbs7muFz1N013ci">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-03-26T13:50:14.272Z" agent="5.0 (Macintosh)" etag="iatr6OIXicxLir24Yjcx" version="17.2.4" type="github">
+  <diagram id="CWeF-Dbs7muFz1N013ci" name="Page-1">
+    <mxGraphModel dx="1186" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-1" value="前端部署流程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-2" value="现有方案" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-8" value="&lt;h1&gt;镜像&lt;br&gt;&lt;/h1&gt;&lt;p&gt;打包镜像，push 镜像，部署镜像，若是 k8s，还要搞部署文件&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="190" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-9" value="&lt;h1&gt;Nginx&lt;/h1&gt;&lt;p&gt;复制文件到远程服务器（SCP），SSH过去，重启Nginx&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="290" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-10" value="&lt;h1&gt;S3+CDN&lt;/h1&gt;&lt;p&gt;同步文件到S3，然后刷新CDN&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="400" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-12" value="&lt;h1&gt;Git Page&lt;br&gt;&lt;/h1&gt;&lt;p&gt;直接Push代码即可。&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="480" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-13" value="优化方案" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-16" value="文件存储分为本地磁盘/共享磁盘/S3，数据传输共有 SCP 和 HTTP两种，但 scp 局限性大，还是基于 HTTP 实现，可以兼容所有文件存储方式" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="595" width="210" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
