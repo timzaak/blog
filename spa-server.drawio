@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-26T13:50:14.272Z" agent="5.0 (Macintosh)" etag="iatr6OIXicxLir24Yjcx" version="17.2.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-27T04:19:29.694Z" agent="5.0 (Macintosh)" etag="Hn-zxV62KYxy7FEx__QA" version="17.2.4" type="github">
   <diagram id="CWeF-Dbs7muFz1N013ci" name="Page-1">
     <mxGraphModel dx="1186" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -25,8 +25,8 @@
         <mxCell id="0BS2BCWE53oCS1VnZQ1A-13" value="优化方案" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="220" y="610" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="0BS2BCWE53oCS1VnZQ1A-16" value="文件存储分为本地磁盘/共享磁盘/S3，数据传输共有 SCP 和 HTTP两种，但 scp 局限性大，还是基于 HTTP 实现，可以兼容所有文件存储方式" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;glass=0;" vertex="1" parent="1">
-          <mxGeometry x="400" y="595" width="210" height="90" as="geometry" />
+        <mxCell id="0BS2BCWE53oCS1VnZQ1A-16" value="文件存储分为本地磁盘/共享磁盘/S3，数据传输共有 SCP 和 HTTP两种，但 scp 局限性大，还是基于 HTTP 实现，可以兼容所有文件存储方式。&lt;br&gt;再提供 Hooks 去刷新 CDN。" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="577.5" width="340" height="125" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
