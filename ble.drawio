@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-08-03T09:55:52.176Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="2sc7gF8-pXYyPenLNGrt" version="21.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-03T10:37:15.401Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="8YIUd5qhPRuV6IEGB94Y" version="21.6.6" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1434" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1600" math="0" shadow="0">
       <root>
@@ -107,11 +107,20 @@
         <mxCell id="4Q__4F4uSHIKYperc5K1-35" value="&lt;ul&gt;&lt;li&gt;BLE 蓝牙读写 最好不要并行处理，确保当前时刻只有一个指令在执行&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="540" y="1030" width="420" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-36" value="&lt;ul&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;小程序在订阅后，不能立即写数据，所以最好有个delay机制，指令有时间间隔，可以通过队列的方式实现&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;蓝牙收发消息不要过快，容易触发硬件工程师的代码BUG&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="560" y="1200" width="360" height="100" as="geometry" />
+        <mxCell id="4Q__4F4uSHIKYperc5K1-36" value="&lt;ul&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;小程序在订阅后，不能立即写数据，所以最好有个delay机制，指令有时间间隔，可以通过队列的方式实现&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;蓝牙收发消息不要过快，容易触发硬件工程师的代码BUG&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;要有超时机制，硬件主动Push 消息可能会影响到你发送的指令，导致返回值没有接收到&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="550" y="1195" width="530" height="110" as="geometry" />
         </mxCell>
         <mxCell id="4Q__4F4uSHIKYperc5K1-37" value="&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;这是最容易出问题的地方&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="130" y="405" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4Q__4F4uSHIKYperc5K1-38" value="&amp;nbsp;BLE 固件升级" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="10" y="1360" width="165" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4Q__4F4uSHIKYperc5K1-39" value="BLE 固件升级，不麻烦，主要的是MCU固件、WiFi 固件等，&lt;br&gt;这些存在" style="whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="185" y="1350" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="4Q__4F4uSHIKYperc5K1-40" value="&lt;ul&gt;&lt;li&gt;BLE 升级过程中， 手机和硬件要暂停其他指令交互&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="590" y="1367.5" width="350" height="55" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
