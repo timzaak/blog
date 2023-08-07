@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-08-03T10:37:15.401Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="8YIUd5qhPRuV6IEGB94Y" version="21.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-07T02:49:41.485Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="zczSxBcrk8IRX_SrP3hg" version="21.6.6" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1434" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1600" math="0" shadow="0">
       <root>
@@ -15,10 +15,10 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-6" target="4Q__4F4uSHIKYperc5K1-2">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-6" target="4Q__4F4uSHIKYperc5K1-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-4" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4Q__4F4uSHIKYperc5K1-3">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-4" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4Q__4F4uSHIKYperc5K1-3" vertex="1" connectable="0">
           <mxGeometry x="-0.0444" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -26,47 +26,47 @@
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-6" value="扫描到了？" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="205" y="160" width="100" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-7" value="设备不存在，让用户确认设备是否开启蓝牙" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="350" y="180" width="240" height="40" as="geometry" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-7" value="设备不存在，重试 or 让用户确认设备是否开启蓝牙" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="360" y="175" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-0" value="BLE 扫描" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-0" value="BLE 扫描" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="60" y="40" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-2" value="展示扫描列表（有可能多台设备）&lt;br&gt;用户选择设备，保存MAC地址，方便下次用户选择" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-2" value="展示扫描列表（有可能多台设备）&lt;br&gt;用户选择设备，保存MAC地址，方便下次用户选择" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;strokeWidth=1;spacing=6;spacingTop=-4;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="140" y="310" width="230" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-11" value="&lt;ul&gt;&lt;li&gt;BLE 扫描耗电，注意在不使用的时候，关闭扫描&lt;/li&gt;&lt;li&gt;BLE 一次扫描可能扫描不到，需要重新扫描&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-11" value="&lt;ul&gt;&lt;li&gt;BLE 扫描耗电，注意在不使用的时候，&lt;font color=&quot;#ff0000&quot;&gt;关闭扫描&lt;/font&gt;&lt;/li&gt;&lt;li&gt;BLE 一次扫描可能扫描不到，需要重新扫描&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="410" y="70" width="320" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-12" value="BLE 链接" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-12" value="BLE 链接" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="40" y="410" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-13" target="4Q__4F4uSHIKYperc5K1-14">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-13" target="4Q__4F4uSHIKYperc5K1-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-13" value="用户选择链接蓝牙" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-13" value="用户选择链接蓝牙" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="180" y="460" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-14" target="4Q__4F4uSHIKYperc5K1-16">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-14" target="4Q__4F4uSHIKYperc5K1-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-18" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4Q__4F4uSHIKYperc5K1-17">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-18" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4Q__4F4uSHIKYperc5K1-17" vertex="1" connectable="0">
           <mxGeometry x="-0.2308" y="-3" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-14" target="4Q__4F4uSHIKYperc5K1-24">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-14" target="4Q__4F4uSHIKYperc5K1-24" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-26" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4Q__4F4uSHIKYperc5K1-25">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-26" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4Q__4F4uSHIKYperc5K1-25" vertex="1" connectable="0">
           <mxGeometry x="-0.3111" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-14" value="链接是否成功？" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-14" value="链接是否成功？" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="185" y="590" width="110" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-16" target="4Q__4F4uSHIKYperc5K1-14">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4Q__4F4uSHIKYperc5K1-16" target="4Q__4F4uSHIKYperc5K1-14" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="430" y="590" />
@@ -74,52 +74,52 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-16" value="启动&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;重试机制&lt;/font&gt;&lt;/b&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-16" value="启动&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;重试机制&lt;/font&gt;&lt;/b&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="370" y="600" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-21" value="&lt;ul&gt;&lt;li&gt;1. 重新链接&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;2. 重新扫描，再链接&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;3. 重启手机蓝牙，再扫描，再链接&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;4. 重启蓝牙设备&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-21" value="&lt;ul&gt;&lt;li&gt;1. 重新链接&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;2. 重新扫描，再链接&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;3. 重启手机蓝牙，再扫描，再链接&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;4. 重启蓝牙设备&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="470" y="565" width="240" height="125" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-24" value="启动全局订阅，并监听蓝牙连接状态&lt;br&gt;蓝牙连接状态回调，小程序不一定准" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-24" value="启动全局订阅，并监听蓝牙连接状态&lt;br&gt;蓝牙连接状态回调，小程序不一定准" style="whiteSpace=wrap;html=1;rounded=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="125" y="710" width="230" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-28" value="BLE 读/写" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-28" value="BLE 读/写" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="20" y="1050" width="110" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-29" value="BLE 读写 Attribution 相对简单， 不再赘述" style="whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-29" value="BLE 读写 Attribution 相对简单， 不再赘述" style="whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="180" y="1040" width="380" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-30" value="BLE 传输协议设计" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-30" value="BLE 传输协议设计" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry y="840" width="250" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-31" value="参考涂鸦的设计即可" style="whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-31" value="参考涂鸦的设计即可" style="whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="295" y="830" width="200" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-32" value="&lt;ul&gt;&lt;li&gt;BLE 状态监听最好能补上超时机制&lt;/li&gt;&lt;li&gt;固件升级后，要断开蓝牙重新链接&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-32" value="&lt;ul&gt;&lt;li&gt;BLE 状态监听最好能补上超时机制&lt;/li&gt;&lt;li&gt;固件升级后，要断开蓝牙重新链接&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="340" y="710" width="250" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-33" value="BLE 订阅" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-33" value="BLE 订阅" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="15" y="1220" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-34" value="由于硬件开发，喜欢用透传的方式和手机打交道。&lt;br&gt;所以必须依靠发布订阅，去区分消息" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-34" value="由于硬件开发，喜欢用透传的方式和手机打交道。&lt;br&gt;所以必须依靠发布订阅，去区分消息" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="175" y="1220" width="395" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-35" value="&lt;ul&gt;&lt;li&gt;BLE 蓝牙读写 最好不要并行处理，确保当前时刻只有一个指令在执行&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-35" value="&lt;ul&gt;&lt;li&gt;BLE 蓝牙读写 最好不要并行处理，确保当前时刻只有一个指令在执行&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="540" y="1030" width="420" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-36" value="&lt;ul&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;小程序在订阅后，不能立即写数据，所以最好有个delay机制，指令有时间间隔，可以通过队列的方式实现&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;蓝牙收发消息不要过快，容易触发硬件工程师的代码BUG&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;要有超时机制，硬件主动Push 消息可能会影响到你发送的指令，导致返回值没有接收到&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-36" value="&lt;ul&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;小程序在订阅后，不能立即写数据，所以最好有个delay机制，指令有时间间隔，可以通过队列的方式实现&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;蓝牙收发消息不要过快，容易触发硬件工程师的代码BUG&lt;/li&gt;&lt;li style=&quot;border-color: var(--border-color);&quot;&gt;要有超时机制，硬件主动Push 消息可能会影响到你发送的指令，导致返回值没有接收到&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="550" y="1195" width="530" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-37" value="&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;这是最容易出问题的地方&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-37" value="&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;这是最容易出问题的地方&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="130" y="405" width="200" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-38" value="&amp;nbsp;BLE 固件升级" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-38" value="&amp;nbsp;BLE 固件升级" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="10" y="1360" width="165" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-39" value="BLE 固件升级，不麻烦，主要的是MCU固件、WiFi 固件等，&lt;br&gt;这些存在" style="whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-39" value="BLE 固件升级，不麻烦，主要的是MCU固件、WiFi 固件等，&lt;br&gt;这些存在" style="whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="185" y="1350" width="420" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-40" value="&lt;ul&gt;&lt;li&gt;BLE 升级过程中， 手机和硬件要暂停其他指令交互&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="4Q__4F4uSHIKYperc5K1-40" value="&lt;ul&gt;&lt;li&gt;BLE 升级过程中， 手机和硬件要暂停其他指令交互&lt;/li&gt;&lt;li&gt;升级完成后，需要重新链接BLE&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="590" y="1367.5" width="350" height="55" as="geometry" />
         </mxCell>
       </root>
