@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-08-07T02:49:41.485Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="zczSxBcrk8IRX_SrP3hg" version="21.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-07T08:32:53.626Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="dY_aoaWLg9N1Gkk8LsIm" version="21.6.6" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1434" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1600" math="0" shadow="0">
       <root>
@@ -95,8 +95,8 @@
         <mxCell id="4Q__4F4uSHIKYperc5K1-31" value="参考涂鸦的设计即可" style="whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="295" y="830" width="200" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4Q__4F4uSHIKYperc5K1-32" value="&lt;ul&gt;&lt;li&gt;BLE 状态监听最好能补上超时机制&lt;/li&gt;&lt;li&gt;固件升级后，要断开蓝牙重新链接&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="340" y="710" width="250" height="60" as="geometry" />
+        <mxCell id="4Q__4F4uSHIKYperc5K1-32" value="&lt;ul&gt;&lt;li&gt;BLE 状态监听最好能补上超时机制&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="360" y="710" width="250" height="60" as="geometry" />
         </mxCell>
         <mxCell id="4Q__4F4uSHIKYperc5K1-33" value="BLE 订阅" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="15" y="1220" width="120" height="40" as="geometry" />
@@ -121,6 +121,12 @@
         </mxCell>
         <mxCell id="4Q__4F4uSHIKYperc5K1-40" value="&lt;ul&gt;&lt;li&gt;BLE 升级过程中， 手机和硬件要暂停其他指令交互&lt;/li&gt;&lt;li&gt;升级完成后，需要重新链接BLE&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="590" y="1367.5" width="350" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="A0C16KF9qsN41Usq-8sh-0" value="链接失败的原因:&lt;br&gt;1. 设备没打开&lt;br&gt;2. Android手机微信 查找附近的设备 权限没有打开(会扫描不到任何设备)&lt;br&gt;3. 蓝牙没有打开" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillStyle=auto;strokeColor=#6c8ebf;sketch=1;curveFitting=1;jiggle=2;fillColor=#dae8fc;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="780" y="573.13" width="410" height="113.75" as="geometry" />
+        </mxCell>
+        <mxCell id="A0C16KF9qsN41Usq-8sh-1" value="实际情况是硬件开发工程师说的算" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="530" y="845" width="200" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
