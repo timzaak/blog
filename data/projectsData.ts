@@ -7,20 +7,36 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'HP',
+    description: `A tutorial project to help Java Programmer to get the sense of measure the performance of HTTP server`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://timzaak.github.io/hp/',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'ForNet',
+    description: `It's a enterprise VPN project, based on Rust + Wireguard, support Linux, Windows, macOS OS platform.`,
+    imgSrc: '/static/images/project/fornet.jpeg',
+    href: 'https://github.com/fornet/fornet',
+  },
+  {
+    title: 'Web Sugar',
+    description: `It's a scala web api starter project, including some other projects, like React Admin Web, database code auto generate, wechat pay support.`,
+    href: 'https://github.com/ForNetCode/web-sugar-startup',
+  },
+  {
+    title: 'Desktop Message',
+    description: `Mqtt + static file http server + service discovery for desktop app, to interact with devices.`,
+    href: 'https://github.com/timzaak/desktop-message',
+  },
+  {
+    title: 'Log Http',
+    description: `log http/https request/response via MITM, for PC software developer who has none Chrome Console.`,
+    href: 'https://github.com/timzaak/log-http-proxy',
+  },
+  {
+    title: 'Table2Case',
+    description: `convert database table to scala case class and scalaSQL ORM, support PG, MySQL, Sqlite.`,
+    href: 'https://github.com/timzaak/table2case',
   },
 ]
 
