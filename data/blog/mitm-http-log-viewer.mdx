@@ -1,0 +1,18 @@
+---
+title: View the HTTP content via MITM proxy
+date: '2025-07-04'
+tags: ['scala', 'tool']
+draft: true
+summary: 'Introduce the newest my own project: log-http-proxy'
+---
+
+
+The project: [log-http-proxy](https://github.com/timzaak/log-http-proxy) originated from a situation where testers and developers were struggling to locate issues. Since the client side of the project includes both a QT PC client and embedded devices, R&D engineers couldn't provide interface logs, leading to a blame game. To solve this problem, I developed this project.
+
+It uses Pekko to implement an HTTP MITM (Man-In-The-Middle) proxy that receives HTTP requests and forwards them to the actual server, while transmitting the incoming and outgoing data to a WebSocket-enabled browser. This allows testers to inspect the correctness of requests directly through the browser. It supports HTTPS certificates; if using a self-signed certificate, please refer to the documentation [mkcert.md](https://github.com/timzaak/log-http-proxy/blob/main/mkcert.md).
+
+The project also provides [clients](https://github.com/timzaak/log-http-proxy/releases/latest) for macOS, Windows, and Linux, which can be started via command line, as well as a [Docker image](https://github.com/timzaak/log-http-proxy/pkgs/container/log-http-proxy), which can be used with a configuration file.
+
+For specific usage instructions, please see the project's [README.md](https://github.com/timzaak/log-http-proxy?tab=readme-ov-file#usage).
+
+Feel free to open an issue if you have any questions or suggestions.
