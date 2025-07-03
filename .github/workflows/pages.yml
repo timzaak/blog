@@ -4,6 +4,10 @@ name: GitHub Pages
 on:
   push:
     branches: main
+    paths-ignore:
+      - 'README.md'
+      - '.vscode'
+      - '.gitignore'
   workflow_dispatch:
 
 permissions:
