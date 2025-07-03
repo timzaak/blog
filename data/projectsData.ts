@@ -38,6 +38,11 @@ const projectsData: Project[] = [
     description: `convert database table to scala case class and scalaSQL ORM, support PG, MySQL, Sqlite.`,
     href: 'https://github.com/timzaak/table2case',
   },
+  {
+    title: 'DevOps Automation Utilities',
+    description: `scripts about daily devops jobs, including bakeup, docker image transfer, encrypt decrypt file and so on`,
+    href: 'https://github.com/timzaak/devops',
+  },
 ]
 
 export default projectsData
