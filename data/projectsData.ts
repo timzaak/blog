@@ -16,7 +16,7 @@ const projectsData: Project[] = [
     title: 'ForNet',
     description: `It's a enterprise VPN project, based on Rust + Wireguard, support Linux, Windows, macOS OS platform.`,
     imgSrc: '/static/images/project/fornet.jpeg',
-    href: 'https://github.com/fornet/fornet',
+    href: 'https://github.com/ForNetCode/fornet',
   },
   {
     title: 'Web Sugar',

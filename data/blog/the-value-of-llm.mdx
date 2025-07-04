@@ -1,0 +1,114 @@
+---
+title: The Value of LLM
+date: '2025-07-04'
+tags: ['product', 'idea']
+draft: false
+summary: 'Translated from Github Issue: https://github.com/timzaak/blog/issues/115, last year written'
+---
+
+Beyond the PR hype, the greater value of LLM lies in:
+
+1. **Providing a better way for humans to interact with tools**
+People can express their needs through natural language, allowing LLM-driven software to approximate and fulfill these needs, significantly lowering the learning curve.
+
+2. **Search enhancement for better FAQs and customer service**
+Enhanced search means fewer but more accurate results — similar to the leap from libraries to Baidu. However, less information often implies that whoever controls the filter also controls "truth." Information filtering becomes cheaper and more refined, reinforcing information bubbles.
+
+3. **Content generation (code, images, videos, novels, etc.)**
+Content can be generated based on more detailed user profiles.
+
+LLM is not a standalone product but a technology that relies on tools and data. Its target audience is **not To C**, but rather **To B** — it acts as an amplifier for professional tools and as a moat or profit engine for companies with large amounts of data.
+
+Technologies derived from LLM can also be used to:
+
+1. Identify patterns within specific datasets
+2. Generate similar data based on existing data
+
+These are mainly applied in scientific research, military, and medical fields. For example: protein structure analysis.
+
+### Defects of LLM
+
+At its core, LLM is statistical in nature, suffering from error accumulation and lacking true logical reasoning capability — it only approximates logic. We will enter the era of super-intelligent agents only when we overcome the challenge of logical reasoning.
+
+LLMs lack consistency and predictability, making them unsuitable for industrial production environments.
+
+LLMs are constrained by "human ethics" — you cannot ask about explicit or violent content even though such material might exist in the training dataset. Political correctness also limits its robustness. Just like science has national borders, so does LLM.
+
+## Current State
+
+Globally, fewer than 100 companies currently have the capability to pre-train LLMs. This requires:
+
+1. Massive volumes of high-quality data (which can be iteratively improved)
+2. Thousands of GPU cards and talent capable of orchestrating large-scale distributed training (e.g., LLaMA 3 required 20,000 H100 GPUs for training)
+3. Abundant capital and electricity resources (a single training run can cost millions of dollars)
+
+Other companies are merely players in fine-tuning or building agent-based applications.
+
+### Research Directions for Large Models
+
+1. **Large models optimized for low inference cost**: e.g., OpenELM, Phi-3 mini; hardware solutions such as switching from GPU to LPU can reduce inference costs.
+2. **GraphRAG** and other technologies aimed at solving hallucinations.
+3. Ultra-large GPU cluster collaborative training solutions.
+4. Logical reasoning capabilities.
+
+### Foreign LLM Development
+
+In the West, when LLMs first emerged, massive capital was invested into infrastructure such as vector databases and computing power, accelerating development. Training technology has now matured — only the construction of nuclear power plants remains to meet energy demands.
+
+On the commercial side, nearly every author of the seminal paper *Attention Is All You Need* is involved in various niche LLM sectors. A startup founded by just one or two of these authors can command high valuations.
+
+The open-source community has progressed to the point where developers with basic GPU hardware can build a functional LLM assistant demo within a week.
+
+### Domestic LLM Development
+
+Currently, there is no real To B market in China. Therefore, small developer teams without unique tools or datasets cannot build successful business models solely around LLMs. Most are still in the phase of financial losses and catching up.
+
+### Potential Impact of LLM on Existing Products
+
+1. **Education**: Particularly in foreign language education, LLMs outperform current teaching methods. In other areas, the impact is less obvious, although interaction capabilities have been enhanced. Attention should be paid to filtering inappropriate information for children.
+
+2. **Smart Speakers**: Low-cost inference solutions remain distant, though high-end ones are close to realization (e.g., RK3588-level chips). The interaction mode — VUI (Voice User Interface) — currently relies on offline wake-up + commands, while online LLM agents + third-party content providers represent the next step. BLE, WiFi, voice recognition, speaker, and microphone modules are already mature — what's missing is integration with online LLMs and infrastructure.
+
+3. **Knowledge Notes**: Individuals with rich personal knowledge databases are still rare. For organizations, however, this is promising. LLM + RAG is becoming a battleground for Notion, Evernote, Feishu, and DingTalk. Notion’s design for LLM interaction has reached a very high level: [Notion LLM Demo](https://www.youtube.com/watch?v=lHsZC6adJus). Other tools should take inspiration from this interaction model.
+
+4. **Mobile Phones**: Xiaomi and Apple have already begun integrating LLMs. Within a year, we may see Apple phones equipped with LLM capabilities — likely in the form of an LLM-enhanced voice assistant + RAG + apps, offering Siri SDK integrations to access data and functionality. Example: “Hi Siri, find messages where my wife said I can go out partying.”
+
+5. **Military**: Not discussed here.
+
+6. **Recommendation Systems**: Once privacy permissions are resolved, recommendation systems could truly understand user intent and provide secondary recommendations through interactive feedback.
+
+7. **Writing, Painting, Video, Music**: LLMs raise the baseline skill level for novices. Meanwhile, distinguishing quality content becomes harder, favoring capital and distribution channels. Creativity becomes more important, expression forms diversify, and personal IP gains more value.
+
+8. **Customer Service**: Systems undergo qualitative improvements. Job roles decrease, and management focuses increasingly on anomaly detection, intervention, and dynamic预案 updates.
+
+9. **Privacy Agreements**: LLMs' insatiable appetite for data causes privacy agreements to devolve into mere formalities — “you click, you agree.” Eventually, governments control all data. Orwell’s *1984* would rely heavily on LLMs at its technological foundation (LLMs can summarize a person’s life from data).
+
+#### 10. **Code Engineering**
+Prompt-based code comments and unit tests are maturing. Currently, in web development, over 20% of code can be auto-generated. For niche programming languages, limited data reduces market viability.
+
+API interface development is trending toward schema-based (rule-based) design, which is more LLM-friendly, enabling automatic code generation rates to reach 80%. Representative: TeoCloud.
+
+Automated testing tools integrated with LLMs can proactively discover, test, crawl, and document functionalities.
+
+#### 11. **Social Interaction**
+Strangers become tagged and untrustworthy — users can't tell if they're talking to a human or an LLM. If the super-human era arrives, people may return to face-to-face interactions.
+
+Knowledge-based personal IPs collapse as humans adopt narrower yet more efficient ways of acquiring information. Human deception becomes easier to detect, leading to increased focus on biological instincts — “beauty” and “handsomeness” become the most valuable social currencies.
+
+## What Can Chinese Developers Do?
+
+1. Those with G-resources can mimic Hugging Face and pitch platform stories.
+2. Those with customs connections can resell NVIDIA GPUs or operate GPU clusters offshore.
+3. Sell courses.
+4. Join data- or tool-rich companies as employees.
+5. Go overseas to develop LLM tools for niche markets — automation tools targeting beginners who already grasp foundational concepts. These users can complete complex tasks via prompts and assess/optimize instructions. However, given how saturated the tool market has become, individual efforts are unlikely to succeed.
+
+## Future Directions and Characteristics of LLM
+
+1. **Extreme evolution of search and human-computer interaction capabilities** — empowering elite individuals with ultimate tools.
+2. **Core technology for the super-human era** (where 80% of people exist primarily to generate data).
+3. **Winner-takes-all dynamics**, eventually escalating into national-level competition.
+
+## Additional Thoughts
+
+~~Drawing parallels to the history of steam engines — would the presence of a large number of high-quality Chinese college students "lock down" domestic LLM development?~~ Probably not. Back then, there was an information gap between East and West. Today, once a field becomes hot, scam schemes, industry titans, and state-backed capital all rush in simultaneously.
