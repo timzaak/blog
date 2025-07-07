@@ -1,0 +1,104 @@
+---
+title: How to Build IT Infrastructure for a Small Software Development Company in China in 2025
+date: '2025-07-07'
+tags: ['startup']
+draft: false
+summary: 'This article introduces a series of open-source software that helps quickly set up IT development infrastructure. translated from GitHub issue: https://github.com/timzaak/blog/issues/49'
+---
+
+At the early stage of establishing an internet company, there is a process of building software infrastructure from scratch. This involves selecting various types of software. Here, I have compiled some solutions that I have used for reference.
+
+## Personnel Management, OA, Email
+
+Depending on the nature of the company, choose different collaboration tools:
+
+- **Sales**: WeCom (WeChat Work)
+- **Design-focused, strict documentation requirements, OKR alignment**: FeiShu
+- **Comprehensive financial and HR management**: DingTalk
+
+For email services, choose providers based on your collaboration tool. Most offer a free quota for up to 50 users. When nearing the limit, migration can be performed; the cost of migrating emails is relatively low.
+
+For SSO (Single Sign-On), it is recommended to use [Keycloak](https://www.keycloak.org/) for user account management. Its advantages include:
+
+1. Data storage supports Postgres, MySQL, etc.
+2. UI is user-friendly, supports theme customization, and is easy to operate.
+3. Supports protocols like OpenID Connect, OAuth 2.0, SAML 2.0, and has multiple adapters. Written in Java, it is open-source with strong extensibility.
+4. Can integrate with LDAP, Active Directory, Kerberos, etc.
+5. Mainstream services can be integrated via plugins.
+6. Extensive documentation available.
+
+However, most small companies may not need this and can skip setting it up.
+
+## Code Repository, CI/CD
+
+There are two directions here: third-party hosting or self-deployment.
+
+- **Third-party hosting**: Gitee, costs 999 RMB for the first year. For small teams, self-hosting would cost about the same in server expenses alone, not to mention maintenance and upgrades.
+
+- **Self-hosted options**: Use Gitea. It's lightweight, supports GitHub Actions, and comes with built-in CI/CD.
+
+If you need to build your own CI/CD pipeline, Jenkins is recommended due to its maturity and rich documentation.
+
+## Container Orchestration, Infrastructure
+
+If using cloud services, try to rely on cloud infrastructure. If self-hosting, K3s is a good option for deploying small-scale Kubernetes clusters at low cost. For image repositories and binary repositories, Nexus can be used (Gitea also supports this).
+
+For service tracing, logs, and metrics, OpenObserve + OpenTelemetry Collector provides an all-in-one solution. However, keep an eye on VictoriaMetrics / VictoriaLogs as they are more cost-effective, although they do not support Trace data.
+
+For monitoring and alerts, Uptime Kuma is recommended — it's open-source and feature-rich.
+
+## Public Cloud Selection
+
+Major domestic vendors have evolved from being basic resource providers (compute, storage, bandwidth) into full-service providers with powerful product portfolios. As a result, their pricing is higher.
+
+Vendors outside the top tier often focus on private clouds. Their public cloud basic services are acceptable, and performance is generally satisfactory. However, more advanced products might deviate from expectations. Always perform thorough testing before adoption to ensure they meet your requirements. On the flip side, these vendors are cheaper and provide better customer support, possibly even assigning a dedicated representative to your small business.
+
+As for international providers like AWS and GCP, there are invoice-related challenges. Typically, cooperation is conducted through Hong Kong-based agents.
+
+Additionally, always communicate with sales representatives to negotiate pricing — many discounts are available upon request.
+
+
+
+
+## 人员管理、OA、邮箱
+
+
+依据公司性质：选择不同的协作工具：
+- 销售：企业微信
+- 设计类，文档要求严格，适配OKR：飞书
+- 财务、人力资源管理完善： 钉钉
+邮箱依据协作工具，选择不同的邮箱供应商，都会有50人的免费额度。免费额度快不够用的时候，可进行迁移，邮箱迁移成本不高。
+
+至于SSO，推荐 [keycloak](https://www.keycloak.org/) 做人员账户管理 其优势如下：
+1. 数据存储 支持 postgres / mysql 等
+2. UI 友好，支持主题定制，操作简单
+3. 支持 OpenId Connect, OAuth 2.0, SAML 2.0 等协议，拥有多个Adapter，java 编写，开源，扩展性强
+4. 可对接 LDAP, Active Directory,  KerberOS 等。
+5. 主流服务可通过插件等对接
+6. 文档十分丰富
+但大部分小公司实际用不到，可以不用搭建。
+
+## 代码仓库、CI/CD
+这里有两个方向，一个是第三方托管，另一个是自己部署一套。
+
+第三方托管：码云， 第一年 999 元，如果是自建的话，光服务器成本 也差不多是这个数，更不用说维护和升级了。
+
+自建：Gitea，开销低，支持 Github Action，自带 CI/CD。
+
+如果需要自建CICD， 推荐 Jenkins，成熟，文档丰富。
+
+## 容器编排、基础设施
+如果服务走云，则尽量使用云基础设施即可，如果自建，K3S 可搭建小规模k8s，成本也低，镜像仓库、二进制仓库可使用 nexus 来做（Gitea 支持也支持） 。
+
+服务 trace、log、 metrics 基于 OpenObserve + OpenTelemetry Collector 一把梭。 但需要关注 victoriametrics /victoriamelogs 方案，它们成本更低，只是不支持 Trace。
+
+告警使用 Uptime Kuma 来做，开源，功能齐全。
+
+## 公有云的选择
+国内头部厂商现在已经从基本的计算存储带宽资源提供商，变成了服务提供商，产品矩阵强大，二三线被甩的远远的。相应的，价格也贵。
+
+二三线的厂商有很多做私有云， 公有云基本服务还行，性能说得过去，高级一点的产品就有可能存在很多和预期不一致的东西，在使用之前，一定要做好测试，看看能不能达标。相对的，二三线厂商价格便宜，人工服务跟得上，即使你是小公司，也有可能配个一对一的服务人员。
+
+至于国外的AWS、GCP等，存在发票问题，都是和香港代理公司合作。
+
+另外，每个厂商的实际价格，要多找销售沟通沟通，有很多折扣。
