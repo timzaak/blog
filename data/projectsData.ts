@@ -9,13 +9,13 @@ const projectsData: Project[] = [
   {
     title: 'HP',
     description: `A tutorial project to help Java Programmer to get the sense of measure the performance of HTTP server`,
-    imgSrc: '/static/images/time-machine.jpg',
+    imgSrc: `${process.env.BASE_PATH || ''}/static/images/time-machine.jpg`,
     href: 'https://timzaak.github.io/hp/',
   },
   {
     title: 'ForNet',
     description: `It's a enterprise VPN project, based on Rust + Wireguard, support Linux, Windows, macOS OS platform.`,
-    imgSrc: '/static/images/project/fornet.jpeg',
+    imgSrc: `${process.env.BASE_PATH || ''}/static/images/project/fornet.jpeg`,
     href: 'https://github.com/ForNetCode/fornet',
   },
   {
