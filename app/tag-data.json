@@ -1,9 +1,10 @@
 {
   "startup": 1,
-  "devops": 1,
+  "devops": 2,
+  "k8s": 1,
   "scala": 1,
   "tool": 1,
+  "hello": 1,
   "product": 1,
-  "idea": 1,
-  "hello": 1
+  "idea": 1
 }

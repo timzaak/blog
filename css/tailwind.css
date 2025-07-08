@@ -12,17 +12,17 @@
 
   /* Colors */
   /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.971 0.014 343.198);
-  --color-primary-100: oklch(0.948 0.028 342.258);
-  --color-primary-200: oklch(0.899 0.061 343.231);
-  --color-primary-300: oklch(0.823 0.12 346.018);
-  --color-primary-400: oklch(0.718 0.202 349.761);
-  --color-primary-500: oklch(0.656 0.241 354.308);
-  --color-primary-600: oklch(0.592 0.249 0.584);
-  --color-primary-700: oklch(0.525 0.223 3.958);
-  --color-primary-800: oklch(0.459 0.187 3.815);
-  --color-primary-900: oklch(0.408 0.153 2.432);
-  --color-primary-950: oklch(0.284 0.109 3.907);
+  --color-primary-50: oklch(0.98 0.016 73.684);
+  --color-primary-100: oklch(0.954 0.038 75.164);
+  --color-primary-200: oklch(0.901 0.076 70.697);
+  --color-primary-300: oklch(0.837 0.128 66.29);
+  --color-primary-400: oklch(0.75 0.183 55.934);
+  --color-primary-500: oklch(0.705 0.213 47.604);
+  --color-primary-600: oklch(0.646 0.222 41.116);
+  --color-primary-700: oklch(0.553 0.195 38.402);
+  --color-primary-800: oklch(0.47 0.157 37.304);
+  --color-primary-900: oklch(0.408 0.123 38.172);
+  --color-primary-950: oklch(0.266 0.079 36.259);
 
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
