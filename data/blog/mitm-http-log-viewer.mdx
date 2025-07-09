@@ -1,18 +1,46 @@
 ---
-title: View the HTTP content via MITM proxy
+title: View HTTP/HTTPS Traffic Easily via MITM Proxy
 date: '2025-07-04'
 tags: ['scala', 'tool']
 draft: false
-summary: 'Introduce the newest my own project: log-http-proxy'
+summary: 'A lightweight MITM (Man‑In‑The‑Middle) proxy that logs HTTP/HTTPS requests and responses in a browser UI. Perfect for debugging HTTPS APIs, mobile apps, webhooks, and Java-based services.'
 ---
 
+## 🚀 Why I Built It
 
-The project: [log-http-proxy](https://github.com/timzaak/log-http-proxy) originated from a situation where testers and developers were struggling to locate issues. Since the client side of the project includes both a QT PC client and embedded devices, R&D engineers couldn't provide interface logs, leading to a blame game. To solve this problem, I developed this project.
+I often need to inspect HTTPS traffic locally—whether it’s from browser clients, mobile apps, or Java services. Existing tools felt heavyweight or lacked Java KeyStore (JKS) support. So I built **log‑http‑proxy** to be:
 
-It uses Pekko to implement an HTTP MITM (Man-In-The-Middle) proxy that receives HTTP requests and forwards them to the actual server, while transmitting the incoming and outgoing data to a WebSocket-enabled browser. This allows testers to inspect the correctness of requests directly through the browser. It supports HTTPS certificates; if using a self-signed certificate, please refer to the documentation [mkcert.md](https://github.com/timzaak/log-http-proxy/blob/main/mkcert.md).
+- Simple to set up (via SBT or Docker)
+- Able to use self-signed certs (via mkcert) and JKS
+- Featuring clean browser-based traffic viewer
 
-The project also provides [clients](https://github.com/timzaak/log-http-proxy/releases/latest) for macOS, Windows, and Linux, which can be started via command line, as well as a [Docker image](https://github.com/timzaak/log-http-proxy/pkgs/container/log-http-proxy), which can be used with a configuration file.
+---
 
-For specific usage instructions, please see the project's [README.md](https://github.com/timzaak/log-http-proxy?tab=readme-ov-file#usage).
+## 🧩 Features
 
-Feel free to open an issue if you have any questions or suggestions.
+- **MITM proxy** for HTTP and HTTPS
+- **Live browser UI** showing full request/response, headers, body
+- **DNS override**: route specific domains (e.g. `example.com`) to local proxy
+- **JKS support**: for Java services trusting a keystore
+- **Docker-ready**: one command to build and run
+
+---
+
+## ✔️ Use Cases
+- Reverse-engineer or audit HTTPS API calls
+- Debug HTTPS webhooks or mobile-app network flows
+- Inspect traffic in Java services trusted via JKS
+
+For specific usage instructions, please see the project's [README.md](https://github.com/timzaak/log-http-proxy?tab=readme-ov-file).
+
+---
+
+## 📣 Feedback & Future Plans
+I'm actively considering adding:
+- Request/response filtering and search in UI
+- Metrics or logging to files
+If you're using this proxy in your workflows, I'd love to hear:
+- What use-cases are most helpful?
+- Any missing features you'd value?
+
+Check out the full source and raise issues or PRs: GitHub – [timzaak/log-http-proxy](https://github.com/timzaak/log-http-proxy).
