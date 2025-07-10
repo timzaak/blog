@@ -1,12 +1,12 @@
 {
-  "rust": 1,
-  "tool": 2,
-  "novel": 2,
+  "startup": 1,
   "devops": 2,
   "k8s": 1,
-  "startup": 1,
   "scala": 1,
+  "tool": 2,
+  "rust": 1,
+  "hello": 1,
   "product": 1,
   "idea": 1,
-  "hello": 1
+  "novel": 2
 }

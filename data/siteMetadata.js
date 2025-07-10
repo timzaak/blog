@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'All About Full-stack development',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  siteUrl: 'https://github.com/timzaak/blog',
   siteRepo: 'https://github.com/timzaak/blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
