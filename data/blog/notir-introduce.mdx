@@ -1,0 +1,15 @@
+---
+title: 'Notir: Simple Pubsub Tool via Http and Websocket Protocol'
+date: '2025-07-10'
+tags: ['rust', 'tool']
+draft: false
+---
+Notir: a concise small tool. It implements simple pubsub functionality through HTTP and WebSocket protocols. This is super useful in many debugging scenarios.
+
+In the past, I tried to implement it with MQTT, but there were issues: publishing messages needed to use the MQTT protocol, which would greatly increase the package size for mini programs. The stability of the Mqtt.js client on the mini program platform was also very poor.
+
+Today, I suddenly got inspired to make one based on Rust: Kicking off MQTT, just http and websocket. With the help of Google Jules, I was able to implement it quickly.
+
+When I have time, I will deploy it on https://fly.io, and that's it.
+
+

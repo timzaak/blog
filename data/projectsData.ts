@@ -34,6 +34,11 @@ const projectsData: Project[] = [
     href: 'https://github.com/timzaak/log-http-proxy',
   },
   {
+    title: 'Notir',
+    description: 'Simple pubsub via http and websocket, provide web console to handle the message.',
+    href: 'https://github.com/timzaak/notir',
+  },
+  {
     title: 'Table2Case',
     description: `Convert database table to scala case class or scalaSQL ORM, support PG, MySQL, Sqlite.`,
     href: 'https://github.com/timzaak/table2case',
