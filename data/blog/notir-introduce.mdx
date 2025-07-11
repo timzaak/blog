@@ -4,7 +4,10 @@ date: '2025-07-10'
 tags: ['rust', 'tool']
 draft: false
 ---
-Notir: a concise small tool. It implements simple pubsub functionality through HTTP and WebSocket protocols. This is super useful in many debugging scenarios.
+Notir: a concise small tool. It implements simple pubsub functionality through HTTP and WebSocket protocols. This is super useful in many scenarios, like
+
+- Http log viewer.
+- Bypassing firewall for message delivery.
 
 In the past, I tried to implement it with MQTT, but there were issues: publishing messages needed to use the MQTT protocol, which would greatly increase the package size for mini programs. The stability of the Mqtt.js client on the mini program platform was also very poor.
 

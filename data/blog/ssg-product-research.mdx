@@ -1,0 +1,39 @@
+---
+title: 'Exploration of Static Site Generator (SSG) Products'
+date: '2025-07-11'
+tags: ['product']
+draft: false
+summary: 'Originally written in 2022. Original post: https://github.com/timzaak/blog/issues/84'
+---
+
+## Overview
+There are numerous products in the Static Site Generator (SSG) category—almost every popular programming language has its own. Here's a [list](https://www.getzola.org/documentation/getting-started/overview/). Based on how they solve problems, SSGs generally fall into three categories:
+1. Server-side template rendering: templates are rendered on the server and sent to the frontend.
+2. Server-side SPA rendering (SSR): single-page applications are rendered on the server and returned as HTML.
+3. Client-side template rendering: templates are rendered directly in the browser.
+
+Each of these approaches has its use cases. Let's look at them one by one:
+
+### Server-side Template Rendering
+These are usually simple string replacement tools combined with markdown. It's a continuation of older web development models (like JSP, ASP). Many modern tools extend this model with frontend frameworks to add dynamic capabilities and richer visual features—examples include VitePress and VuePress.
+
+### Server-side SPA Rendering (SSR)
+This approach emerged with the rise of SPAs, primarily to address SEO issues. Early implementations were sluggish and even used headless browsers. Over time, support for server-side rendering in frontend frameworks improved dramatically. Next.js is a prominent example.
+
+Frameworks like Svelte have also entered the scene, making it increasingly feasible to deliver static pages with minimal JS payloads.
+
+### Client-side Template Rendering
+This is essentially SPA for a specific domain—Docsify is a typical example. However, due to SEO limitations, this approach has become less viable for blogs and documentation sites, especially with the rapid advancement of SSR solutions which clearly outperform it.
+
+---
+
+Regardless of approach, all SSGs typically expand with supporting tools. Most start with themes and demos to enable quick site creation. Older generations featured numerous fancy templates—back in 2014, I remember spending a lot of time just choosing one. UI enthusiasm was high. The newer generation focuses less on that, offering just a few solid templates for common use cases. The focus has shifted to clean content and cross-platform support (perhaps influenced by the rise of the Bauhaus aesthetic in frontend design).
+
+Plugins have evolved from broad functional add-ons to targeted integrations that improve the user development experience. Instead of large plugin ecosystems, functionality is often delegated to the community, while companies drive traffic to their platform products.
+
+In summary, for blogs, static sites, and documentation, VitePress is closest to my ideal solution. The project team’s insights are truly commendable. Next.js is more comprehensive, with a broad range of plugins.
+
+Non-JS SSGs are increasingly disadvantaged due to JS ecosystem dominance and may eventually disappear.
+
+## Future Direction
+Next.js and Svelte seem poised to define the future, but for now, VitePress already does the job very well.
