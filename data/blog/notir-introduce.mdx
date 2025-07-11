@@ -1,18 +1,47 @@
 ---
-title: 'Notir: Simple Pubsub Tool via Http and Websocket Protocol'
+title: 'Notir – A Minimal Web Notification Service via HTTP and WebSocket'
 date: '2025-07-10'
 tags: ['rust', 'tool']
 draft: false
 ---
-Notir: a concise small tool. It implements simple pubsub functionality through HTTP and WebSocket protocols. This is super useful in many scenarios, like
+Hi,
 
-- Http log viewer.
-- Bypassing firewall for message delivery.
+I built Notir, a lightweight, self-hostable notification service that lets you send a message over HTTP and receive it in real-time via WebSocket on a web page.
 
-In the past, I tried to implement it with MQTT, but there were issues: publishing messages needed to use the MQTT protocol, which would greatly increase the package size for mini programs. The stability of the Mqtt.js client on the mini program platform was also very poor.
+**🔧 How it works:**
 
-Today, I suddenly got inspired to make one based on Rust: Kicking off MQTT, just http and websocket. With the help of Google Jules, I was able to implement it quickly.
+- Clients (like your web browser) open a WebSocket connection to Notir with an id.
+- Any HTTP POST to /pub?id=... delivers the message to the connected WebSocket clients with the same id.
+- No authentication, database, or complex setup — just cargo run.
 
-I have deployed a ligthtweight version of Notir on http://notir.fornetcode.com:5800/ , You can use it to test.
+**💡 Use cases:**
+
+- Debugging / dev tools
+- Live monitoring / status pages
+- DIY alerting
+- Real-time message demos
+
+**🚀 Demo:**
+
+>
+> Step 1. Open browser: http://notir.fornetcode.com:5800/?id=theUniqueId_ChangeIt
+>
+> Step 2. Open browser dev console.
+>
+> Step 3. Publish message via curl
+> ```bash
+> curl -X POST http://notir.fornetcode.com:5800/pub?id=theUniqueId_ChangeIt -d "Hello World"
+> ```
+
+That's All! 🎉🎉🎉
+
+---
+
+**🔗 Project page:** https://github.com/timzaak/notir
+
+Would love any feedback, ideas, or contributions.
+
+Thanks for reading!
+
 
 
