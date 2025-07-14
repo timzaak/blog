@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'All About Full-stack development',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://timzaak.github.io/blog',
+  siteUrl: 'https://blog.fornetcode.com',
   siteRepo: 'https://github.com/timzaak/blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
