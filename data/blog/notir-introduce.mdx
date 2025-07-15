@@ -4,44 +4,60 @@ date: '2025-07-10'
 tags: ['rust', 'tool']
 draft: false
 ---
-Hi,
+Hi Devs 👋
 
-I built Notir, a lightweight, self-hostable notification service that lets you send a message over HTTP and receive it in real-time via WebSocket on a web page.
-
-**🔧 How it works:**
-
-- Clients (like your web browser) open a WebSocket connection to Notir with an id.
-- Any HTTP POST to /pub?id=... delivers the message to the connected WebSocket clients with the same id.
-- No authentication, database, or complex setup — just cargo run.
-
-**💡 Use cases:**
-
-- Debugging / dev tools
-- Live monitoring / status pages
-- DIY alerting
-- Real-time message demos
-
-**🚀 Demo:**
-
->
-> Step 1. Open browser: http://notir.fornetcode.com:5800/?id=theUniqueId_ChangeIt
->
-> Step 2. Open browser dev console.
->
-> Step 3. Publish message via curl
-> ```bash
-> curl -X POST http://notir.fornetcode.com:5800/pub?id=theUniqueId_ChangeIt -d "Hello World"
-> ```
-
-That's All! 🎉🎉🎉
+I recently built **[Notir](https://github.com/timzaak/notir)** — a lightweight, self-hostable real-time notification service. It delivers messages over WebSocket with **no database, no authentication, and no complex setup**.
 
 ---
 
-**🔗 Project page:** https://github.com/timzaak/notir
+## 🔧 How It Works
 
-Would love any feedback, ideas, or contributions.
+1. Clients (like browsers) open a WebSocket connection with a unique `id`:
+```
+ws://localhost:5800/ws?id=your-unique-id
+```
+
+2. Any HTTP POST to `/pub?id=your-unique-id` sends the message to all connected WebSocket clients with that ID:
+```
+POST /pub?id=your-unique-id
+```
+
+- ✅ No database required
+- ✅ No authentication
+- ✅ No third-party services
+- ✅ Docker-ready
+
+---
+
+## 🚀 Live Demo
+
+Give it a try in 3 steps:
+
+**Step 1:** Open in browser
+[http://notir.fornetcode.com:5800/?id=theUniqueId_ChangeIt](http://notir.fornetcode.com:5800/?id=theUniqueId_ChangeIt)
+
+**Step 2:** Open browser developer console
+
+**Step 3:** Send a message using curl
+```bash
+curl -X POST http://notir.fornetcode.com:5800/pub?id=theUniqueId_ChangeIt -d "Hello World"
+```
+
+🎉 Message delivered instantly to the browser.
+
+---
+## 📦 Quick Start for Self-Hosted
+
+```bash
+docker run -it --rm -p 5800:5800 ghcr.io/timzaak/notir:latest
+```
+
+---
+
+## 🔗 Project Page
+
+GitHub: [https://github.com/timzaak/notir](https://github.com/timzaak/notir)
+
+I’d love your feedback, ideas, or contributions — feel free to star or open an issue!
 
 Thanks for reading!
-
-
-
