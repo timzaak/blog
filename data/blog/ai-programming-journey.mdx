@@ -1,0 +1,119 @@
+---
+title: 'From "Making AI Write Code" to "Making AI Understand You" — My AI Programming Journey'
+date: '2026-05-20'
+tags: ['ai', 'engineering']
+draft: false
+summary: 'A reflection on my AI programming journey: from context-driven quality to engineering systems, visual-first workflows, and the ongoing challenge of intent alignment.'
+---
+
+When I first started using AI to write code, I was like most people: throw a requirement at it, get some code back, use it if it works, ask again if it doesn't. Back then, AI felt like a smarter search engine that could save me some typing.
+
+But the more I used it, the more I noticed something: **The quality of AI's output is almost entirely determined by the context you give it.** The same requirement, described differently, with a couple extra lines of background or clear acceptance criteria, could turn the result from "barely usable" into "ready to ship."
+
+The logic isn't complicated — AI performs next-token prediction based on the context you provide. The more precise the context, the narrower the prediction space, the higher the output relevance. This insight became the foundation for all my AI programming practices.
+
+---
+
+Once I understood that "context determines quality," the natural next question was: if one round isn't good enough, can we do more rounds?
+
+So I developed a working pattern: provide context and acceptance criteria, let AI generate a solution, feed the solution back as new context, and loop until the criteria are met. It sounds simple, but the results are real — single-shot accuracy is around 20%, but through iteration you can push it to 70-80%. Each round helps AI narrow its prediction space. The first round captures 60% of the intent, the second round refines it to 80% through feedback comparison, and one more round usually gets it there.
+
+This made me realize: **The core of AI programming isn't prompt engineering tricks — it's workflow design.** You don't need a "perfect prompt." You need a loop that continuously gives AI correct feedback.
+
+---
+
+But iterative loops introduced new problems.
+
+The most obvious one is context degradation. The longer the conversation and the more irrelevant information accumulates, the worse the output quality becomes. After 50 rounds of conversation, AI might forget rules established in round 3 and start making things up. Then there's instruction following — you set up a set of conventions, and AI follows them strictly for the first few rounds, then starts drifting. Not because it doesn't want to comply, but because as context expands, those instructions get diluted in its attention.
+
+These two problems taught me something: **LLMs have inherent structural weaknesses that better prompts can't fix — they require engineering solutions to mitigate.**
+
+My approach was to proactively and frequently clear or isolate context — later I found that Subagents are naturally suited for this. I use Slash Commands for precise triggering instead of verbal instructions in long conversations. I solidify complex specifications into standalone documents rather than repeating them every time.
+
+Another related pitfall is context bloat. When a task is too large and has too many details, throwing it all at AI at once results in incomplete work — not because AI doesn't want to do it all, but because the task is too big for the limited context window to capture all the relevant details.
+
+Later I changed my approach: let AI break large tasks into smaller steps itself. How small? Through experimentation, I found a sweet spot — a single sub-agent completing one task should consume roughly 100K tokens per cycle. Too many and information gets lost, things fall through the cracks. Too few and you end up doing repetitive work. This number came from repeated real-world adjustments.
+
+This also gave me a new perspective on "task decomposition": I used to think it was about making work clearer, but now I realize the essence is **controlling the context window size per agent**, maintaining sufficient attention density for each execution.
+
+---
+
+After solving the context problems, I started thinking bigger: could I turn this methodology into a reusable engineering system, rather than relying on personal experience every time?
+
+That's what led to [T-Tools](https://github.com/timzaak/web-dev-skills).
+
+The core idea behind T-Tools is upgrading AI programming from "ad-hoc Q&A" to "executable engineering workflows." Each work phase becomes an independent Skill command. Agents are split by engineering role (backend development, frontend testing, E2E demo, read-only acceptance). Shared rules are abstracted into Protocols. The entire development process is chained into a pipeline with quality gates: PRD → Design → Task → Run → Demo Acceptance.
+
+There are a few design choices I consider particularly important. First, every phase has a check — no skipping. Skipping just pushes upstream problems downstream, where fixing them gets exponentially more expensive. Second, Demo acceptance is independent of other tests — it runs real browser simulations via Playwright to verify the complete user journey, answering the question "can a user actually use this feature?" Third, serial execution — at any point, at most one task is running. This trades speed for greater controllability. The biggest risk in AI programming isn't being slow — it's losing control.
+
+---
+
+While implementing this engineering system, I encountered a problem I hadn't paid much attention to before: the speed of engineering infrastructure.
+
+When writing code by hand, waiting 20-30 minutes for tests was perfectly acceptable. Write a few dozen lines, run tests, check results, adjust, repeat. Compilation speed, test parallelism, incremental builds were low priorities — you could afford to wait.
+
+But AI programming completely changes this equation. In an iterative loop, AI might generate, compile, and run code a dozen or even dozens of times. If each compilation takes 5 minutes and the test suite takes 20 minutes, a single Dev-Test-Accept cycle consumes one to two hours — and that's just one item. A feature might have a dozen items.
+
+This means **engineering shortcomings that were previously tolerable become critical bottlenecks under AI programming.** Concurrent test execution, incremental compilation, test selection and isolation, build caching — capabilities that were "nice to have" in manual programming become "must-have" in AI programming. AI programming demands an upgrade of engineering capabilities. Engineering used to serve human efficiency; now it serves AI's iteration speed. The tolerance for slowness differs by orders of magnitude.
+
+---
+
+Once the engineering pipeline was running, I thought I'd found the ultimate answer. But after completing a few real projects, an uncomfortable truth emerged: **things worked, but the final UI interaction experience was poor.**
+
+Where was the problem? Looking back, I realized the root cause was actually the PRD.
+
+A PRD is fundamentally a text description. How to name things, how flows should work, how interactions connect — written out in text, even I didn't want to read it twice, let alone expect AI to execute it strictly. A blurry picture in my head, translated into text, then translated by AI into code — after two layers of translation, the gap between the final product and the expectation is huge. And you can't even pinpoint what's wrong — the text itself isn't precise enough to identify the deviation.
+
+Fixing it was even more painful. Changing one interaction detail often cascaded into backend logic changes. A single modification could take three to four hours and consume tens of millions of tokens. The verification process and testing phases couldn't be skipped — the vast majority of tokens were spent on "course correction" rather than "creation."
+
+This made me question a fundamental assumption: is the PRD really the right starting point for AI programming?
+
+I tried a different angle: instead of starting from PRD, start from UI and interaction. Define what to build by specifying what the interface looks like and how users interact with it. After AI generates the page, visually assess what's missing or wrong, then have AI reverse-engineer and fill in the PRD based on the page.
+
+A popular recent approach is having AI output HTML directly instead of Markdown — essentially the same idea as mine: using visual form to quickly confirm whether AI's understanding is correct. The human eye can judge layout correctness, interaction flow, and missing features in one second. Reviewing text descriptions or code line by line is laughably inefficient by comparison. There's another key benefit to working backwards from UI: when the page looks wrong, the feedback is immediate and specific — "the button should be on the right," "the list needs filtering," "the flow is missing a step." This feedback doesn't go through text translation, so the signal AI receives is more precise.
+
+I haven't fully implemented this approach yet, but the process is clear in my mind: instead of writing a complete PRD first, create an MVP-level visual description — several HTML pages with annotated comments, possibly including simple JS interaction demos. Hand this material to AI, tell it what needs adjustment and what to focus on, while saving the interaction history. Then, based on these visual materials and conversation records, reverse-engineer the PRD. I call this "the PRD for the AI era" — visualization-centric. Anyone looking at it can roughly imagine the product's features and appearance. Taking it further, you could have AI generate interaction videos for user stories — you describe the operation flow verbally, AI outputs a demo, then reorganize everything with the documentation. This produces a PRD with both visuals and dynamic demonstrations, dramatically reducing understanding gaps. Finally, leveraging T-Tools' engineering capabilities, translate the "visual PRD" into the final product.
+
+Going back to the beginning, all these experiments — iterative loops, engineering systems, visual-first workflows — are really answering the same question: **How do you confirm that AI truly understands your intent?**
+
+The problem with text PRDs is that there's a layer of text translation between human and AI. You say "redirect to homepage after login," but the "homepage" AI understands might be completely different from what's in your head. Using text to review text makes deviations nearly invisible. HTML pages and interaction demos are effective because they pull "understanding verification" from the text dimension to the visual dimension — one glance tells you if it's right, orders of magnitude more efficient than text review.
+
+So the core challenge of AI programming isn't just making AI write runnable code — it's aligning intent with AI before it writes the code. Engineering solves "can what's written run?" Visual-first solves "is what runs what you actually wanted?"
+
+---
+
+Looking back at this journey, one belief has never changed: **The human's role isn't "the person who writes code" — it's "the workflow designer, the contract maker, and the final acceptance authority."**
+
+AI can write code, tests, and documentation, but humans need to design workflows, establish standards, and control quality gates. The core value of humans in AI programming shifts from "doing" to "designing and judging." The fundamental trade-off in engineering is the same — sacrifice some flexibility for more structure. The model still handles reasoning and implementation, but it must proceed along the paths defined by documents, states, contracts, and gates.
+
+---
+
+Writing this far, there's actually another question that's been turning over in my head. I haven't figured it out completely, but I think it's important: **How do you make AI's output more professional?**
+
+All the methods I've described — precise context, iterative loops, engineering workflows, visual-first verification — are solving "how to make AI do things correctly." But "doing it correctly" and "doing it well" are different things. AI can implement a feature according to the PRD, but is the interaction design professional enough? Is the information architecture reasonable? Does the code truly follow best practices? These aren't solvable through better prompts or stricter gates.
+
+What I'm really thinking about is: how should professional knowledge be fed to AI?
+
+One intuition is to organize domain experts' experience and judgment criteria into documents, guides, and checklists, and inject them into AI's workflow — write UX design principles as guides, backend architecture trade-offs as protocols, testing strategies as checklists. The guides and protocols I mentioned earlier are already a step in this direction.
+
+But another possibility interests me more: maybe what really needs to improve isn't the capacity of AI's knowledge base, but the human's own mental model.
+
+If you lack sufficient cognitive dimensions and evaluation criteria for a domain, you can't even tell where AI's output "falls short" — you can sense "something's off," but can't articulate "why it's off" or "what it should be instead." The feedback you give AI is vague and inefficient, and no amount of iteration converges to a professional standard. Conversely, if you have a clear mental model — knowing what standards good interaction design should meet, knowing what traps reasonable architectures should avoid, able to decompose "feels wrong" into specific, actionable feedback — then AI's output quality will improve qualitatively. Not because you wrote better prompts, but because each piece of feedback is more precise and directional.
+
+This raises a question worth discussing: in the future of AI collaboration, should we "push the entire process to AI," or should we "first build human mental models, then feed them back into AI workflows"?
+
+The logic of the former is that AI keeps getting stronger, professional knowledge will be internalized by models, and humans only need final acceptance. The logic of the latter is that the depth of human cognition determines the ceiling of AI's output — without human improvement, AI just accelerates in the wrong direction, no matter how strong it gets. I lean toward the latter, but I'm not certain. Perhaps the answer is a middle ground: humans need sufficient mental models to ask the right questions and give effective feedback, but don't need to master every execution detail themselves. Like how an architect doesn't need to lay bricks personally, but must understand structural mechanics and spatial logic — otherwise even the blueprints will be wrong.
+
+I don't have an answer to this question. I'm putting it out there for discussion.
+
+---
+
+From the initial discovery that "context determines quality," to exploring iterative loops, to hitting context degradation bottlenecks, to developing an engineering system, to questioning the "PRD-first" starting point, to the ongoing question of "where should professional knowledge live" — this process itself is a Dev-Test-Accept cycle.
+
+Every layer of problems solved reveals the next layer. Engineering solved "can AI deliver to spec?" Visual-first attempts to solve "is what's delivered what you wanted?" The professionalization question asks "is the standard you want high enough?"
+
+AI programming is still evolving rapidly. But one thing is becoming increasingly clear: **The core challenge has always been "intent alignment" — how to confirm that AI truly understands what you want.** And the prerequisite for intent alignment is being clear about "what I want" yourself. Engineering is a means. Visual verification is a means. Mental models are the foundation. Prompts are tactics. Workflows are strategy. Alignment verification is strategy within strategy. And the depth of human cognition determines the ceiling for all of it.
+
+---
+
+*The engineering practices described here are implemented in [T-Tools](https://github.com/timzaak/web-dev-skills). If you're interested, you can refer to the [design document](https://github.com/timzaak/web-dev-skills/blob/main/human/structure.md). For the core principles of engineering AI programming, I previously wrote a systematic breakdown in [this issue](https://github.com/timzaak/blog/issues/142).*
