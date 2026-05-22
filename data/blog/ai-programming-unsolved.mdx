@@ -1,0 +1,109 @@
+---
+title: 'After AI Started Writing My Code, the Problems Nobody Talks About'
+date: '2026-05-22'
+tags: ['ai', 'engineering']
+draft: false
+summary: 'The engineering pipeline is up and running, the process works — but some problems only got more visible: stale information piling up, code structure slowly drifting, frontend consistency slipping through your fingers, and humans struggling to keep up with the big picture.'
+---
+
+In my [previous post](./ai-programming-journey), I walked through my journey from "making AI write code" to "making AI understand you" — discovering that context determines quality, iterating in loops, building the engineering system T-Tools, and moving toward a visual-first workflow. That post landed on "intent alignment": how do you confirm that AI truly understands what you want?
+
+But there was an implicit assumption I didn't unpack: that the system is already running, that the engineering pipeline is already in motion. In reality, once those conditions are met, the problems I face don't decrease — they just change shape.
+
+Engineering solves "how to build the right thing correctly." But after you've built it? That's when the real problems begin.
+
+---
+
+## Project Information Quietly Goes Stale
+
+This is the problem I feel most acutely in real projects.
+
+As the business keeps iterating, information in the project inevitably becomes outdated. A comment describes logic from three months ago. A document outlines a workflow that's been retired. A config maps to a service that was decommissioned long ago. This stale information isn't just useless — it's **wrong**, and it misleads AI's judgment.
+
+What's worse, this stale information is nearly impossible to clean up. There's no reliable solution that can automatically identify, remove, and correct outdated content. My current approach is to keep having AI run various audits — code reviews, document reviews, consistency checks — to slow the growth of errors. Honestly, it helps a little, but the cost is burning through tokens, and **it can only slow things down, never cure them**.
+
+It's like a room — don't clean it, and it naturally gets messier. AI programming accelerates how fast information piles up, but doesn't bring an equivalent ability to organize it.
+
+---
+
+## Code Structure: It Drifts Before You Notice
+
+Beyond information, code structure is equally tricky.
+
+At the start of a project, you set up a clean architecture — how to organize directories, split modules, assign responsibilities. But as the project iterates, edge-case requirements keep showing up. One requirement doesn't quite fit the existing structure, so AI implements something "good enough." Another edge case, another compromise. After a few rounds, that once-clean structure has quietly drifted.
+
+This isn't about bad code — it's about **consistency falling apart**. Like a well-planned road that sprouts more and more side paths and shortcuts. Each one had a reason at the time, but taken together, it's no longer a coherent road.
+
+My response has been to run regular code scans, even build custom scripts that run every few task submissions to check how far the structure has drifted. These help, but they're inherently reactive — find a problem, patch it — rather than preventing the drift in the first place.
+
+The good news is that for backend business logic, this is relatively manageable. As long as test coverage is solid and scenarios are validated, backend correctness is largely guaranteed. If the logic is right, structural deviations won't cause functional errors.
+
+Frontend is a completely different story.
+
+---
+
+## Frontend: The Hardest Thing to Keep in Line
+
+Frontend is the area I find most frustrating right now. Almost every piece of AI output buries some deeply hidden mess.
+
+And I don't mean the code is badly written — AI-generated code is decent when you look at it in isolation. The problem is that **the same feature keeps getting implemented in increasingly different ways**. A list filter might use three different state management approaches across three requirements. A form submission might follow completely different data flow paths in two implementations.
+
+The core issue is **a lack of consistency**. Not bad code, but the same things done increasingly differently.
+
+I'm trying a few things:
+
+**For styles**, I'm using a Design.md to enforce visual consistency. I freeze design specs into a document, inject it before each task, and have AI work within the same design system. It helps — at least the same button won't look different across three pages.
+
+**For code logic**, honestly I haven't found a good solution yet. State management is the worst offender — sometimes code uses global state, sometimes component-local state, and the boundary between the two isn't even clear to humans, let alone AI.
+
+Backend has tests as a safety net. Frontend doesn't. You can't easily write a test that checks "does this code's state management approach match the rest of the project?" This isn't something you fix by writing more tests.
+
+---
+
+## When Should Humans Step In?
+
+This leads to a more fundamental question: in the AI programming workflow, when should humans intervene, and how deeply?
+
+On the acceptance side, humans must be the final gatekeepers — no argument there. But acceptance shouldn't only happen at the end. If a person only looks at the code after it's written, there's very little left to change.
+
+The question further upstream is: when a human states a requirement and AI produces a PRD and frontend UI, should the human step in early to validate?
+
+I see three issues:
+
+**First, your grip on the project quietly slips away.** A PRD contains a massive amount of information. As more work is handed to AI, your sense of the project's overall state slowly dilutes. You might clearly remember the decision logic from three months ago, but have no idea about that small adjustment AI made last week.
+
+**Second, AI's solutions are inherently isolated.** Each solution AI produces is internally consistent, but often doesn't account for the project's current state. Viewed globally, it might conflict with existing design principles, mismatch other modules' interfaces, or go against the overall architectural direction. And when humans audit, the sheer volume of information makes it hard to spot these deeper conflicts.
+
+**Third, audits can only do so much.** What audits can improve today is mainly at the logic and technical design level — an experienced architect can indeed guide AI toward better solutions with better prompts. But when it comes to interaction design, user experience, and the continuous layering of features, current AI collaboration falls short. Humans may still have an edge in overall coordination and visual quality judgment, but that edge is thinning.
+
+There's also a deeper gap: **there's no unified solution that uses multimodal models to evaluate a product against UI/UX standards.** I haven't seen anyone in open source make a real breakthrough here either. A tool that understands design specs, evaluates interaction quality, and gives concrete feedback — this might be a meaningful area for AI-assisted programming in the next couple of years.
+
+---
+
+## RAG: It Doesn't Feel Right
+
+When looking for solutions, you inevitably consider RAG (Retrieval-Augmented Generation). But after actually using it, my feeling is: **RAG isn't ready to be a programming assistant.**
+
+The fundamental issue is that RAG's retrieval logic doesn't match how programming information is structured. RAG is essentially a keyword-adjacent search — you describe a need, it returns relevant fragments. But information in code isn't flat text. It's deeply **structural**: which methods does this method call, what does this class depend on, what implementations does this interface have, which flows does this logic affect. Gathering this information requires "jumping" — like in an IDE, where you Ctrl-click into a method, see its implementation, then jump to the core methods it calls, tracing deeper and deeper.
+
+This IDE-style information gathering is naturally better suited for programming than RAG's search approach.
+
+I think this pattern might ultimately be better handled by small models on the edge. A small local model that can directly access the project's code structure, follow call chains to collect context, and provide precise assistance. But the reality is that current edge-side model capabilities and hardware aren't there yet.
+
+My guess is this won't become real until after 2027 — as small models get stronger and edge hardware (especially NPUs) advances further. When that happens, local small models handle structural code understanding while cloud models handle complex reasoning and generation. The two work together — precise, efficient, and far less computationally expensive than throwing everything at a large model.
+
+---
+
+## Closing Thought
+
+These problems share a common thread: **at their core, they might just be entropy — and you can't defeat entropy.**
+
+Think about those massive legacy codebases. No matter how well-architected they started, they all eventually turned into "big balls of mud." Not because someone wrote bad code, but because they accumulated through countless iterations of business requirements. What can you do? Keep writing tests, keep refactoring, maintain a "still works" state. Order naturally trends toward chaos. You can spend energy maintaining it, but you'll never fix it once and for all.
+
+AI programming is the same. It accelerates code production, and it accelerates the accumulation of chaos. Stale information, drifting structures, dissolving consistency — these aren't new problems AI created. They're old software engineering problems that AI just makes faster and harder to notice.
+
+So here's what I want to say: **AI programming is not a silver bullet.** It can make one person do the work of five, but it can't keep a one-person project from rotting. It solves efficiency, not entropy. Efficiency can be improved with tools, but entropy can only be managed by people — constantly, repeatedly, going back and maintaining things.
+
+I'm not writing this to be pessimistic. I use AI to write code every day, and honestly, I can't work without it anymore. But I'd rather accept that these problems exist than hope they'll magically disappear someday. And once you accept that, you can think more clearly about what's worth spending energy on and what you just have to live with.
+
+Knowing your limits beats blind optimism.
