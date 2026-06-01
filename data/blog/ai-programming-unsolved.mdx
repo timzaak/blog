@@ -78,6 +78,18 @@ I see three issues:
 
 There's also a deeper gap: **there's no unified solution that uses multimodal models to evaluate a product against UI/UX standards.** I haven't seen anyone in open source make a real breakthrough here either. A tool that understands design specs, evaluates interaction quality, and gives concrete feedback — this might be a meaningful area for AI-assisted programming in the next couple of years.
 
+That said, theory is one thing; in practice I've settled into an intervention cadence of my own.
+
+When the PRD is done, I always have AI produce a simple HTML page along with a concrete implementation explanation. The benefit is immediacy — you quickly grasp its implementation intent and can identify its capability boundaries early. Right after that, I ask it to raise questions about the PRD, which I answer one by one, ensuring both sides share the same understanding of the requirements.
+
+Beyond that point, the main locus of human involvement shifts to acceptance testing. I split acceptance into two stages.
+
+The first is immediate acceptance right after the frontend Demo is complete. At this point, subsequent Demos haven't started yet — problems are caught early, and later iterations can directly avoid repeating the same mistakes. The core benefit is reducing token consumption: errors haven't had the chance to compound through downstream stages.
+
+The second is acceptance after all Demos have run and known issues are fixed. The advantage is that you don't have to waste attention on low-level bugs and can focus on more fundamental deviations. But even with thorough discussion during the PRD phase, the translation from backend code to frontend code still introduces significant drift — UI style inconsistencies, subtle logic shifts — that only surface at this stage.
+
+Both strategies have their strengths and their costs. The later you intervene, the fewer low-level bugs remain — but the more tokens correcting drift will consume.
+
 ---
 
 ## RAG: It Doesn't Feel Right

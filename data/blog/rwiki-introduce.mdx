@@ -1,0 +1,105 @@
+---
+title: 'RWiki: A Lightweight Self-Hosted RAG Knowledge Base Q&A System'
+date: '2026-06-01'
+tags: ['rust', 'ai', 'rag', 'tool']
+draft: false
+summary: 'No PostgreSQL, no Redis, no vector database. One binary, one SQLite database, and you have a fully functional RWiki knowledge base Q&A service.'
+---
+
+To solve the need for a lightweight internal knowledge base Q&A system, I built **RWiki**.
+
+After looking around, I found that existing solutions were either cloud services (data not in your hands) or open-source projects with overwhelming dependencies. What the team needed was simple: throw in some documents, ask questions in natural language, and get answers with sources — not a complex microservices architecture.
+
+So I built **[RWiki](https://github.com/timzaak/rwiki)**. The entire project was developed using [T-Tools AI](https://github.com/timzaak/web-dev-skills), taking less than a week and consuming over 400 million tokens.
+
+---
+
+## What It Is
+
+RWiki is a RAG (Retrieval-Augmented Generation) based knowledge base Q&A system. You upload documents, and it handles splitting, vectorization, and storage. Users can then ask questions in natural language — the system retrieves relevant content from the documents and generates answers with source citations via an LLM.
+
+The core design goal is simple: **keep it as simple as possible**.
+
+- Single binary, no external dependencies
+- SQLite for all data storage, including vector indexes (via sqlite-vec)
+- Supports multiple LLM providers: OpenAI, OpenRouter, Zhipu AI, and more
+- Comes with an embeddable chat widget for any website
+
+---
+
+## Notable Features
+
+### Document Processing
+
+Supports three formats: Markdown (with frontmatter), Excel (.xlsx), and OpenAPI specs. Markdown works well for technical docs and knowledge bases, Excel for structured data, and OpenAPI for API documentation assistants. Uploaded files are automatically split, embedded, indexed, and made searchable once published.
+
+### Conversation Experience
+
+Chat uses streaming (SSE) for a natural typing effect. Multi-turn conversations are supported with automatic query rewriting — follow-up questions are understood in their full semantic context. Conversation history uses a sliding window with automatic compression, so token usage won't blow up over long sessions.
+
+Answers include source citations in the format `[Source: Title / Section]`, with links to original documents when available. This is crucial for knowledge base scenarios — users need to be able to trace information back to its origin.
+
+### Embeddable Chat Widget
+
+Beyond the built-in admin frontend, RWiki provides `rwiki-chat.js` — a chat widget you can embed in any webpage with just two lines of HTML. It uses Shadow DOM for style isolation, so it won't conflict with the host page's styles.
+
+### Multi-LLM Provider
+
+Simply specify `base_url` and `model` in the config file — it's compatible with any OpenAI API format provider. You can use DeepSeek, Claude, GPT-4o, or Zhipu's GLM series. The same applies to embedding models — currently tested with OpenAI and Zhipu's Embedding-3.
+
+---
+
+## Quick Start
+
+The easiest way is Docker:
+
+```bash
+docker run -it --rm \
+  -p 8080:8080 \
+  -e LLM_API_KEY=your-api-key \
+  -v rwiki-data:/app/data \
+  ghcr.io/timzaak/rwiki:latest
+```
+
+Then visit `http://localhost:8080` to see the interface.
+
+To run locally, download the binary for your platform from [GitHub Releases](https://github.com/timzaak/rwiki/releases), prepare a config file, and run it directly.
+
+---
+
+## Tech Stack
+
+The backend is written in Rust (Axum + SQLite + rig-core), with a React + TypeScript frontend. Rust wasn't chosen to show off — it was chosen because:
+
+1. Compiles to a single binary, easy to deploy
+2. Low memory footprint, runs on a 1C1G machine
+3. Mature SQLite ecosystem in Rust, sqlite-vec handles vector search well enough
+
+Honestly, for most small-to-medium knowledge base scenarios (hundreds to thousands of documents), SQLite + sqlite-vec performs perfectly fine. No need to reach for Qdrant or Milvus right away.
+
+---
+
+## Current Status
+
+This is the first official release (v0.1.1), with core features ready to use:
+
+- Document upload, parsing, vectorization, and publishing
+- RAG retrieval + LLM streaming Q&A
+- Multi-turn conversation + source citations
+- Embeddable chat widget
+- OpenTelemetry observability support
+
+Upcoming plans: more document format support, finer-grained access control, and a better frontend experience.
+
+---
+
+## Wrapping Up
+
+RWiki solves a small problem: "I have a bunch of documents and want to ask questions in natural language." But this need is quite common — internal team docs, product FAQs, API documentation assistants, personal note collections...
+
+Want to try it out? Visit [rwiki.fornetcode.com](https://rwiki.fornetcode.com) to test document upload and Q&A online.
+
+If this fits your needs, give it a try. Feel free to open an [issue](https://github.com/timzaak/rwiki/issues) if you run into problems, and stars are always welcome.
+
+Project: [https://github.com/timzaak/rwiki](https://github.com/timzaak/rwiki)
+Live Demo: [https://rwiki.fornetcode.com](https://rwiki.fornetcode.com)
