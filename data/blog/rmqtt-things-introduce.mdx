@@ -1,0 +1,144 @@
+---
+title: 'RMQTT Things: A Lightweight IoT Thing Model Management Platform'
+date: '2026-06-03'
+tags: ['rust', 'iot', 'mqtt', 'tool']
+draft: false
+summary: 'A thing model service built on RMQTT Broker — device management, certificate management, and OTA updates. Backend in Rust, frontend in React, entirely developed with AI.'
+---
+
+## What It Is
+
+A thing model management platform. Devices connect via MQTT, report properties and events, receive commands. The platform handles storage, management, and delivery.
+
+The broker is [RMQTT](https://github.com/rmqtt/rmqtt) (written in Rust, lightweight and stable), the backend is also Rust (Axum), and the frontend is React 19. Database is PostgreSQL, caching supports Redis or in-memory, file storage goes through S3.
+
+The architecture is straightforward:
+
+```
+Device → RMQTT Broker → WebHook → Backend (Rust) → PostgreSQL
+                                      ↓
+                              Frontend (React) ← Management API
+```
+
+No message queue between the broker and backend — just direct WebHook callbacks. Simple and sufficient.
+
+---
+
+## Thing Model Protocol
+
+The protocol is the most critical part of the project. Once the communication rules between devices and the platform are well-defined, everything else follows.
+
+### Topic Design
+
+Format: `{productId}/{deviceId}/thing/{direction}/{type}/{action}`
+
+There are only two directions: `event` (device reports) and `service` (platform delivers). For example:
+
+- Device reports temperature: `demo/device1/thing/event/property/post`
+- Platform sets a threshold: `demo/device1/thing/service/property/set`
+
+The reply mechanism is also simple — just add the `_reply` suffix to any topic that needs a response. One rule covers everything; no need to design separate reply topics for each message type.
+
+### Message Format
+
+Unified JSON:
+
+```json
+{
+  "id": "request-id",
+  "params": { "temperature": 25.3 },
+  "ack": 1
+}
+```
+
+`ack` controls whether a reply is needed. `0` means no reply — suitable for high-frequency reporting (reporting temperature every second, no need to wait for confirmation each time). `1` means reply required, ensuring the device receives the platform's processing result.
+
+### Authentication
+
+The password used when a device connects to the broker is not plaintext — it uses HMAC-SHA1 signing:
+
+```
+password = nonce.timestamp.hmac_sha1(shared_key, deviceId.nonce.timestamp.shared_key)
+```
+
+Timestamps that differ by more than 5 minutes are rejected outright, preventing replay attacks. If the backend is down, connections are denied — it's better for devices to fail to connect than to let unauthenticated devices in.
+
+ACL is equally straightforward: devices can only operate within their own topic space, where the deviceId in the topic must match their clientId. Cross-device operations are denied.
+
+---
+
+## Certificate Management
+
+Production environments require TLS. The project includes a built-in CA that can issue both server and client certificates.
+
+One-way TLS is simple to deploy and sufficient for most scenarios. Mutual TLS (mTLS) provides higher security — the client certificate's CN field format is `{productId}/{deviceId}`, and the broker parses the device identity directly from the CN without additional lookups.
+
+Device certificate issuance and revocation are handled in the management dashboard, and the APIs are also exposed for integration into your own production workflows.
+
+---
+
+## OTA Updates
+
+Version numbers follow `major.minor.patch` format, encoded as a 7-digit integer. `1.2.34` becomes `102034` — comparing numbers directly tells you which is newer.
+
+Devices can report versions for multiple MCUs (main controller, camera module, etc.), differentiated by `key`:
+
+```json
+{
+  "id": "req-001",
+  "params": [
+    {"key": "main", "version": "1.0.0"},
+    {"key": "camera", "version": "1.2.0"}
+  ]
+}
+```
+
+Update packages are stored on S3. Devices receive an S3 object key rather than a direct URL — since each CDN has different authentication strategies, a unified approach isn't feasible. Devices construct their own download requests based on the key.
+
+---
+
+## Rule Engine
+
+A recently added feature. You can configure alert rules such as "temperature > 50 degrees triggers an alert." It supports threshold-based judgments and event triggers. Alerts are recorded and viewable in the management dashboard.
+
+This area is still being iterated on — more notification methods will be added in the future.
+
+---
+
+## Management Dashboard
+
+React 19 + TanStack Router + Tailwind 4. Feature coverage:
+
+- Product and device CRUD
+- Device online status and connection history
+- Property reporting history queries
+- Certificate issuance and management
+- OTA firmware version management
+- Alert rule configuration
+- Schema template management (validates data reported by devices)
+
+Nothing flashy — just everything you need.
+
+---
+
+## Built with AI
+
+This project has been written with AI from the very first line of code, using my own [T-Tools](https://github.com/timzaak/web-dev-skills) workflow. The project includes a complete Claude Code configuration (`.claude/` directory) — from PRD to design to development to acceptance testing, the entire pipeline is there.
+
+---
+
+## Current Status
+
+v0.3.2, all core features are working:
+
+- Device connection, authentication, and access control
+- Property reporting and delivery, history queries
+- Certificate issuance (built-in CA, mTLS support)
+- OTA firmware management
+- Alert rule engine
+- Management dashboard UI
+- OpenTelemetry observability
+
+If you're working on an IoT project and need a lightweight thing model management service, give it a try.
+
+Project: [https://github.com/timzaak/rmqtt-things](https://github.com/timzaak/rmqtt-things)
